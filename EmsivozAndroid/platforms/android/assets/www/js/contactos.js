@@ -15,6 +15,11 @@ var app = {
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
+
+      if(localStorage.getItem('contactos') != null){
+          document.getElementById('result').innerHTML = localStorage.getItem('contactos');
+      }
+
         navigator.contactsPhoneNumbers.list(function(contacts) {
             var impri="";
               var imprD="";
@@ -31,7 +36,8 @@ var app = {
                   }
               }
             document.getElementById('result').innerHTML='<ul class="list" style="margin: 0.5rem 0 1rem 0;border: 1px solid #e0e0e0;border-radius: 2px;overflow: hidden;position: relative;">'+impri+'</ul>';
-              var options = {
+            localStorage.setItem('contactos',$('#result').html());  
+            var options = {
                     valueNames: [ 'nameCon', 'phoneCon' ]
                   };
 

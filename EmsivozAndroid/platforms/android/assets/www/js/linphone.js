@@ -87,11 +87,11 @@ function onDeclineCallClick() {
                 });
 }
         
-function onSendDtmfClick(cod) {
+function onSendDtmfClick() {
             Linphone.sendDtmf(
-                cod,
+                document.getElementsByName("dtmf_key")[0].value,
                 function(id) {
-                    //alert('SENT DTMF');
+                   // alert('SENT DTMF -> ');
                 });
 }
         
@@ -202,12 +202,33 @@ function onAdjustVolumeClick() {
                             break;
                         }
 
-                    } else if (data.event == "REGISTRATION_CHANGE") {
+                    }else if (data.event == "REGISTRATION_CHANGE") {
                         console.log("Event: " + data.event + "\n"
                             + "State: " + data.state + "\n"
                             + "Message: " + data.message + "\n"
                             + "Username: " + data.username + "\n"
                             + "Domain: " + data.domain);
+                       
+                        if(data.state == "RegistrationFailed" || data.state == "RegistrationNone"){
+                            $('#palabraD').css('background','#ED565A');
+                              $('#goodD').css('color','#fff');
+                              $('#goodD').html('No estas Registrado');
+                              ("#btnllam").attr("disabled", true);
+                        }else{
+                            if(data.state == "RegistrationOk"){
+                              $('#palabraD').css('background','#D0E86F');
+                              $('#goodD').css('color','#4470B4');
+                              input=localStorage.getItem('credit');
+                                  var num = input.replace(/\./g,'');
+                                    if(!isNaN(num)){
+                                    num = num.toString().split('').reverse().join('').replace(/(?=\d*\.?)(\d{3})/g,'$1.');
+                                    num = num.split('').reverse().join('').replace(/^[\.]/,'');
+                                    
+                                  }
+                               document.getElementById('goodD').innerHTML= "Bienvenido "+localStorage.getItem('name')+"! - Saldo: $<span id='saldo_good'>"+num+"</span>";
+                                $("#btnllam").removeAttr("disabled");
+                            }
+                        }
                     }
                 },
                 function(e) {
@@ -234,6 +255,4 @@ function onAdjustVolumeClick() {
 
         //;
 
-        Linphone.initLinphoneCore(function(id) {
-          //  alert('linphoneCore will be ready a few second!');
-        });
+        
