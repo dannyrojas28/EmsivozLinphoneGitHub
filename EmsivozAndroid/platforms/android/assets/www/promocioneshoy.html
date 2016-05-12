@@ -1,0 +1,65 @@
+        <meta charset="utf-8">
+<script>
+      $( document ).ready(function() {
+           document.getElementById('barraD').innerHTML='<button type="button"  style="background:#4470B4;color:#fff;" class="btn barra" onclick="ContenidoPrincipal(\'promocioneshoy\')"><span class="material-icons d" style="color:#fff">&#xE8DF;</span> Hoy</button><button type="button"  style="background:#fff;color:#757575;" class="btn barra" onclick="ContenidoPrincipal(\'todaspromociones\')"><span class="material-icons d">&#xE80B;</span> Semanal  </button>';
+            document.getElementById('refresh').innerHTML='<i><span style="top:30px;font-size:35px;" class="material-icons"  onclick="Contenido(\'inicio.html\')">&#xE317;</span></i>';
+                var fecha = new Date();
+                var dia = fecha.getDay();
+                var param = {'dia':dia};
+             $.ajax({
+                    data: param,
+                    type:"POST",
+                    url:'https://app.emsivoz.co/funciones/prod/programadas/getPromo.php',
+                  success:function(data){                    
+                      var print=JSON.parse(data);
+                      var diaLetra=print[0]['day_week'].toUpperCase();
+                        $("#mipromo").html('<span class="glyphicon glyphicon-bullhorn"> </span> '+diaLetra+' DE PROMOCIÓN ');
+                      if(print[0]['resul'] != 'false'){
+                        var res = "";
+                         for (var i = 0; i < print.length;i++){
+                                    res += "<div class='card '><div  style='background:#fff;height:45px;color:#757575'><br><span id='h' style='color:#757575;font-size:16px;' class='card-title activator'><span style='color:#757575;margin-left:5px;font-style:italic;'><i class='material-icons right'>&#xE5D4;</i> "+print[i]['titulo']+"</span></span></div><div class='card-image waves-effect waves-block waves-light activator'><center><img class='materialboxed activator' src='https://app.emsivoz.co/funciones/prod/programadas/"+print[i]['imagen']+"' style='width:100% !important;' alt=''></center></div><div class='card-reveal '><span class='card-title grey-text text-darken-4'><h5 style='color:#4470B4;'>"+print[i]['titulo']+"<i class='material-icons right'>close</i></h5></span><p style='color:#757575;text-align:justify'>"+print[i]['descripcion']+"  </p></div></div>";   
+                            }
+                     }else{
+                        res='<center><h5>NO HAY PROMOCIONES PARA HOY</h5></center>';
+                     }
+                        $("#promociones").html(res);
+                }
+            });
+      });
+</script>
+ <div id="" class="animated bounceInLeft">
+<br>  <br>
+<center><h5  style="color:#4470B4;" id="mipromo">  <span class="glyphicon glyphicon-bullhorn"> </span>  PROMOCIONES</h5></center>  
+    <div id="promociones">
+        <div id="cargax" style="text-align:center;margin-top:200px;">
+        <div class="preloader-wrapper small active">
+        <div class="spinner-layer spinner-green-only">
+          <div class="circle-clipper left">
+            <div class="circle"></div>
+          </div><div class="gap-patch">
+            <div class="circle"></div>
+          </div><div class="circle-clipper right">
+            <div class="circle"></div>
+          </div>
+        </div>
+      </div>
+       <br>
+       <p id="loadtext">Cargando Nuestras Promociones</p>
+    </div>
+  </div>
+</div>
+<div class="fixed-action-btn vertical left click-to-toggle" style="bottom: 45px; left: 24px;position:fixed;z-index:1002;">
+    <a class="btn-floating btn-large btn-iosD" style="background:#4470B4;" onclick="Desvanceido()">
+      <i class="large material-icons" >&#xE896;</i>
+    </a>
+    <ul  > 
+      <li ><a class="btn-floating btn-ios" style="background:#4470B4;" onclick="Desvanceido();ContenidoPrincipal('puntos')"><i class="material-icons">&#xE56A;</i></a></li>
+      <li ><a class="btn-floating btn-ios" style="background:#4470B4;" onclick="Desvanceido();ContenidoPrincipal('recarga')"><i class="material-icons">&#xE870;</i></a></li>
+      <li ><a class="btn-floating btn-ios" style="background:#4470B4;" onclick="Desvanceido();ContenidoPrincipal('indicativos')"><i class="material-icons">&#xE80B;</i></a></li>
+      <li ><a class="btn-floating btn-ios" style="background:#4470B4;" onclick="Desvanceido();ContenidoPrincipal('llamar')"><i class="material-icons">&#xE0BB;</i></a></li>
+      <li ><a class="btn-floating btn-ios" style="background:#4470B4;" onclick="Desvanceido();ContenidoPrincipal('balance')" ><i class="material-icons">&#xE873;</i></a></li>
+      <li ><a class="btn-floating btn-ios" style="background:#D0E86F" onclick="Desvanceido();ContenidoPrincipal('promocioneshoy')"><i class="material-icons" style="color:#4470B4">&#xE8B1;</i></a></li>
+    </ul>
+  </div>
+
+      <script src="js/init.js"></script> 

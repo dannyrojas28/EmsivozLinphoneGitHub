@@ -1,0 +1,70 @@
+ <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no,initial-scale=1, maximum-scale=1">
+    <meta http-equiv="Content-Script-Type" content="type">
+    <title>AppMovil</title>
+    <script src="http://maps.google.com/maps/api/js?sensor=false"></script>
+
+
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link href="css/icons.css" rel="stylesheet">
+    <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link rel="stylesheet" href="css/animate.css"><link rel="stylesheet" href="css/materialdesign.css">
+
+    <script type="text/javascript" src="js/jquery.js" ></script>
+    <script type="text/javascript" src="index.js"></script>
+    <script type="text/javascript" src="js/functions.js"></script>
+    <script type="text/javascript" src="js/bootstrap.js"></script>
+
+    <script type="text/javascript" src="js/notificacion.js"></script>
+    <script src="js/materialdesig.js"></script>
+    <script src="js/materialize.js"></script>
+    <script src="js/init.js"></script> 
+    <script src="js/list.js"></script> 
+    <style type="text/css">
+    </style>
+ <div class="row" id="contactos" >
+        
+        <input  type="text" class="search" placeholder="Buscar Contacto">
+        <div id="result" class="col s12 conts">
+            <center>
+              <div style="margin-top: 240px;">
+                <div class="preloader-wrapper small active">
+                    <div class="spinner-layer spinner-green-only">
+                      <div class="circle-clipper left">
+                        <div class="circle"></div>
+                      </div><div class="gap-patch">
+                        <div class="circle"></div>
+                      </div><div class="circle-clipper right">
+                        <div class="circle"></div>
+                      </div>
+                    </div>
+                 </div>
+                 <br>
+                    Estamos cargando tus contactos
+              </div>
+            </center>
+            
+        </div>
+  </div>
+
+  <script src="js/init.js"></script>
+  <script src="js/contactos.js"></script>
+  <script type="text/javascript">
+   var impri="";
+     for (var i = 0; i <= 110; i++) {
+       impri = impri +""+
+                                      "<li style='background-color: #fff;line-height: 1.5rem; padding: 10px 20px;margin: 0;border-bottom: 1px solid #e0e0e0;min-height: 84px;padding-left:10px;position: relative;'>"+
+                                        "<span class='nameCon' style='font-size:18px;font-weight: 550;'>nombredelsusu"+i+"</span> "+
+                                        "<p class='phoneCon'>312"+i+"</p>"+
+                                         "<button class='btn-floating btn-large waves-effect waves-light secondary-content' id='btnllam' style='background:#D0E86F;color:#fff;float:right;position: absolute;top: 16px;right: 16px;' onclick='LlamarOtroMedio(\""+i+"\")' ><i class='material-icons' style='color:#4470B4;'>&#xE0CD;</i></button>"+
+                                      "</li>";
+
+     }
+
+     document.getElementById('result').innerHTML='<ul class="list collection">'+impri+'</ul>';
+              var options = {
+                    valueNames: [ 'nameCon', 'phoneCon' ]
+                  };
+
+                  var userList = new List('contactos', options);
+  </script>

@@ -1,0 +1,121 @@
+<html>
+  <head>
+<meta charset="utf-8">
+       <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta http-equiv="Content-Script-Type" content="type">
+      <title>AppMovil</title>
+       <link rel="stylesheet" type="text/css" href="css/style.css">
+     <link rel="stylesheet" type="text/css" href="css/jquery.mmenu.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css"> 
+    <link rel="stylesheet" href="css/animate.css">
+    <script type="text/javascript" src="js/jquery.js" ></script>
+    <script type="text/javascript" src="js/jquery.mmenu.min.js" ></script>
+    <script type="text/javascript" src="js/jquerydragopen.min.js" ></script>
+    <script type="text/javascript" src="js/functions.js"></script>
+    <script type="text/javascript" src="js/bootstrap.js"></script>
+
+      <script type="text/javascript" src="cordova.js"></script>
+      <script type="text/javascript" src="cordova_plugins.js"></script>
+    <script type="text/javascript" src="js/jquery.mmenu.fixedelements.min.js" ></script>
+    <script type="text/javascript">
+          $(document).ready(function(){
+              if(localStorage.getItem('usname') != null && localStorage.getItem('uspass') != null){
+             var argument="inicio.html";
+            $(location).attr('href',argument);
+        }else{
+            
+          $(function() {
+				var $menu = $('nav#menu'),
+					$html = $('html, body');
+
+				$menu.mmenu({
+					dragOpen: true
+				});
+
+				var $anchor = false;
+				$menu.find( 'a' ).on(
+					'click',
+					function( e )
+					{
+						$anchor = $(this);
+                        $('.estatica').removeClass();
+					}
+				);
+
+				var api = $menu.data( 'mmenu' );
+				api.bind( 'closed',
+					function()
+					{
+                         $('#nabvar').css('background','#fff');
+                            $('#nabvar').css('position','fixed');
+						if ( $anchor )
+						{
+							var href = $anchor.attr( 'href' );
+							$anchor = false;
+                               $('#nabvar').css('background','#fff');
+                            $('#nabvar').css('position','fixed');
+							//	if the clicked link is linked to an anchor, scroll the page to that anchor 
+							if ( href.slice( 0, 1 ) == '#' )
+							{
+								$html.animate({
+									scrollTop: $( href ).offset().top
+								});	
+							}
+						}
+					}
+				);
+			});
+
+                 
+         }
+                 });
+    </script>
+</head>
+    <body class="animated bounceInLeft">  
+     
+<div id="fade">
+     <nav id="menu" class="menu" style=" background:#f1f1f1;">
+            <ul>
+                <h4 style="color:#d1d1d1;margin-left:15px;" > <span class="glyphicon glyphicon-th"></span>   Menu</h4>
+               <li>
+                   <a style="color:#4470B4;" class="mdl-navigation__link"    href='index.html'> <span style="font-size:18px;" class="glyphicon glyphicon-user"></span>  Iniciar   Sesion</a>
+                    <br>
+               </li>
+               <li> 
+                   <a style="color:#4470B4;" class="mdl-navigation__link"     href='registrar.html'>  <span style="font-size:18px;" class="glyphicon glyphicon-list-alt"></span>    Registrarme</a>
+                    <br>
+                </li>
+               <li> 
+                   <a style="color:#4470B4;" class="mdl-navigation__link"     href='ayuda.html'> <span style="font-size:18px;" class="glyphicon glyphicon-exclamation-sign"></span>    Ayuda</a> 
+               </li>
+        </ul>
+         </nav>
+         <div id="nabvar fixed" class="estatica fixed" style="z-index:1;background:#fff;width:100%;">
+                <div class="container">
+                           <p><a href="#menu" onclick="menu()"><span  style="font-size:20px;color:#4470B4;top:30px;float:left;" class="glyphicon glyphicon-list " id="header__icon"></span></a><center><img  src="img/logo.png"  style="width:140px;height:60px;" ></center></p>  
+                   </div>
+        </div> 
+   <div id="contenido"> 
+       <div id="micont" >
+          <div class="container"><p>Emsivoz es una empresa que brinda servicios de comunicación a bajo costo para mantener en contacto a familiares y amigos en el extranjero.</p></div>
+           <hr style="color:#d1d1d1">
+           <center> <p>¿Cómo registrarme en EMSIVOZ?</p></center>
+                <div class="embed-responsive embed-responsive-4by3">
+                  <iframe width='1080' height='760' src="https://www.youtube.com/embed/3oanq6bdunI" frameborder="0" allowfullscreen></iframe> 
+                </div>
+            <hr style="color:#d1d1d1">
+       </div>
+   
+    </div>  
+        </div>
+         <div id="load" class="hidden">
+         <div style="margin-top:25%;">
+                <center>
+                    <div class="mdl-spinner mdl-spinner--single-color mdl-js-spinner is-active"></div>
+                    <h4 style="color:#4470B4;">  Cargando.....</h4></center>
+                
+            </div>
+      
+    </div>
+  </body>
+</html>

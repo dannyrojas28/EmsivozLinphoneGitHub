@@ -1,0 +1,42 @@
+<meta charset="utf-8">
+ <div id="" class=" animated bounceInLeft">
+  <br><br>
+	<center><h5  style="color:#4470B4;" id="mipromo">  <span class="glyphicon glyphicon-usd"> </span>  Tarifas</h5></center> 
+	<div class="container text-center" id="indi">
+		<center><h5>Selecciona tu pais</h5>
+			<div id="pol" class="row">
+				<div class="input-field col s12 input" >
+					<select  name="pais" class="validate  option" onchange="FiltrarTarifa()" id="pais" >
+				        <option>Seleccionar</option>
+					</select>
+				</div>
+			</div>
+			<div id="rta" class="text-center">
+			</div>
+								
+		</center>
+	</div>
+</div>
+<div class="fixed-action-btn vertical left click-to-toggle" style="bottom: 45px; left: 24px;position:fixed;z-index:1002;">
+    <a class="btn-floating btn-large btn-iosD" style="background:#4470B4;" onclick="Desvanceido()">
+      <i class="large material-icons" >&#xE896;</i>
+    </a>
+    <ul  > 
+      <li ><a class="btn-floating btn-ios" style="background:#4470B4;" onclick="Desvanceido();ContenidoPrincipal('puntos')"><i class="material-icons">&#xE56A;</i></a></li>
+      <li ><a class="btn-floating btn-ios" style="background:#4470B4;" onclick="Desvanceido();ContenidoPrincipal('recarga')"><i class="material-icons">&#xE870;</i></a></li>
+      <li ><a class="btn-floating btn-ios" style="background:#D0E86F" onclick="Desvanceido();ContenidoPrincipal('indicativos')"><i class="material-icons" style="color:#4470B4">&#xE80B;</i></a></li>
+      <li ><a class="btn-floating btn-ios" style="background:#4470B4;" onclick="Desvanceido();Llamar()"><i class="material-icons">&#xE0BB;</i></a></li>
+      <li ><a class="btn-floating btn-ios" style="background:#4470B4;" onclick="Desvanceido();ContenidoPrincipal('balance')" ><i class="material-icons">&#xE873;</i></a></li>
+      <li ><a class="btn-floating btn-ios" style="background:#4470B4;" onclick="Desvanceido();ContenidoPrincipal('promocioneshoy')"><i class="material-icons">&#xE8B1;</i></a></li>
+    </ul>
+  </div>
+<script>
+     $(document).ready(function(){
+        document.getElementById('barraD').innerHTML='<button type="button" class="btn barra" style="background:#fff;color:#757575;" onclick="ContenidoPrincipal(\'indicativos\')"><span class="material-icons d">&#xE8C5;</span> Indicativos</button><button type="button" style="background:#4470B4;color:#fff;" class="btn barra" onclick="ContenidoPrincipal(\'tarifas\')"><span class="material-icons d" style="color:#fff">&#xE80B;</span> Tarifas </button>';
+       document.getElementById('refresh').innerHTML='<i><span style="top:30px;font-size:35px;" class="material-icons" onclick="ContenidoPrincipal(\'indicativos\')">&#xE317;</span></i>';
+ 
+	     	loadTarif();
+     });
+</script>
+
+<script src="js/init.js"></script>  

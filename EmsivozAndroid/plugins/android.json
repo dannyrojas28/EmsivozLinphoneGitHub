@@ -1,0 +1,55 @@
+{
+    "prepare_queue": {
+        "installed": [],
+        "uninstalled": []
+    },
+    "config_munge": {
+        "files": {}
+    },
+    "installed_plugins": {
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "com.emsitel.emsivoz"
+        },
+        "cordova-plugin-device": {
+            "PACKAGE_NAME": "com.emsitel.emsivoz"
+        },
+        "cordova-plugin-network-information": {
+            "PACKAGE_NAME": "com.emsitel.emsivoz"
+        },
+        "cordova-plugin-geolocation": {
+            "PACKAGE_NAME": "com.emsitel.emsivoz"
+        },
+        "cordova-plugin-device-orientation": {
+            "PACKAGE_NAME": "com.emsitel.emsivoz"
+        },
+        "cordova-plugin-dialogs": {
+            "PACKAGE_NAME": "com.emsitel.emsivoz"
+        },
+        "cordova-plugin-vibration": {
+            "PACKAGE_NAME": "com.emsitel.emsivoz"
+        },
+        "cordova-plugin-splashscreen": {
+            "PACKAGE_NAME": "com.emsitel.emsivoz"
+        },
+        "cordova-plugin-inappbrowser": {
+            "PACKAGE_NAME": "com.emsitel.emsivoz"
+        },
+        "cordova-plugin-console": {
+            "PACKAGE_NAME": "com.emsitel.emsivoz"
+        },
+        "phonegap-plugin-push": {
+            "SENDER_ID": "424525287571",
+            "PACKAGE_NAME": "com.emsitel.emsivoz"
+        },
+        "com.techstorm.linphone": {
+            "PACKAGE_NAME": "com.emsitel.emsivoz"
+        },
+        "com.dbaq.cordova.contactsPhoneNumbers": {
+            "PACKAGE_NAME": "com.emsitel.emsivoz"
+        },
+        "org.awokenwell.proximity": {
+            "PACKAGE_NAME": "com.emsitel.emsivoz"
+        }
+    },
+    "dependent_plugins": {}
+}

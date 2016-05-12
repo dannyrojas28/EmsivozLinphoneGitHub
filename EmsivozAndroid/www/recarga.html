@@ -1,0 +1,101 @@
+<meta charset="utf-8">
+
+<div  class="animated bounceInLeft">
+    <center><h5  style="color:#4470B4;">  <span class="material-icons icopC">&#xE870;</span>  RECARGAR EN LINEA</h5></center>  
+<div style="margin-top:0%;">
+    <div class="container" id="form">
+       <div class="row">
+
+         <form method="get"  target="_system" action="https://gateway.payulatam.com/ppp-web-gateway/" accept-charset="UTF-8"  id="formulario1">
+            <div class="col-xs-12 col-sm-offset-2 col-sm-8" id="selecff"><hr>
+            
+              
+            </div>
+        <div class="col 12 col md2 col-sm-8">
+              <input name="merchantId" id="merchantId" type="hidden" value="544372"/>
+              <input name="accountId" id="accountId" type="hidden" value="546535"/>
+              <input name="description" id="description" type="hidden" value="Recarga"/>
+              <input name="referenceCode" id="referenceCode" type="hidden" value=""/>
+              <input name="tax" type="hidden" id="tax" value="0"/>
+              <input name="test" type="hidden" id="test" value="0"/>
+              <input name="taxReturnBase" type="hidden" id="taxReturnBase" value="0"/>
+              <input name="currency" type="hidden" id="currency" value="COP"/>
+              <input name="lng" type="hidden" id="lng" value="es"/>
+              <input name="buyerEmail"  value="" id="buyerEmail" type="hidden"/>  
+              <input name="signature" id="signature" value="0" type="hidden"/>
+              <input name="responseUrl"  id="responseUrl"  type="hidden"  value="">
+               <input name="confirmationUrl"  id="confirmationUrl"  type="hidden"  value="https://app.emsivoz.co/funciones/prod/programadas/confirmacionRECARGA.php">
+               <input name="extra2"  id="extra2"  type="hidden"  value="">
+        </div>
+        <div class="col s12">        <br>    
+             <center>
+                 <input type="submit"  class="btn" style="background:#D0E86F;color:#4470B4;" value="Realizar Pago">
+            </center>
+        </div>
+          
+             </form>
+             <div class="col s12">
+         <hr>
+              <p>Acontinuación seras redireccionado a la plataforma Payu la cual se encargara de realizar la transaccion bancaria y generar una Respuesta</p>
+           
+           </div>
+        </div>
+    </div>
+  
+    </div>
+</div>
+  <div class="fixed-action-btn vertical left click-to-toggle" style="bottom: 45px; left: 24px;position:fixed;z-index:1002;">
+    <a class="btn-floating btn-large btn-iosD" style="background:#4470B4;" onclick="Desvanceido();">
+      <i class="large material-icons" >&#xE896;</i>
+    </a>
+    <ul  > 
+      <li ><a class="btn-floating btn-ios" style="background:#4470B4;" onclick="Desvanceido();ContenidoPrincipal('puntos')"><i class="material-icons">&#xE56A;</i></a></li>
+      <li ><a class="btn-floating btn-ios" style="background:#D0E86F;" onclick="Desvanceido();ContenidoPrincipal('recarga')"><i class="material-icons" style="color:#4470B4">&#xE870;</i></a></li>
+      <li ><a class="btn-floating btn-ios" style="background:#4470B4;" onclick="Desvanceido();ContenidoPrincipal('indicativos')"><i class="material-icons">&#xE80B;</i></a></li>
+      <li ><a class="btn-floating btn-ios" style="background:#4470B4;" onclick="Desvanceido();ContenidoPrincipal('llamar')"><i class="material-icons">&#xE0BB;</i></a></li>
+      <li ><a class="btn-floating btn-ios" style="background:#4470B4;" onclick="Desvanceido();ContenidoPrincipal('balance')" ><i class="material-icons">&#xE873;</i></a></li>
+      <li ><a class="btn-floating btn-ios" style="background:#4470B4;" onclick="Desvanceido();ContenidoPrincipal('promocioneshoy')"><i class="material-icons">&#xE8B1;</i></a></li>
+    </ul>
+  </div>
+
+    <script src="js/init.js"></script>  
+    <script type="text/javascript">
+    $( document ).ready(function() {
+    	loadPreciosRecarga();
+        document.getElementById('barraD').innerHTML='';
+ document.getElementById('refresh').innerHTML='<i><span style="top:30px;font-size:35px;" class="material-icons"  onclick="Contenido(\'inicio.html\')">&#xE317;</span></i>';
+  		document.getElementById('extra2').value=localStorage.getItem('session');
+        var valor=10000;
+                 var parametro={'precio':valor};
+                    $.ajax({
+                       data:parametro,
+                        type:'POST',
+                        url:'https://app.emsivoz.co/funciones/prod/programadas/pago.php',
+                        success:function(data){
+                            console.log(data);
+                            var print=data.split("+");
+                            document.getElementById('signature').value=print[0];
+                            document.getElementById('referenceCode').value=print[1];
+                        }
+                    });
+    });
+
+    function ValorSignature(){
+                 var valor=$('#amount').val();
+                 var parametro={'precio':valor};
+                
+                    $.ajax({
+                       data:parametro,
+                        type:'POST',
+                        url:'https://app.emsivoz.co/funciones/prod/programadas/pago.php',
+                        success:function(data){
+                            console.log(data);
+                            var print=data.split("+");
+                            document.getElementById('signature').value=print[0];
+                            document.getElementById('referenceCode').value=print[1];
+                        }
+                    });
+
+             }
+    </script>
+ <script src="js/init.js"></script>  

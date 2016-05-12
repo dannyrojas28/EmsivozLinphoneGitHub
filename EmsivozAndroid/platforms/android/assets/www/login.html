@@ -1,0 +1,192 @@
+<html>
+  <head>
+<meta charset="utf-8">
+       <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta http-equiv="Content-Script-Type" content="type">
+      <title>AppMovil</title>
+   
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css"> 
+     <link rel="stylesheet" type="text/css" href="css/jquery.mmenu.css">
+     <link rel="stylesheet" href="css/animate.css">
+    <script type="text/javascript" src="js/jquery.js" ></script>
+    <script type="text/javascript" src="js/functions.js"></script>
+     <script type="text/javascript" src="js/login.js"></script>
+    <script type="text/javascript" src="js/bootstrap.js"></script>
+
+      <script type="text/javascript" src="cordova.js"></script>
+      <script type="text/javascript" src="cordova_plugins.js"></script>
+    <script type="text/javascript" src="js/jquery.mmenu.min.js" ></script>
+    <script type="text/javascript" src="js/jquerydragopen.min.js" ></script>
+    
+        <script type="text/javascript" src="index.js"></script>
+    <script type="text/javascript" src="js/jquery.mmenu.fixedelements.min.js" ></script>
+    <script>
+    function onDeviceReady() {
+                checkConnection();
+            }
+                function checkConnection() {
+                    var networkState = navigator.connection.type;
+                    if(networkState == Connection.NONE){
+                        $('#contenido').html('<br><br><center><img src="img/unnamed.png" style="width:220px;height:50px;"><h5>NO TIENES CONEXION A INTERNET</h5><br><a href="login.html" style="color:#AAB2A;font-size:18px;"><span class="glyphicon glyphicon-refresh"></span></a></center>');
+                    }
+                }
+          $(document).ready(function(){
+              var argument="inicio.html";
+            if(localStorage.getItem('usname') != null && localStorage.getItem('uspass') != null){   
+            $(location).attr('href',argument);
+        }else{
+         
+            $('#fade').css('display','block');
+          $(function() {
+				var $menu = $('nav#menu'),
+					$html = $('html, body');
+
+				$menu.mmenu({
+					dragOpen: true
+				});
+
+				var $anchor = false;
+				$menu.find( 'a' ).on(
+					'click',
+					function( e )
+					{
+						$anchor = $(this);
+                        $('.estatica').removeClass();
+					}
+				);
+
+				var api = $menu.data( 'mmenu' );
+				api.bind( 'closed',
+					function()
+					{
+                         $('#nabvar').css('background','#fff');
+                            $('#nabvar').css('position','fixed');
+						if ( $anchor )
+						{
+							var href = $anchor.attr( 'href' );
+							$anchor = false;
+                               $('#nabvar').css('background','#fff');
+                            $('#nabvar').css('position','fixed');
+							//	if the clicked link is linked to an anchor, scroll the page to that anchor 
+							if ( href.slice( 0, 1 ) == '#' )
+							{
+								$html.animate({
+									scrollTop: $( href ).offset().top
+								});	
+							}
+						}
+					}
+				);
+			});
+
+                 
+         }
+
+                 });
+    </script>
+</head>
+    <body class="animated bounceInLeft">  
+     
+<div id="fade" style="display:none;">
+     <nav id="menu" class="menu" style=" background:#f1f1f1;">
+            <ul>
+                <h4 style="color:#d1d1d1;margin-left:15px;" > <span class="glyphicon glyphicon-th"></span>   Menu</h4>
+               <li>
+                    <a style="color:#4470B4;" class="mdl-navigation__link"    onclick="Contenido('index.html')"> <span style="font-size:18px;" class="glyphicon glyphicon-home"></span>    Inicio </a>
+                    <br>
+                </li>
+               <li>
+                   <a style="color:#4470B4;" class="mdl-navigation__link"    onclick="Contenido('login.html')"> <span style="font-size:18px;" class="glyphicon glyphicon-user"></span>  Iniciar   Sesion</a>
+                    <br>
+               </li>
+               <li> 
+                   <a style="color:#4470B4;" class="mdl-navigation__link"    onclick="Contenido('registrar.html')">  <span style="font-size:18px;" class="glyphicon glyphicon-list-alt"></span>    Registrarme</a>
+                    <br>
+                </li>
+               <li> 
+                   <a style="color:#4470B4;" class="mdl-navigation__link"    onclick="Contenido('ayuda.html')"> <span style="font-size:18px;" class="glyphicon glyphicon-exclamation-sign"></span>    Ayuda</a> 
+               </li>
+        </ul>
+         </nav>
+         <div id="nabvar fixed" class="estatica fixed" style="z-index:2;background:#fff;width:100%;">
+                <div class="container">
+                           <p><a href="#menu" onclick="menu()"><span  style="font-size:20px;color:#4470B4;top:30px;float:left;" class="glyphicon glyphicon-list " id="header__icon"></span></a><center><img  src="img/logo.png"  style="width:154px;height:70px;" ></center></p>  
+                   </div>
+        </div> 
+   <div id="contenido"> 
+     <div id="carga" style="display:none;text-align:center;margin-top:20%;">
+                             <img src="img/cargando.gif" style="width:100px;height:60px;"><br>Iniciando....
+                      </div>
+       <div id="micont" >
+                 <form method="post" name="formulario1" class="formulario1 animated bounceInLeft"><br><br>
+                      <center><h5 style="color:#d1d1d1;margin-top:1px;" >Iniciar Sesión en Emsivoz</h5></center>
+                     
+                      <center>
+                      			 	<div id="gh" style="color:red"></div>
+                          <div id="miconeten" style="background:transparent;border-raidus:1px;padding:2px;z-index:1;">
+                              <hr>
+                              <div style="background:transparent;margin-top:1px;">
+                                    
+                                  <div class="form-group" >
+                                          <div class="input-group" >
+                                               <input type="email" name="usuario"   class="form-control" onkeyup="validateEmail()" id="usuario" placeholder="Usuario" value="">
+                                               <div id="icoUser" name="icoUser" class="input-group-addon"><span class='glyphicon glyphicon-user' aria-hidden='true'></span></div><br>
+
+                                          </div> 
+                                       <span id="usuario_error"></span><br>
+                                 </div>
+                                  <div class="form-group">
+                                       <div class="input-group" >
+                                            <input type="password" placeholder="Contraseña" onkeyup="ValidateText('password','icoPass')" class="form-control" name="password" id="password" value=""  /> 
+                                            <div id="icoPass" name="icoPass" class="input-group-addon">  <span class="glyphicon glyphicon-lock"></span> </div><br>
+
+                                       </div>
+                                      <span id="pass_error"></span>
+                                   </div>
+                                   
+
+                                    
+                                  </div>    
+                           </div>
+                     </center>
+                  </form>
+                                <div class="text-center">
+                                    <button name ="btn" class="btn lg ingresar" style="background:#4470B4;color:#fff;width:60%;" onClick="javascript:Login()"  id="btn"> <span class="glyphicon glyphicon-share-alt"></span>  Iniciar Sesion </button>
+             <br><br>
+                                         <a style="color:#4470B4;border:none;" onclick="NuevaPestana('http://olacolombia.com/olvido-contrasena')" > Olvido Su Contraseña?</a> <br>
+                                     </div> 
+       </div>
+  
+      
+         <a class="hidden" id="modalls" data-toggle="modal" data-target=".bs-example-modal-lg"></a><br>
+            <div class="modal fade bs-example-modal-lg" tabindex="-1" data-backdrop="static" role="dialog" aria-labelledby="mySmallModalLabel">
+              <div class="modal-dialog modal-sm" id="lp">
+                <div class="modal-content">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                        <center><h4 class="modal-title" id="tx"></h4></center>
+                    </div>
+                      <center>
+                          <div class="modal-body" id="bd">
+
+                          </div>
+                    </center>
+                  </div>
+                </div>
+              </div>
+         </div>
+   
+    </div>  
+        </div>
+         <div id="load" class="hidden">
+         <div style="margin-top:25%;">
+                <center>
+                    <div class="mdl-spinner mdl-spinner--single-color mdl-js-spinner is-active"></div>
+                    <h4 style="color:#4470B4;">  Cargando.....</h4></center>
+                
+            </div>
+      
+    </div>
+  </body>
+</html>

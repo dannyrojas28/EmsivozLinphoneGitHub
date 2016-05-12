@@ -1,0 +1,54 @@
+ <div id="" class=" animated bounceInLeft">
+  
+ <center><h5  style="color:#4470B4;">  <span class="material-icons icopC">&#xE56A; </span>  PUNTOS DE RECARGA</h5></center> 
+<div id="mapdiv">
+<input type="hidden" id="existe" value="0">
+       <div id="carga" style="text-align:center;margin-top:200px;">
+        <div class="preloader-wrapper small active">
+        <div class="spinner-layer spinner-green-only">
+          <div class="circle-clipper left">
+            <div class="circle"></div>
+          </div><div class="gap-patch">
+            <div class="circle"></div>
+          </div><div class="circle-clipper right">
+            <div class="circle"></div>
+          </div>
+        </div>
+      </div>
+       <br>
+       <p id="loadtext">Cargando Nuestros Puntos</p>
+    </div>
+</div>
+</div>
+<input type="hidden" id="bd"  value="ac">
+<button class="btn btn-info" id="mapa" onclick="initialize()" style="display:none;" >
+    VER MAPA
+</button>
+<div class="fixed-action-btn vertical left click-to-toggle" style="bottom: 45px; left: 24px;position:fixed;z-index:1002;">
+    <a class="btn-floating btn-large btn-iosD" style="background:#4470B4;" onclick="Desvanceido()">
+      <i class="large material-icons" >&#xE896;</i>
+    </a>
+    <ul  > 
+      <li ><a class="btn-floating btn-ios" style="background:#D0E86F" onclick="Desvanceido();ContenidoPrincipal('puntos')"><i class="material-icons" style="color:#4470B4">&#xE56A;</i></a></li>
+      <li ><a class="btn-floating btn-ios" style="background:#4470B4;" onclick="Desvanceido();ContenidoPrincipal('recarga')"><i class="material-icons">&#xE870;</i></a></li>
+      <li ><a class="btn-floating btn-ios" style="background:#4470B4;" onclick="Desvanceido();ContenidoPrincipal('indicativos')"><i class="material-icons">&#xE80B;</i></a></li>
+      <li ><a class="btn-floating btn-ios" style="background:#4470B4;" onclick="Desvanceido();ContenidoPrincipal('llamar')"><i class="material-icons">&#xE0BB;</i></a></li>
+      <li ><a class="btn-floating btn-ios" style="background:#4470B4;" onclick="Desvanceido();ContenidoPrincipal('balance')" ><i class="material-icons">&#xE873;</i></a></li>
+      <li ><a class="btn-floating btn-ios" style="background:#4470B4;" onclick="Desvanceido();ContenidoPrincipal('promocioneshoy')"><i class="material-icons">&#xE8B1;</i></a></li>
+    </ul>
+  </div>
+<script languaje="javascript">
+   $(document).ready(function(){
+        document.getElementById('barraD').innerHTML='';
+   document.getElementById('refresh').innerHTML='<i><span style="top:30px;font-size:35px;" class="material-icons"  onclick="Contenido(\'inicio.html\')">&#xE317;</span></i>';$('#mapa').click();
+   });
+   
+   var as=function demora(){
+	   var si=$('#existe').val();
+     console.log(2);
+	   if(si == 0){
+		  document.getElementById('mapdiv').innerHTML='<center><h5>Tenemos Problemas </h5></center><br><div class="container"><p style="font-color:15px;">Para poder acceder a la geolocalizacion de tu telefono, sigue las instrucciones</p><p>1. Click en el menu de configuracion de tu telefono <br>2.Ingresa en la parte que dice Ubicacion o GPS<br>3. Verifica que este activada la opcion "Acceder a mi ubicacion"  y modo ubicacion-alta precision<br></div>';
+	   } 
+   };
+    setTimeout(as,10000);
+</script>

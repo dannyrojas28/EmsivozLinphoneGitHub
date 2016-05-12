@@ -1,0 +1,933 @@
+<meta charset="utf-8">
+
+
+<style type="text/css">
+  .top{
+    margin-top: 7px;
+  }
+
+  input{width:20px; height:20px; text-align:center; font-size:10px;}
+  -->
+
+   .bnM{
+    color: #545E69;
+    border:none;
+    background: #fff;
+    width: 100%;
+   }
+
+    .bnMx{
+    color: #545E69;
+    background: #fff;
+    width: 100%;
+   }
+    .bn{
+      font-size: 1.1em;
+      color: #545E69;
+      background: #fff;
+      margin-top: 9px;
+      font-weight: bold;
+  }
+     .bns{
+      font-size: 11px;
+      color: #545E69;
+      background: #fff;
+  } 
+    .sm-bn{
+    
+      font-size: 12px;
+      color: #545E69;
+      border: none;
+      background: #fff;
+  }
+   .cx{
+      font-size:15px;
+      color: #630502;
+  }
+   .bna{
+      width: 100%;
+      height:30px;
+      font-size: 26px;
+      color: #545E69;
+      border: none;
+      background: #fff;
+  }
+  .rg{
+    border-right: 1px solid #545E69;
+  }
+  .lf{
+    border-left: 1px solid #545E69;
+  }
+  .ab{
+    border-bottom: 1px solid #545E69;
+  }
+  .let{
+
+      font-size: 10px;
+      color: #545E69;
+  }
+  .sm-let{
+
+      font-size: 10px;
+      color: #545E69;
+  }
+  .al{
+    background: #4470B4;
+    color: #fff;
+    font-size:16px;
+  }
+  .fd{
+    font-size: 16px;
+      color: #fff;
+      border: none;
+      background: #4470B4;
+  }
+  .t{
+    height: 50px
+  }
+  .sm-t{
+    height: 40px
+  }
+
+@media screen and (min-height: 500px) {
+
+    .bn{
+      font-size: 1.8em;
+      color: #545E69;
+      font-weight: bold;
+      background: #fff;
+  }
+     .bns{
+    
+      font-size: 13px;
+      color: #545E69;
+      background: #fff;
+  } 
+    .sm-bn{
+    
+      font-size: 14px;
+      color: #545E69;
+      border: none;
+      background: #fff;
+  }
+   .cx{
+      font-size:20px;
+      color: #630502;
+  }
+   .bna{
+      width: 100%;
+      height:40px;
+      font-size: 26px;
+      color: #545E69;
+      border: none;
+      background: #fff;
+  }
+  .rg{
+    border-right: 1px solid #545E69;
+  }
+  .lf{
+    border-left: 1px solid #545E69;
+  }
+  .ab{
+    border-bottom: 1px solid #545E69;
+  }
+  .let{
+
+      font-size: 12px;
+      color: #545E69;
+  }
+  .sm-let{
+
+      font-size: 10px;
+      color: #545E69;
+  }     
+  .al{
+    background: #4470B4;
+    color: #fff;
+    font-size: 24px;
+  }
+  .fd{
+    font-size: 24px;
+      color: #fff;
+      border: none;
+      background: #4470B4;
+  }
+  .t{
+    height: 55px
+  }
+  .sm-t{
+    height: 50px
+  }
+}
+.jk{
+  color: transparent;
+}
+</style>
+
+<div class="app" >
+                <div class="row" id="telefono-llamar" style="display: none">  
+                    <div class="fixed-action-btn" style="bottom: 0;background:#fff32;width:100%;">
+                          <div class="col s12">
+                           <center> <p style="font-style:italic;font-size:18px;" id="connect"></p></center>
+                             <div class="col s3" id="pol">
+                                <div class="input-field">
+                                  <select  name="pais"  onchange="FiltrarPrecioLlamar()" id="pais" >
+                                       <option value="0">Pais..</option>
+                                  </select>
+                                </div>
+                            </div>
+                            <div class="col s9" >
+                              <h3 id="number" style="color:#424242 ;margin-left:5px;display:inline-block"></h3>
+                            </div>
+                          </div>
+                     <center>
+                          <div class="col s4 rg ab t" onmouseup="Numero(1)" id="num1">
+                            <button class="bnM bn   transparent" >1 <br><span class="let" style="color:transparent">as</span></button>
+                          </div>
+                          <div class="col s4 ab t" onmouseup="Numero(2)" id="num2">
+                            <button class="bnM bn transparent" >2 <br><span class="let">ABC</span></button>
+                          </div>
+                          <div class="col s4 lf ab t" onmouseup="Numero(3)" id="num3" >
+                            <button class="bnM bn transparent" >3 <br><span class="let">DEF</span></button>
+                          </div>
+                          <div class="col s4 rg ab t" onmouseup="Numero(4)" id="num4">
+                            <button class="bnM bn transparent" >4 <br><span class="let">GHI</span></button>
+                          </div>
+                          <div class="col s4 ab t" onmouseup="Numero(5)" id="num5">
+                            <button class="bnM bn transparent" >5 <br><span class="let">JKL</span></button>
+                          </div>
+                          <div class="col s4 lf ab t" onmouseup="Numero(6)" id="num6">
+                            <button class="bnM bn transparent" >6 <br><span class="let">MNO</span></button>
+                          </div>
+                          <div class="col s4 rg ab t" onmousedown="Numero(7)" id="num7">
+                            <button class="bnM bn transparent" >7 <br><span class="let">PQRS</span></button>
+                          </div>
+                          <div class="col s4 ab t"  onmouseup="Numero(8)" id="num8">
+                            <button class="bnM bn transparent" >8 <br><span class="let">TUV</span></button>
+                          </div>
+                          <div class="col s4 lf ab t"  onmouseup="Numero(9)" id="num9">
+                            <button class="bnM bn transparent" >9 <br><span class="let">WYZ</span></button>
+                          </div>
+                          <div class="col s4 rg "  onmouseup="Numero('*')" id="num*">
+                            <button class="bnM bn transparent"  >* <br><span class="let jk">.</span></button>
+                          </div>
+                          <div class="col s4 "  onmouseup="Numero(0)" id="num0">
+                            <button class="bnM bn transparent" >0 <br><span class="let jk">. </span></button>
+                          </div>
+                          <div class="col s4 lf " onmouseup="Numero('#')" id="num#">
+                            <button class="bnM bn transparent" ># <br><span class="let jk">.</span></button>
+                          </div>
+
+                           <div class="col s4 bot">
+                                <h5  onclick="ContenidoSotf('contactos')" class="material-icons" style="color:#4470B4;margin-top:10px;font-size:37px;">&#xE853;</h5>
+                           </div>
+                           <div class="col s4 bot">
+                                <button class="btn btn-large waves-effect waves-light" id="btnllam" style="background:#D0E86F;color:#fff;width:100%;font-size:20px;height: 40px;margin-top:10px;" onclick="Llamar()" disabled><i class="material-icons" style="color:#fff32;">&#xE0CD;</i> Llamar</button>
+                          </div>
+                          <div class="col s4  bot">
+                                <h5 class="material-icons" style="color:#424242;margin-top:10px;font-size:32px;" onmouseup="BorrarNumero()">&#xE14A;</h5>
+                          </div>
+                          </center>
+                    
+                    </div>
+                </div>
+                <div class="row" id="telefono-contestado" style="position:fixed;width:100%;height:100%;top:0;left:0;z-index:100000;background:url(img/fondo.jpeg) center;background-size:100% 100%;display: none;">
+                            <div class="col s12 img-back">
+                                <center>
+                                    <br><br>
+                                    <h5 style="font-style:italic ;font-family: GillSans, Calibri, Trebuchet, sans-serif;color:#fff;font-size:40px;" id="num-llama"></h5>
+                                    <div id="time-llama" style="color:#fff">
+                                      <div class="progress">
+                                        <div class="indeterminate"></div>
+                                      </div>
+                                    </div>
+                                    <p style="font-size:16px;color:#fff" id="dtmf"></p>
+                                </center>
+                            </div>
+                            <div class="col s12 row" >
+                                <center>
+                                    <div class="col s12" id="opciones">
+
+                                     <div class="col s12"><br><br></div>
+                                        <div class="col s4" id="speaker">    
+                                           <a class="btn-floating btn-large waves-effect waves-light transparent" style="border:1px solid #fff">  <i class="material-icons" style="color:#fff;font-size:30px;" onclick="ActivarParlante()">&#xE050;</i> </a>
+                                        </div>
+                                        <div class="col s4" >
+                                           <button class="btn-floating btn-large waves-effect waves-light transparent ds" style="border:1px solid #fff" >  <i class="material-icons" style="color:#fff;font-size:30px;" onclick="TecladoPequeno()">&#xE0BC;</i></button>
+                                        </div>
+                                        <div class="col s4">
+                                           <button class="btn-floating btn-large waves-effect waves-light transparent ds" style="border:1px solid #fff" onclick="Mute()" disabled>  <i class="material-icons" style="color:#fff;font-size:30px;">&#xE02B;</i></button>
+                                        </div>
+                                        <div class="col s12"><br><br></div>
+                                         <div class="col s4" >    
+                                            <a class="btn-floating btn-large waves-effect waves-light transparent" style="border:1px solid #fff">  <i class="material-icons" style="color:#fff;font-size:30px;">&#xE853;</i>   </a>
+                                        </div>
+                                        <div class="col s4" id="estados-llama">
+                                           <button class="btn-floating btn-large waves-effect waves-light transparent ds" style="border:1px solid #fff" disabled>  <i class="material-icons" style="color:#fff;font-size:30px;" onclick="Stop()">&#xE034;</i></button>
+                                        </div>
+                                        <div class="col s4">
+                                           <button class="btn-floating btn-large waves-effect waves-light transparent ds" style="border:1px solid #fff" disabled>  <i class="material-icons" style="color:#fff;font-size:30px;">&#xE145;</i></button>
+                                        </div>
+                                    </div>
+                                    <div class="col s12" id="tecladopequeno" style="display:none">
+
+                                           <center>
+                                                 <div class="col s12">
+                                                    <a class="btn-floating btn waves-effect waves-light transparent" style="color:#fff ;border:1px solid #fff" onclick="OcultarTeclado()"><i class="material-icons">&#xE318;</i></a>
+                                                    <br><br>
+                                                 </div>
+                                                <div class="col s4">
+                                                      <a class="btn-floating btn waves-effect waves-light transparent" style="color:#fff ;border:1px solid #fff" onclick="Dtmf(1)">1</a>
+                                                     
+                                                </div>
+                                                <div class="col s4">
+                                                      <a class="btn-floating btn waves-effect waves-light transparent" style="color:#fff ;border:1px solid #fff" onclick="Dtmf(2)">2 </a>
+                                                        
+                                                </div>
+                                                <div class="col s4">
+                                                      <a class="btn-floating btn waves-effect waves-light transparent" style="color:#fff ;border:1px solid #fff" onclick="Dtmf(3)">3</a>
+                                                           
+                                                </div>
+                                                <div class="col s12"><br></div>
+                                                <div class="col s4">
+                                                      <a class="btn-floating btn waves-effect waves-light transparent" style="color:#fff ;border:1px solid #fff" onclick="Dtmf(4)">4</a>
+                                                </div>
+                                                <div class="col s4">
+                                                      <a class="btn-floating btn waves-effect waves-light transparent" style="color:#fff ;border:1px solid #fff" onclick="Dtmf(5)">5</a>
+                                                </div>
+                                                <div class="col s4">
+                                                      <a class="btn-floating btn waves-effect waves-light transparent" style="color:#fff ;border:1px solid #fff" onclick="Dtmf(6)">6</a>
+                                                </div>
+                                                <div class="col s12"><br></div>
+                                                <div class="col s4">
+
+                                                      <a class="btn-floating btn waves-effect waves-light transparent" style="color:#fff ;border:1px solid #fff" onclick="Dtmf(7)">7</a>
+                                                </div>
+                                                <div class="col s4">
+                                                      <a class="btn-floating btn waves-effect waves-light transparent" style="color:#fff ;border:1px solid #fff" onclick="Dtmf(8)">8</a>
+                                                </div>
+                                                <div class="col s4">
+                                                      <a class="btn-floating btn waves-effect waves-light transparent" style="color:#fff ;border:1px solid #fff" onclick="Dtmf(9)">9</a>
+                                                </div>
+                                                <div class="col s12"><br></div>
+                                                 <div class="col s4">
+
+                                                      <a class="btn-floating btn waves-effect waves-light transparent" style="color:#fff ;border:1px solid #fff" onclick="Dtmf('*')">*</a>
+                                                </div>
+                                                <div class="col s4">
+                                                      <a class="btn-floating btn waves-effect waves-light transparent" style="color:#fff ;border:1px solid #fff" onclick="Dtmf(0)">0</a>
+                                                </div>
+                                                <div class="col s4">
+                                                      <a class="btn-floating btn waves-effect waves-light transparent" style="color:#fff ;border:1px solid #fff" onclick="Dtmf('#')">#</a>
+                                                </div>
+                                            </center>
+                                    </div>
+                                        <div class="col s12 fixed-action-btn" style="bottom: 10px;">
+                                        <br><br>
+                                             <button class="btn btn-large waves-effect waves-light red darken-4" style="color:#fff32;width:70%;font-size:32px;" onclick="Colgar()" id="btncolllam" ><i class="material-icons" style="color:#fff32;"  >&#xE0D1;</i></button >
+                                        </div>
+                                </center>
+                            </div>
+
+
+
+                </div>
+
+            </div>
+
+  <div class="row" id="contactos" style="display: none">
+    <div>
+        <br><br>
+        <div  class="col s12">
+          <div class="container">
+            <div class="input-field col s12 input">
+              <input type="text" placeholder="Buscar un contacto" onkeyup="BuscarContacto()" name="contbus" id="contbus" style="border:none;" >
+             </div>
+          </div>
+        </div>
+        <div id="result" class="col s12">
+            <center>
+              <div style="margin-top: 240px;">
+                <div class="preloader-wrapper small active">
+                    <div class="spinner-layer spinner-green-only">
+                      <div class="circle-clipper left">
+                        <div class="circle"></div>
+                      </div><div class="gap-patch">
+                        <div class="circle"></div>
+                      </div><div class="circle-clipper right">
+                        <div class="circle"></div>
+                      </div>
+                    </div>
+                 </div>
+                 <br>
+                    Estamos cargando tus contactos
+              </div>
+            </center>
+            
+        </div>
+    </div>
+  </div>
+
+  <div id="balance" >
+              <meta charset="utf-8">
+     <div>
+    <br><br>
+    <div id="historial"  style="margin-top:10px;">
+    <div id="carga" style="text-align:center;margin-top:200px;">
+            <div class="preloader-wrapper small active">
+            <div class="spinner-layer spinner-green-only">
+              <div class="circle-clipper left">
+                <div class="circle"></div>
+              </div><div class="gap-patch">
+                <div class="circle"></div>
+              </div><div class="circle-clipper right">
+                <div class="circle"></div>
+              </div>
+            </div>
+          </div>
+           <br>
+           <p id="loadtext">Cargando Historial</p>
+        </div></div>
+    </div>
+    <div class="fixed-action-btn vertical left click-to-toggle" style="bottom: 45px; left: 24px;position:fixed;z-index:1002;">
+        <a class="btn-floating btn-large btn-iosD" style="background:#4470B4;" onclick="Desvanceido()">
+          <i class="large material-icons" >&#xE896;</i>
+        </a>
+        <ul  > 
+          <li ><a class="btn-floating btn-ios" style="background:#4470B4;" onclick="Desvanceido();ContenidoPrincipal('puntos')"><i class="material-icons">&#xE56A;</i></a></li>
+          <li ><a class="btn-floating btn-ios" style="background:#4470B4;" onclick="Desvanceido();ContenidoPrincipal('recarga')"><i class="material-icons">&#xE870;</i></a></li>
+          <li ><a class="btn-floating btn-ios" style="background:#4470B4;" onclick="Desvanceido();ContenidoPrincipal('indicativos')"><i class="material-icons">&#xE80B;</i></a></li>
+          <li ><a class="btn-floating btn-ios" style="background:#4470B4;" onclick="Desvanceido();ContenidoPrincipal('llamar')"><i class="material-icons">&#xE0BB;</i></a></li>
+          <li ><a class="btn-floating btn-ios" style="background:#D0E86F;" onclick="Desvanceido();ContenidoPrincipal('balance')" ><i class="material-icons" style="color:#4470B4">&#xE873;</i></a></li>
+          <li ><a class="btn-floating btn-ios" style="background:#4470B4;" onclick="Desvanceido();ContenidoPrincipal('promocioneshoy')"><i class="material-icons">&#xE8B1;</i></a></li>
+        </ul>
+      </div>
+  </div>
+  
+            <div id='lio'>
+                   <input type="hidden" id="minutos" value="00">
+                   <input type="hidden" id="segundos" value="00">
+                 <input type="hidden" id="horas" value="00">
+                 <input type="hidden" id="esta" value="balance">
+                 <input type="hidden" id="colgado" value="0">
+            </div>
+        
+
+        <!-- modales -->
+        <!-- Modal Structure -->
+          <div id="modal5" class="modal">
+            <div class="modal-content">
+                <center>
+                  <form>
+                    <div class="row">
+                        <div class="col s12" id="polz">
+                           <div class="input-field input" style="display:block;">
+                             <select  name="pais"  onchange="FiltrarIndicativo()" id="pais" style="display:block;">
+                                 <option value="0">Seleccionar</option>
+
+                              </select>
+                          </div>
+                        </div>
+                      <div id="rta">
+                        
+                      </div>
+                    </div>
+                  </form>
+                </center>
+            </div>
+          </div>  
+
+        <script src="js/init.js"></script>
+        <script src="js/linphone.js"></script>
+        <script type="text/javascript" >
+              $(document).ready(function(){
+                         loadIndiLlamar();
+                }
+              );
+                 function ContenidoSotf(param){
+                  
+                  var es=$('#esta').val();
+                  if(es != param){
+                    console.log('tocame');
+                    $('#'+es).css('display','none');
+                    $('#'+param).css('display','block');
+                    $('#esta').val(param);
+                  }
+                }
+                function onSuccess(contacts) {
+                    var print='';
+                     $('#result').html('');
+                    var nombre,number;
+                      for (var i = 0; i < contacts.length; i++) {
+                        if(contacts[i].displayName == null){
+                          nombre='';
+                        }else{
+                          nombre=contacts[i].displayName;
+                        }
+                         console.log("Name = " + contacts[i].displayName);
+                             console.log("Phone = " + contacts[i].phoneNumbers);
+                        if(null != contacts[i].phoneNumbers){
+                                for(var j=0;j<contacts[i].phoneNumbers.length;j++)
+                                  {
+                                    print=print+"<ul class='collection'>"+
+                              "<li class='collection-item avatar'>"+
+                                " <i class='material-icons circle green'>&#xE853;</i>"+
+                                "<span class='title'>"+nombre+"</p> "+
+                                "<p>"+contacts[i].phoneNumbers[j].value+"</p>"+
+                                "<a onclick='LlamarOtroMedio(\""+contacts[i].phoneNumbers[j].value+"\")' class='secondary-content'><i class='material-icons' style='color:#4470B4;font-size:40px;'>&#xE0CD;</i></a>"+
+                              "</li>"+
+                            "</ul>";
+                                   }
+                            }
+                          
+                      }
+                      $('#result').html(print);
+                  }
+
+                  function onError(contactError) {
+                      alert('onError!'+contactError);
+                  }
+               document.addEventListener("deviceready", onDeviceReadyXD, false);
+                var mySip;
+                var interval; 
+                
+                  
+                  var options;
+                function onDeviceReadyXD(){
+                    document.getElementById('barraD').innerHTML='<button type="button"  style="background:#fff;color:#757575;" class="btn barraT" onclick="ContenidoSotf(\'telefono-llamar\')"> Llamar</button><button type="button"  style="background:#fff;color:#757575;" class="btn barraT" onclick="ContenidoSotf(\'contactos\')"> Contactos </button><button type="button"  style="background:#fff;color:#757575;" class="btn barraT" onclick="ContenidoSotf(\'balance\')"> Historial </button>';
+                    document.getElementById('refresh').innerHTML='<i><span style="top:30px;font-size:35px;" class="material-icons"  onclick="Contenido(\'inicio.html\')">&#xE317;</span></i>';
+                      if(localStorage.getItem('llamada') != null){
+                           $('#telefono-contestado').css('display','block');
+                           console.log(localStorage.getItem('llamada'));
+                            $('#num-llama').html(localStorage.getItem('llamada'));
+                           $('#number').html(localStorage.getItem('llamada'));
+                           $('#horas').val(localStorage.getItem('hor'));
+                           $('#minutos').val( localStorage.getItem('min'));
+                           $('#segundos').val( localStorage.getItem('seg'));
+                           $("#btncolllam").removeAttr("disabled");
+                           $('#colgado').val("false");
+                           $("#btncolllam").removeAttr("disabled");
+                           if (localStorage.getItem('seg') != '00'){
+                               callEstablished();
+                           }
+                      }else{
+                         //  $('#telefono-llamar').css('display','block');
+                          localStorage.setItem('seg','00');
+                          localStorage.setItem('min','00');
+                          localStorage.setItem('hor','00');
+                         // mySip = cordova.plugins.SIP;
+                        
+                          var cel = localStorage.getItem('cel');
+                          var pas = localStorage.getItem('uipass');
+                          console.log(cel);
+                          console.log(pas);
+                              onRegister(cel,pas);
+                           // mySip.connect(cel , cel , pas ,'200.75.46.70');
+                               document.getElementById('num1').addEventListener('touchstart', Numero('1'), false);
+                               document.getElementById('num2').addEventListener('touchstart', Numero('2'), false);
+                               document.getElementById('num3').addEventListener('touchstart', Numero('3'), false);
+                               document.getElementById('num4').addEventListener('touchstart', Numero('4'), false);
+                               document.getElementById('num5').addEventListener('touchstart', Numero('5'), false);
+                               document.getElementById('num6').addEventListener('touchstart', Numero('6'), false);
+                               document.getElementById('num7').addEventListener('touchstart', Numero('7'), false);
+                               document.getElementById('num8').addEventListener('touchstart', Numero('8'), false);
+                               document.getElementById('num9').addEventListener('touchstart', Numero('9'), false);
+                               document.getElementById('num*').addEventListener('touchstart', Numero('*'), false);
+                               document.getElementById('num0').addEventListener('touchstart', Numero('0'), false);
+                               document.getElementById('num#').addEventListener('touchstart', Numero('#'), false);
+                               document.getElementById('num#').addEventListener('touchstart', Numero('#'), false);
+                                $('#number').html('');
+
+                            //mi saldo
+                            setTimeout(function(){
+                              input=localStorage.getItem('credit');
+                              var num = input.replace(/\./g,'');
+                                if(!isNaN(num)){
+                                num = num.toString().split('').reverse().join('').replace(/(?=\d*\.?)(\d{3})/g,'$1.');
+                                num = num.split('').reverse().join('').replace(/^[\.]/,'');
+                                
+                              }
+                             document.getElementById('goodD').innerHTML= "Bienvenido "+localStorage.getItem('name')+"! - Saldo: $<span id='saldo_good'>"+num+"</span>";
+                            var miId=localStorage.getItem('session');
+                            var micred=localStorage.getItem('credit');
+                            var param={'credit':miId};
+                            console.log(localStorage.getItem('name')+"! - Saldo: $"+localStorage.getItem('credit'));
+                              $.ajax({
+                                 data:param,
+                                  type:'POST',
+                                  url:"https://app.emsivoz.co/funciones/prod/usuario-app/getCredit.php",
+                                   
+                                  success:function(data){
+
+                                          if(data == "En estos momentos estamos realizando cambios "){
+                                              document.getElementById('goodD').innerHTML= "En estos momentos estamos realizando cambios";
+                                               $('#palabraD').css('background','#F2A914');
+                                          }else{
+                                            console.log(data);
+                                            if(data != micred){
+                                               localStorage.setItem('credit',data);
+                                                input=localStorage.getItem('credit');
+                                            var num = input.replace(/\./g,'');
+                                              if(!isNaN(num)){
+                                              num = num.toString().split('').reverse().join('').replace(/(?=\d*\.?)(\d{3})/g,'$1.');
+                                              num = num.split('').reverse().join('').replace(/^[\.]/,'');
+                                              
+                                            }
+                                            if(input <= 500 ){
+                                              $('#palabraD').css('background','#ED565A');
+                                              $('#goodD').css('color','#fff');
+                                              $('#malD').html('¡No olvides Recargar!');
+                                              $('#sdf').html('<br>');
+                                           }else{
+                                              $('#palabraD').css('background','#D0E86F');
+                                              $('#goodD').css('color','#4470B4');
+                                              $('#malD').html('');
+                                           }
+                                               document.getElementById('goodD').innerHTML= "Bienvenido "+localStorage.getItem('name')+"! - Saldo: $<span id='saldo_good'>"+num+"</span>" ;
+                                            }
+                                        }
+                                    }
+                                });
+                            },3000);
+
+                            //cargar historial de llamadas
+                            var parametro={'session':localStorage.getItem('session')};
+                              $.ajax({
+                                  data:parametro,
+                                  type:"POST",
+                                  url:'https://app.emsivoz.co/funciones/prod/usuario-app/historial.php',
+                                  success:function(data){
+                                        var print=JSON.parse(data);
+                                        var res = "";
+                                      if(print[0]['resul'] == "ok"){
+                                         for (var i = 0; i < print.length;i++){
+                                            if(print[i]['precio'] >= '1'){
+                                                  color="color:#227538;";
+                                              }else{
+                                                  color="color:#ED565A;";
+                                              }
+                                             res += "<ul class='collection'>"+
+                                                "<li class='collection-item avatar'>"+
+                                                  " <i class='circle white' style='"+color+"font-size:16px;'>"+print[i]['start']+"</i>"+
+                                                  "<span class='title' style='"+color+"' >"+print[i]['dnid']+"</span> "+
+                                                  "<i class='material-icons' style='float:right;color:#4470B4;font-size:40px;' onclick='LlamarOtroMedio(\""+print[i]['dnid']+"\")'>&#xE0CD;</i></a>"+
+                                                    "<p><i style='color:#4470B4;' class='material-icons'></i>  "+print[i]['tiempo']+" segundos <i><i style='color:#4470B4;' class='material-icons'>&#xE227;</i>  "+print[i]['precio']+"</i></p>"+
+                                                "</li>"+
+                                              "</ul>";
+                                        }
+                                      }else{
+                                          res="<center><h5>No has realizado Ninguna Llamada</h5></center>"
+                                      }
+                                      $("#historial").html(res);
+                                     
+                              }
+                          });
+
+                          //cargar paises
+
+                         //cargar todos los contaactos
+                         
+                          options = new ContactFindOptions();
+                          options.filter = "";
+                          options.multiple = true;
+                              options.hasPhoneNumber = true;
+                          var filter = ["displayName", "phoneNumbers"];
+                          navigator.contacts.find(filter, onSuccess, onError, options);
+
+                    }
+                        onStartListenerClick();
+                }
+                function BuscarContacto(){
+
+                  var con=$('#contbus').val();
+                  if(con.length > 2){
+                    options.filter = con;
+                    options.multiple = true;
+                    options.hasPhoneNumber = true;
+                    var filter = ["displayName", "phoneNumbers"];
+                    navigator.contacts.find(filter, onSuccess, onError, options);
+                  }else{
+                    options.filter = "";
+                    options.multiple = true;
+                    options.hasPhoneNumber = true;
+                    var filter = ["displayName", "phoneNumbers"];
+                    navigator.contacts.find(filter, onSuccess, onError, options);
+                  }
+                }
+
+                function Numero(num){
+                  if($('#number').html().length <= 12){
+                    $('#number').css('font-size','34px');
+                  }else{
+                    if($('#number').html().length <= 18){
+                      $('#number').css('font-size','24px');
+                    }else{
+                      $('#number').css('font-size','20px');
+                    }
+                  }
+                    $('#number').html($('#number').html() + num);
+
+                  var numero=$('#number').html();
+                  var pais=numero;
+                  var indi,precio,nombre;
+                   if($('#number').html().length >= 4){
+                    console.log($('#number').html());
+                     $.post('https://app.emsivoz.co/funciones/prod/programadas/indicativos_pais.php',{'pais':pais},function(data){
+                      console.log(data);
+                        if(data != 0){
+                          var print=JSON.parse(data);
+                          nombre=print[0]['nombre'];
+                            if(print[0]['indi'] == 1){
+                              precio=print[0]['precio'];
+                            }else{
+                              precio=print[1]['precio'];
+                            }
+                          console.log('el valor para llamar a '+nombre+' es $'+precio);
+                          $('#connect').html('el valor para llamar a '+nombre+' es $'+precio);
+                      }
+                   });
+
+                     
+                  }else{
+                    $('#connect').html('');
+                  }
+              }
+
+                function BorrarNumero(){
+                    var num= $('#number').html();
+                    var numero="";
+                    for(var i =0;i < num.length - 1;i++){
+                        numero=numero+ num[i];
+                    }
+                    $('#number').html(numero);
+                  if($('#number').html().length <= 13){
+                    $('#number').css('font-size','34px');
+                  }else{
+                    if($('#number').html().length <= 19){
+                      $('#number').css('font-size','24px');
+                    }else{
+                      $('#number').css('font-size','20px');
+                    }
+                  }
+
+                  var pais=num;
+                  var indi,precio,nombre;
+                    console.log($('#number').html());
+                     $.post('https://app.emsivoz.co/funciones/prod/programadas/indicativos_pais.php',{'pais':pais},function(data){
+                      console.log(data);
+                        if(data != 0){
+                          var print=JSON.parse(data);
+                          nombre=print[0]['nombre'];
+                            if(print[0]['indi'] == 1){
+                              precio=print[0]['precio'];
+                            }else{
+                              precio=print[1]['precio'];
+                            }
+                          console.log('el valor para llamar a '+nombre+' es $'+precio);
+                          $('#connect').html('el valor para llamar a '+nombre+' es $'+precio);
+                      }
+                   });
+
+                     
+                }
+                function LlamarOtroMedio(numero){
+                  var numeroenvi="";
+                  for(var i=0; i < numero.length;i++){
+                      numeroenvi=numeroenvi+numero[i];
+                      if(i == 2){
+                        if(numeroenvi == '+57'){
+                          numeroenvi="";
+                          console.log('sew cambio el numero');
+                        }
+                      }
+                      console.log(numeroenvi);
+                  }
+                  $('#number').html(numeroenvi);
+                  Llamar();
+                }
+
+                
+                function Llamar(){
+                    var num= $('#number').html();
+                    console.log(num);
+                     onCall(num);
+                     localStorage.setItem('llamada',num);
+                }
+
+                function Colgar(){
+
+                    //var $toastContent = $('<span>Llamada Finalizada</span>');
+                   // Materialize.toast($toastContent, 3000);
+                    clearInterval(interval);
+                    localStorage.removeItem('llamada');
+                    localStorage.removeItem('seg');
+                    localStorage.removeItem('min');
+                    localStorage.removeItem('hor');
+                    $('#colgado').val('true');
+                    onTerminateCall();
+                    ContenidoPrincipal('llamar');
+                }
+                function ActivarParlante(){
+                    $('#speaker').html('<a class="btn-floating btn-large waves-effect waves-light transparent" style="border:1px solid #fff">  <i class="material-icons" style="color:#fff;font-size:30px;" onclick="DescativarParlante()">&#xE04D;</i> </a>');
+                      onEnableSpeakerClick();
+                }
+                function DescativarParlante(){
+                    $('#speaker').html('<a class="btn-floating btn-large waves-effect waves-light transparent" style="border:1px solid #fff">  <i class="material-icons" style="color:#fff;font-size:30px;" onclick="ActivarParlante()">&#xE050;</i> </a>');
+                      onDisableSpeakerClick();
+
+                }
+                function TecladoPequeno(){
+                    $('#opciones').css('display','none');
+                    $('#tecladopequeno').css('display','block');
+                }
+                function OcultarTeclado(){
+                    $('#opciones').css('display','block');
+                    $('#tecladopequeno').css('display','none');
+                }
+                function Dtmf(num){
+                    console.log(num);
+                   onSendDtmfClick(num);
+                   $('#dtmf').html($('#dtmf').html() + num);
+                }
+               function callEstablished(){
+                    $(".ds").removeAttr("disabled");
+                    interval=  setInterval(tiempo,1000);
+                }
+                function tiempo(){
+                      var colgado = $('#colgado').val();
+                      if(colgado == "false"){
+                        var min = $('#minutos').val();
+                        var seg = $('#segundos').val();
+                        var hor = $('#horas').val();
+                            if(seg == 59){
+                                seg=00;
+                                min=01+parseInt(min);
+                                if(min < 10){
+                                    min='0'+min;
+                                  }
+                            }else{
+                                seg=01+parseInt(seg);
+                            }
+                            if(min == 59){
+                                min=00;
+                                hor=01+parseInt(hor);
+                            }
+                            
+                          var string = "";
+                          if(seg < 10){
+                            seg='0'+seg;
+                          }
+                          
+                          string += hor +':'+ min + ':'+ seg;
+                          console.log(string);
+                          $('#horas').val(hor);
+                          $('#minutos').val(min);
+                          $('#segundos').val(seg);
+                          document.getElementById("time-llama").innerHTML = string;
+                          localStorage.setItem('seg',seg);
+                          localStorage.setItem('min',min);
+                          localStorage.setItem('hor',hor);
+                      }else{
+                          clearInterval(interval);
+                      }
+                }
+
+                function callEnd(){
+                   // var $toastContent = $('<span>Llamada Finalizada</span>');
+                     //Materialize.toast($toastContent, 3000);
+                    clearInterval(interval);
+                    localStorage.removeItem('llamada');
+                    $('#colgado').val("true");
+                    localStorage.removeItem('seg');
+                      localStorage.removeItem('min');
+                      localStorage.removeItem('hor');
+                    ContenidoPrincipal('llamar');
+
+                }
+                function Mute(){
+                   //mySip.muteCall('on');
+                }
+                function Stop(){
+                    $('#estados-llama').html('<a class="btn-floating btn-large waves-effect waves-light transparent" style="border:1px solid #fff">  <i class="material-icons" style="color:#fff;font-size:30px;" onclick="Listen()">&#xE037;</i></a>');
+                    //mySip.stopListenCall();
+                }
+                function Listen(){
+                   $('#estados-llama').html('<a class="btn-floating btn-large waves-effect waves-light transparent" style="border:1px solid #fff">  <i class="material-icons" style="color:#fff;font-size:30px;" onclick="Stop()">&#xE034;</i></a>');
+                  // mySip.listenCall();
+                }
+
+                /*
+                function connectSuccess(){
+                    //$('#connect').html('Estas Conectado');
+                    $('#connect').css('color','green');
+                    $("#btnllam").removeAttr("disabled");
+                     var $toastContent = $('<span>Estas Conectado</span>');
+                     Materialize.toast($toastContent, 3000,'rounded');
+                }
+                function connectError(){
+                   // $('#connect').html('No Estas Conectado');
+                    $('#connect').css('color','red');
+                    var $toastContent = $('<span>No se puede Conectar</span>');
+                     Materialize.toast($toastContent, 3000);
+                }
+                function callReady(){
+                    var num= $('#number').html();
+                    $('#num-llama').html(num);
+                    $('#telefono-contestado').css('display','block');
+                    console.log(num);
+                }
+                function callError(){
+                     var $toastContent = $('<span>Problemas al realizar Llamada</span>');
+                     Materialize.toast($toastContent, 3000);
+                      localStorage.removeItem('llamada');
+                      localStorage.removeItem('seg');
+                      localStorage.removeItem('min');
+                      localStorage.removeItem('hor');
+                   
+                     navigator.notification.alert(
+                            'Error de Llamada',  // message
+                            alertDismissed,         // callback
+                            'ERROR',            // title
+                            'Aceptar'                  // buttonName
+                        );
+                }
+                 function callErrorES(){
+                     var $toastContent = $('<span>Problemas al realizar Llamada</span>');
+                     Materialize.toast($toastContent, 3000);
+                    localStorage.removeItem('llamada');
+                    localStorage.removeItem('seg');
+                    localStorage.removeItem('min');
+                    localStorage.removeItem('hor');
+                    ContenidoPrincipal('llamar');
+                   
+                     navigator.notification.alert(
+                            'Error de Llamada',  // message
+                            alertDismissed,         // callback
+                            'ERROR',            // title
+                            'Aceptar'                  // buttonName
+                        );
+                }
+                function callRingingBack(){
+                    $("#btncolllam").removeAttr("disabled");
+                    $("#btncolllam").removeAttr("disabled");
+                }
+                function alertDismissed(){
+
+                }
+                */
+
+
+                function Destin(){
+                  $('#modal5').openModal();
+                  
+                }
+                 function callRingingBack(){
+                    $("#btncolllam").removeAttr("disabled");
+                    $("#btncolllam").removeAttr("disabled");
+                }
+               
+        </script>
+
+   
+
+  
