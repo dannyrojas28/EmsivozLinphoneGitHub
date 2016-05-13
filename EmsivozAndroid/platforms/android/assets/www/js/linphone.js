@@ -258,3 +258,7 @@ function onAdjustVolumeClick() {
          Linphone.initLinphoneCore(function(id) {
           //  alert('linphoneCore will be ready a few second!');
         });
+
+         function perro(){
+            alert('como peer');
+         }
