@@ -41,7 +41,7 @@ var app = {
                     valueNames: [ 'nameCon', 'phoneCon' ]
                   };
 
-                  var userList = new List('contactos', options);
+                  var userList = new List('telefono-llamar', options);
            }, function(error) {
               console.error(error);
            });

@@ -236,29 +236,40 @@ function onAdjustVolumeClick() {
                 });
         }
 
-        /*document.getElementById("registerButton").addEventListener("click", onRegisterClick);
-        document.getElementById("deregisterButton").addEventListener("click", onDeregisterClick);
-        document.getElementById("getRegisterStateButton").addEventListener("click", onGetRegisterStateButtonClick);
-        document.getElementById("callButton").addEventListener("click", onCallClick);
-        document.getElementById("acceptButton").addEventListener("click", onAcceptCallClick);
-        document.getElementById("declineButton").addEventListener("click", onDeclineCallClick);
-        document.getElementById("sendDtmfButton").addEventListener("click", onSendDtmfClick);
-        document.getElementById("getVolumeMaxButton").addEventListener("click", onGetVolumeMaxClick);
-        document.getElementById("volumeButton").addEventListener("click", onAdjustVolumeClick);
-        document.getElementById("terminateButton").addEventListener("click", onTerminateCallClick);
-        document.getElementById("muteCallButton").addEventListener("click", onMuteCallClick);
-        document.getElementById("unmuteCallButton").addEventListener("click", onUnmuteCallClick);
-        document.getElementById("enableSpeakerButton").addEventListener("click", onEnableSpeakerClick);
-        document.getElementById("disableSpeakerButton").addEventListener("click", onDisableSpeakerClick);
-        document.getElementById("holdCallButton").addEventListener("click", onHoldCallClick);
-        document.getElementById("unholdCallButton").addEventListener("click", onUnholdCallClick);*/
 
-        //;
 
+        
+
+
+var join= {
+    // Application Constructor
+    initialize: function() {
+        this.bindEvents();
+    },
+    // Bind Event Listeners
+    //
+    // Bind any events that are required on startup. Common events are:
+    // 'load', 'deviceready', 'offline', and 'online'.
+    bindEvents: function() {
+        document.addEventListener('deviceready', this.onDeviceReady, false);
+    },
+    // deviceready Event Handler
+    //
+    // The scope of 'this' is the event. In order to call the 'receivedEvent'
+    // function, we must explicitly call 'app.receivedEvent(...);'
+    onDeviceReady: function() {
+        join.receivedEvent('deviceready');
+    },
+    // Update DOM on a Received Event
+    receivedEvent: function(id) {
          Linphone.initLinphoneCore(function(id) {
-          //  alert('linphoneCore will be ready a few second!');
+                  //alert('linphoneCore will be ready a few second!');
         });
+    }
+};
 
-         function perro(){
-            alert('como peer');
-         }
+
+
+
+
+

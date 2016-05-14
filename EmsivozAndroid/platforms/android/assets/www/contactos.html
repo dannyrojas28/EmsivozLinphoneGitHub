@@ -1,32 +1,235 @@
+<html>
+  <head>
+    <title>AppMovil</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no,initial-scale=1, maximum-scale=1">
 
 
 
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link href="css/icons.css" rel="stylesheet">
+    <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link rel="stylesheet" href="css/animate.css"><link rel="stylesheet" href="css/materialdesign.css">
+
+    <link rel="stylesheet" type="text/css" href="css/teclado.css">
+    <script type="text/javascript" src="js/jquery.js" ></script>
+    <script type="text/javascript" src="index.js"></script>
+    <script type="text/javascript" src="js/functions.js"></script>
+    <script type="text/javascript" src="js/bootstrap.js"></script>
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/notificacion.js"></script>
+    <script type="text/javascript" src="js/materialdesig.js"></script>
+    <script type="text/javascript" src="js/materialize.js"></script>
+    <script type="text/javascript" src="js/init.js"></script> 
+    
+    <style type="text/css">
+      .top{
+        margin-top: 7px;
+      }
+    #teclado{
+      width: 100%;
+    }
+
+     
+    </style>
+    <script type="text/javascript">
+
+       sss.initialize();
+          //cuando se presione la tecla back button (flecha que indica hacia atras, ejecute esta funcion)
+          document.addEventListener("BackButton", onBackKeyDown, false); 
+            function onBackKeyDown(e) {
+                e.preventDefault();
+                var existeNav=$('#salir').val();
+                if(existeNav == 1){
+                 var argument="inicio.html";
+                    $(location).attr('href',argument);
+                }else{
+                  navigator.app.exitApp();
+                }
+            }
+
+            // funcion para saber si estamos conectados a internet
+            //
+           function onDeviceReady() {
+                checkConnection();
+            }
+            function checkConnection() {
+              var networkState = navigator.connection.type;
+              if(networkState == Connection.NONE){
+                 $('#micont').html('<br><br><center><img src="img/unnamed.png" style="with:270px;height:150px;"><h5>NO TIENES CONEXION A INTERNET</h5><br><a href="inicio.html" style="color:#AAB2A;font-size:24px;"><i class="material-icons" style="color:#AAB2A;font-size:34px;">&#xE863;</i></a></center>');
+              }
+            }
+
+        //verificamos si la session existe
+        if(localStorage.getItem('usname') == null && localStorage.getItem('uspass') == null){
+             var argument="index.html";
+            $(location).attr('href',argument);
+        }else{
+            $(document).ready(function(){
+              localStorage.removeItem("RegisCount");
+              setTimeout(function(){
+                  $('#fade').css('display','block');
+                  $('#carga').css('display','none');
+
+              },100);
+          
+
+              //si el usuario tiene un regalo
+              var paramId = {'id':localStorage.getItem('session')};
+               $.ajax({
+                   data:paramId,
+                    type:'POST',
+                    url:"https://app.emsivoz.co/funciones/prod/usuario-app/regalos.php",
+                    success:function(rta){
+                      var regalo=JSON.parse(rta);
+                        if(regalo.estado == 1){
+                          $('#regalo').html('<a class="modal-trigger" href="#modal1"><img src="img/Regalo3.gif" class="animated" style="width:60px;height:60px;position:absolute;right:10px;margin-top:0px;" onclick="TomarRegalo('+regalo.monto+','+regalo.id+')"  id="rg_img" > <audio id="musicafondo"   loop><source src="/img/sound.wav" type="audio/wav"></audio><audio id="price" ><source src="/img/price.mp3" type="audio/mp3"></audio>');
+                          $('#html-modal').html('<center><img src="https://app.emsivoz.co/fidelizar_cliente.jpg" ></center>');
+                           $('.modal-trigger').leanModal({
+                              dismissible: true, // Modal can be dismissed by clicking outside of the modal
+                              opacity: .5, // Opacity of modal background
+                              in_duration: 0, // Transition in duration
+                              out_duration: 0, // Transition out duration
+                              ready: function() { }, // Callback for Modal open
+                              complete: function(){ } // Callback for Modal close
+                            }
+                          );
+
+                        }
+                    }
+                }); 
+               if (localStorage.getItem('ms') == null){
+                  setTimeout(function(){
+                         //obtenemos el credito o saldo del usuario
+                            input=localStorage.getItem('credit');
+                            var num = input.replace(/\./g,'');
+                              if(!isNaN(num)){
+                              num = num.toString().split('').reverse().join('').replace(/(?=\d*\.?)(\d{3})/g,'$1.');
+                              num = num.split('').reverse().join('').replace(/^[\.]/,'');
+                              
+                            }
+                         document.getElementById('goodD').innerHTML= "Bienvenido "+localStorage.getItem('name')+"! - Saldo: $<span id='saldo_good'>"+num+"</span>";
+                        var miId=localStorage.getItem('session');
+                        var micred=localStorage.getItem('credit');
+                        var param={'credit':miId};
+                        console.log(localStorage.getItem('name')+"! - Saldo: $"+localStorage.getItem('credit'));
+                          $.ajax({
+                             data:param,
+                              type:'POST',
+                              url:"https://app.emsivoz.co/funciones/prod/usuario-app/getCredit.php",
+                               
+                              success:function(data){
+
+                                if(data == "En estos momentos estamos realizando cambios "){
+                                    document.getElementById('goodD').innerHTML= "En estos momentos estamos realizando cambios";
+                                     $('#palabraD').css('background','#F2A914');
+                                }else{
+                                  console.log(data);
+                                  if(data != micred){
+                                     localStorage.setItem('credit',data);
+                                      input=localStorage.getItem('credit');
+                                  var num = input.replace(/\./g,'');
+                                    if(!isNaN(num)){
+                                    num = num.toString().split('').reverse().join('').replace(/(?=\d*\.?)(\d{3})/g,'$1.');
+                                    num = num.split('').reverse().join('').replace(/^[\.]/,'');
+                                    
+                                  }
+                                  if(input <= 500 ){
+                                    $('#palabraD').css('background','#ED565A');
+                                    $('#goodD').css('color','#fff');
+                                    $('#malD').html('¡No olvides Recargar!');
+                                    $('#sdf').html('<br>');
+                                 }else{
+                                    $('#palabraD').css('background','#D0E86F');
+                                    $('#goodD').css('color','#4470B4');
+                                    $('#malD').html('');
+                                 }
+                                     document.getElementById('goodD').innerHTML= "Bienvenido "+localStorage.getItem('name')+"! - Saldo: $<span id='saldo_good'>"+num+"</span>" ;
+                                  }
+                              }
+                          }
+                        });
+                  
+                     if(localStorage.getItem('credit') <= 500){
+                        $('#palabraD').css('background','#ED565A');
+                        $('#goodD').css('color','#fff');
+                        $('#malD').html('¡No olvides Recargar!');
+                     }
+                },1500);
+               }else{
+                    $('#palabraD').css('background','#4470B4');
+                    $('#goodD').css('color','#fff');
+                    $('#malD').html('');
+                     document.getElementById('goodD').innerHTML= localStorage.getItem('ms');
+                     localStorage.removeItem('ms');
+               }
 
 
-  <meta charset="utf-8">
+            }); //document ready
+        }
 
-<link rel="stylesheet" type="text/css" href="css/teclado.css">
-<style type="text/css">
-  .top{
-    margin-top: 7px;
-  }
-#teclado{
-  width: 100%;
-}
+        
+        </script>
+      <style>
+          .btn{
+              text-transform: capitalize;
+          }
+      </style>
+</head> 
+<body> 
+<span id="number" style="color:#424242 ;margin-left:5px;display:none;margin-top: 10px;font-size: 34px"></span> 
+    <input type="hidden" id="registrado" value="0">
+    <div id="fade" style="display:none">
+            <div class="navbar-fixed" style="height:110px;" id="nav">
+                <nav class="todo"     style="height:110px;">
+                    <div class="nav-wrapper" >
+                      <center><img  class="brand-logo " src="img/logo.png"  style="width:154px;height:70px;" ></center>
+                      <!-- Dropdown Trigger -->
+                      <h1 id="refresh" style="position:absolute;margin:10px;font-size:18px;">
+                          <span style="top:30px;font-size:35px;" class="material-icons" onclick="Contenido('inicio.html')">&#xE863;</span>
+                      </h1>
+                      <div id="regalo">
+                          <a id="demo-menu-lower-right" class="mdl-button mdl-js-button mdl-button--icon " style="color:#4470B4;position:absolute;right:10px;margin-top:10px;">
+                            <i class="material-icons" >&#xE5D4;</i>
+                          </a>
+                      </div>  
+                          <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
+                            for="demo-menu-lower-right" style="background:#f1f1f1" style="background:#f0f0f0">
+                              <li class="mdl-menu__item" onclick="ContenidoPrincipal('ayudam')"> 
+                                  <p style="color:#757575;"><span class="material-icons">&#xE88F;</span> <a style="color:#757575;display:inline-block" >   Ayuda </a></p>
+                              </li>
+                              <li class="mdl-menu__item" onclick="ContenidoPrincipal('datos')">
+                                 <p style="color:#757575;"><span  class="material-icons">&#xE853;</span><a style="color:#757575;display:inline-block">  Datos de mi softphone </a> </p>
+                              </li>
+                              <li class="mdl-menu__item" onclick="Close()">
+                                  <p style="color:#757575;"><span  class="material-icons">&#xE8AC;</span> <a style="color:#757575;display:inline-block" >  Cerrar Sesiòn </a></p>
+                              </li>
+                          </ul>
 
- 
-</style>
-<span id="number" style="color:#424242 ;margin-left:5px;display:none;margin-top: 10px;"></span> 
-<div id="modal8" class="modal modal-fixed-footer" style="height: 200px;width: 70%;text-align: center;margin: auto;">
-            <div class="modal-content" id="paises">
-               
+                        
+                       
+                      <br>
+                      <div style="height:25px;width:100%;background:#D0E86F;font-size:14px;margin-top:10px;" id="palabraD" >
+                        <p style='color:#4470B4;text-align:center;font-size:14px;margin-top:5px;' id="goodD"></p>
+                      </div>
+                        <center><p onclick="ContenidoPrincipal('recarga')"style='color:#ED565A;background:#fff;' id="malD"></p></center>
+                      <div id="barraD" >
+                      </div>
+                  </div>   
+                </nav>
             </div>
-            <div class="modal-footer">
-              <a href="#!" class=" modal-action modal-close waves-green red btn">Cancelar</a>
-            </div>
-</div>
-<div class="app" >
-                <div class="row" id="contactos" style="display: none">
+
+      <div id="micont">
+              <div id="modal8" class="modal modal-fixed-footer" style="height: 200px;width: 70%;text-align: center;margin: auto;">
+                          <div class="modal-content" id="paises">
+                             
+                          </div>
+                          <div class="modal-footer">
+                            <a href="#!" class=" modal-action modal-close waves-green red btn">Cancelar</a>
+                          </div>
+              </div>
+              <div class="app" >
+                              <div class="row" id="telefono-llamar" >  
                     <br><br>
                      
                     <!--<input type="text" class="search" placeholder="Buscar Contacto"  style="border:none">-->
@@ -174,7 +377,7 @@
                    <input   type="hidden" id="minutos" value="00">
                    <input   type="hidden" id="segundos" value="00">
                    <input   type="hidden" id="horas" value="00">
-                   <input   type="hidden" id="esta" value="contactos">
+                   <input   type="hidden" id="esta" value="telefono-llamar">
                    <input   type="hidden" id="colgado" value="0">
                    <input   type="hidden" id="contas_load" value="1">
                    <input   type="hidden" id="numero-llam" value="">
@@ -183,161 +386,30 @@
         
 
 
-        <script src="js/init.js"></script>
-        <script src="js/linphone.js"></script>
-        <script src="js/contactos.js"></script>
-        <script type="text/javascript" >
+        <script type="text/javascript" src="js/linphone.js"></script> 
+        <script type="text/javascript" src="js/linphone_conf.js"></script> 
+        <script type="text/javascript" src="js/contactos.js"></script>
+        <script type="text/javascript" src="js/list.js"></script> 
+     
+              <script type="text/javascript">
               $(document).ready(function(){
-                         loadIndiLlamar();
-
-                }
-              );
-               /*  function ContenidoSotf(param){
-                  
-                  var es=$('#esta').val();
-                  if(es != param){
-                    console.log('tocame');
-                    $('#'+es).css('display','none');
-                    $('#'+param).css('display','block');
-                    $('#esta').val(param);
-                  }
-
-                  if ($('#esta').val() != 'telefono-llamar') {
-                      document.getElementById('barraD').innerHTML='<button type="button"  style="background:#fff;color:#4470B4;" class="btn barraT material-icons" onclick="ContenidoSotf(\'telefono-llamar\')">&#xE0CD;</button><button type="button"  style="background:#fff;color:#4470B4;" class="btn barraT material-icons" onclick="ContenidoSotf(\'contactos\');">&#xE853;</button><button type="button"  style="background:#fff;color:#4470B4;" class="btn barraT material-icons" onclick="Historial();ContenidoSotf(\'balance\')">&#xE8B0;</button>';
-                      
-                  }else{
-                     document.getElementById('barraD').innerHTML='';
-                  }
-
-                  if($('#esta').val() == 'contactos'){
-                    if ($('#contas_load').val() == 1) {
-                       Contactos();
-                       $('#contas_load').val(2);
-                    }
-                  }
-                }
-                function onError(contactError) {
-                      alert('onError!'+contactError);
-                  }
-                */
+                setTimeout(function(){
+                    join.initialize();
+                    pol.initialize();
+                    app.initialize();
+                },300);
+              });
+                 
                
 
-                  
-               document.addEventListener("deviceready", onDeviceReadyXD, false);
+              
+               
                 var mySip;
                 var interval;
                 var options;
                 var rf= false;
-                
-                function onDeviceReadyXD(){
-                    document.getElementById('barraD').innerHTML='<button type="button"  style="background:#fff;color:#4470B4;" class="btn barraT material-icons" onclick="ContenidoPrincipal(\'llamar\');">&#xE0CD;</button><button type="button"  style="background:#fff;color:#4470B4;" class="btn barraT material-icons" >&#xE853;</button><button type="button"  style="background:#fff;color:#4470B4;" class="btn barraT material-icons" onclick="ContenidoPrincipal(\'balance\');">&#xE8B0;</button>';
-                    document.getElementById('refresh').innerHTML='<i><span style="top:30px;font-size:35px;" class="material-icons"  onclick="Contenido(\'inicio.html\')">&#xE317;</span></i>';
-                      if(localStorage.getItem('llamada') != null){
-                           $('#telefono-contestado').css('display','block');
-                           console.log(localStorage.getItem('llamada'));
-                            $('#num-llama').html(localStorage.getItem('llamada'));
-                           $('#number').html(localStorage.getItem('llamada'));
-                           $('#horas').val(localStorage.getItem('hor'));
-                           $('#minutos').val( localStorage.getItem('min'));
-                           $('#segundos').val( localStorage.getItem('seg'));
-                           $("#btncolllam").removeAttr("disabled");
-                           $('#colgado').val("false");
-                           $("#btncolllam").removeAttr("disabled");
-                           if (localStorage.getItem('seg') != '00'){
-                               callEstablished();
-                           }
-                      }else{
-                        var numero = $('#llamar-contact').val();
-                        if(numero != 0){
-                            LlamarOtroMedio(numero);
-                        }else{
-                          localStorage.setItem('seg','00');
-                          localStorage.setItem('min','00');
-                          localStorage.setItem('hor','00');
-                         // mySip = cordova.plugins.SIP;
-                          $('#contactos').css('display','block');
-                          
-                        
-                         var cel = localStorage.getItem('cel');
-                         var pas = localStorage.getItem('uipass');
-                          console.log(cel);
-                          console.log(pas);
-
-                        
-                          onRegister(cel,pas);
-                          app.initialize();
-                         navigator.proximity.disableSensor();
-                         console.log("se cargaron los contactos");
-                            //cargar todos los contaactos
-
-                            setTimeout(function(){
-                              input=localStorage.getItem('credit');
-                              var num = input.replace(/\./g,'');
-                                if(!isNaN(num)){
-                                num = num.toString().split('').reverse().join('').replace(/(?=\d*\.?)(\d{3})/g,'$1.');
-                                num = num.split('').reverse().join('').replace(/^[\.]/,'');
-                                
-                              }
-                             document.getElementById('goodD').innerHTML= "Bienvenido "+localStorage.getItem('name')+"! - Saldo: $<span id='saldo_good'>"+num+"</span>";
-                            var miId=localStorage.getItem('session');
-                            var micred=localStorage.getItem('credit');
-                            var param={'credit':miId};
-                            console.log(localStorage.getItem('name')+"! - Saldo: $"+localStorage.getItem('credit'));
-                              $.ajax({
-                                 data:param,
-                                  type:'POST',
-                                  url:"https://app.emsivoz.co/funciones/prod/usuario-app/getCredit.php",
-                                   
-                                  success:function(data){
-
-                                          if(data == "En estos momentos estamos realizando cambios "){
-                                              document.getElementById('goodD').innerHTML= "En estos momentos estamos realizando cambios";
-                                               $('#palabraD').css('background','#F2A914');
-                                          }else{
-                                            console.log(data);
-                                            if(data != micred){
-                                               localStorage.setItem('credit',data);
-                                                input=localStorage.getItem('credit');
-                                            var num = input.replace(/\./g,'');
-                                              if(!isNaN(num)){
-                                              num = num.toString().split('').reverse().join('').replace(/(?=\d*\.?)(\d{3})/g,'$1.');
-                                              num = num.split('').reverse().join('').replace(/^[\.]/,'');
-                                              
-                                            }
-                                            if(input <= 500 ){
-                                              $('#palabraD').css('background','#ED565A');
-                                              $('#goodD').css('color','#fff');
-                                              $('#malD').html('¡No olvides Recargar!');
-                                              $('#sdf').html('<br>');
-                                           }else{
-                                              $('#palabraD').css('background','#D0E86F');
-                                              $('#goodD').css('color','#4470B4');
-                                              $('#malD').html('');
-                                           }
-                                               document.getElementById('goodD').innerHTML= "Bienvenido "+localStorage.getItem('name')+"! - Saldo: $<span id='saldo_good'>"+num+"</span>" ;
-                                            }
-                                        }
-                                    }
-                                });
-                            },3000);
-
-                        
-                         
-
-                        }
-                          //cargar paises
-                          console.log("se cargo todo bie");
-
-                      }
-
-                    
-                        onStartListenerClick();
-                }
-                
-                
-                
                 function LlamarOtroMedio(numero){
-                  var numeroenvi="";
+                    var numeroenvi="";
                   for (var i = 0; i < numero.length; i++) {
                       for (var j = 0; j <= 9;j++) {
                           if(numero[i] != " "){
@@ -408,14 +480,15 @@
                     $('#colgado').val('true');
                     onTerminateCall();
                     onDeregister();
-                    ContenidoPrincipal('contactos');
+                    var argument="contactos.html";
+                   $(location).attr('href',argument);
                 }
                 function ActivarParlante(){
                     $('#speaker').html('<a class="btn-floating btn-large waves-effect waves-light " style="background:#D0E86F;border:1px solid #D0E86F">  <i class="material-icons" style="color:#fff;font-size:30px;" onclick="DescativarParlante()">&#xE050;</i> </a>');
                       onEnableSpeakerClick();
                 }
                 function DescativarParlante(){
-                    $('#speaker').html('<a class="btn-floating btn-large waves-effect waves-light" style="background:#D0E86F;border:1px solid #D0E86F">  <i class="material-icons" style="color:#fff;font-size:30px;" onclick="ActivarParlante()">&#xE04D;</i> </a>');
+                    $('#speaker').html('<a class="btn-floating  waves-effect bg " style="background:#fff;border:1px solid #9e9e9e" onclick="ActivarParlante()">   <i class="material-icons" style="color:#333;font-size:30px;" >&#xE04D;</i> </a>');
                       onDisableSpeakerClick();
 
                 }
@@ -490,7 +563,8 @@
                     localStorage.removeItem('seg');
                     localStorage.removeItem('min');
                     localStorage.removeItem('hor');
-                    ContenidoPrincipal('contactos');
+                    var argument="contactos.html";
+                   $(location).attr('href',argument);
 
                 }
                 function Mute(){
@@ -504,67 +578,6 @@
                    $('#estados-llama').html('<a class="btn-floating btn-large waves-effect waves-light transparent" style="border:1px solid #fff">  <i class="material-icons" style="color:#fff;font-size:30px;" onclick="Stop()">&#xE034;</i></a>');
                   // mySip.listenCall();
                 }
-
-                /*
-                function connectSuccess(){
-                    //$('#connect').html('Estas Conectado');
-                    $('#connect').css('color','green');
-                    $("#btnllam").removeAttr("disabled");
-                     var $toastContent = $('<span>Estas Conectado</span>');
-                     Materialize.toast($toastContent, 3000,'rounded');
-                }
-                function connectError(){
-                   // $('#connect').html('No Estas Conectado');
-                    $('#connect').css('color','red');
-                    var $toastContent = $('<span>No se puede Conectar</span>');
-                     Materialize.toast($toastContent, 3000);
-                }
-                function callReady(){
-                    var num= $('#number').html();
-                    $('#num-llama').html(num);
-                    $('#telefono-contestado').css('display','block');
-                    console.log(num);
-                }
-                function callError(){
-                     var $toastContent = $('<span>Problemas al realizar Llamada</span>');
-                     Materialize.toast($toastContent, 3000);
-                      localStorage.removeItem('llamada');
-                      localStorage.removeItem('seg');
-                      localStorage.removeItem('min');
-                      localStorage.removeItem('hor');
-                   
-                     navigator.notification.alert(
-                            'Error de Llamada',  // message
-                            alertDismissed,         // callback
-                            'ERROR',            // title
-                            'Aceptar'                  // buttonName
-                        );
-                }
-                 function callErrorES(){
-                     var $toastContent = $('<span>Problemas al realizar Llamada</span>');
-                     Materialize.toast($toastContent, 3000);
-                    localStorage.removeItem('llamada');
-                    localStorage.removeItem('seg');
-                    localStorage.removeItem('min');
-                    localStorage.removeItem('hor');
-                    ContenidoPrincipal('llamar');
-                   
-                     navigator.notification.alert(
-                            'Error de Llamada',  // message
-                            alertDismissed,         // callback
-                            'ERROR',            // title
-                            'Aceptar'                  // buttonName
-                        );
-                }
-                function callRingingBack(){
-                    $("#btncolllam").removeAttr("disabled");
-                    $("#btncolllam").removeAttr("disabled");
-                }
-                function alertDismissed(){
-
-                }
-                */
-
 
                 function Destin(){
                   $('#modal5').openModal();
@@ -585,7 +598,48 @@
                     $('#htCons').html($('#result').html());
                 }
         </script>
+   
+        </script>
 
    
 
+  
+             
+   
+        <div id="fadexinz" class="fadeboxinz" ></div>
+        <input type="hidden" id="desvanecido" value="0">
+        <div id="carga" style="text-align:center;margin-top:200px;">
+            <div class="preloader-wrapper small active">
+            <div class="spinner-layer spinner-green-only">
+              <div class="circle-clipper left">
+                <div class="circle"></div>
+              </div><div class="gap-patch">
+                <div class="circle"></div>
+              </div><div class="circle-clipper right">
+                <div class="circle"></div>
+              </div>
+            </div>
+          </div>
+           <br>
+           <p id="loadtext"></p>
+        </div>
+
+       <input type="hidden" id="salir" value="1">  
+       <input type="hidden" id="llamar-contact" value="0">  
+
+         <div id="modal1" class="modal">
+            <div class="modal-content" id="html-modal">
+              
+            </div>
+            <div class="modal-footer">
+              <a href="#!" class=" modal-action modal-close waves-green btn">Muchas Gracias <i class="material-icons">&#xE7F2;</i> </a>
+            </div>
+          </div>
+
+      </div>
+    </div>
+
+        </body>
+
+      </html>
   
