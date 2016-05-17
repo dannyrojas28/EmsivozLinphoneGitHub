@@ -1,3 +1,33 @@
+
+var join= {
+    // Application Constructor
+    initialize: function() {
+        this.bindEvents();
+    },
+    // Bind Event Listeners
+    //
+    // Bind any events that are required on startup. Common events are:
+    // 'load', 'deviceready', 'offline', and 'online'.
+    bindEvents: function() {
+        document.addEventListener('deviceready', this.onDeviceReady, false);
+    },
+    // deviceready Event Handler
+    //
+    // The scope of 'this' is the event. In order to call the 'receivedEvent'
+    // function, we must explicitly call 'app.receivedEvent(...);'
+    onDeviceReady: function() {
+        join.receivedEvent();
+    },
+    // Update DOM on a Received Event
+    receivedEvent: function() {
+         Linphone.initLinphoneCore(function(id) {
+                  //alert('linphoneCore will be ready a few second!');
+        });
+    }
+};
+
+
+
 function onRegister(cel,pass) {
 
                 Linphone.registerSIP(
@@ -19,8 +49,7 @@ function onRegister(cel,pass) {
                 },
                 function(e) {
                    // alert(e);
-                   $('#connect').css('color','red');
-                    var $toastContent = $('<span>No se puede Conectar</span>');
+                    var $toastContent = $('<span>No se puede Conectar vuelve a cargar</span>');
                      Materialize.toast($toastContent, 3000);
                      
                 });
@@ -58,16 +87,13 @@ function onCall(cel){
                     $('#num-llama').html(num);
                     $('#telefono-contestado').css('display','block');
                     onDisableSpeakerClick();
-                   
                     //alert('CALLING');
                 },
                 function(e){
                    // var $toastContent = $('<span>Problemas al realizar Llamada</span>');
                   //   Materialize.toast($toastContent, 3000);
-                    localStorage.removeItem('llamada');
-                    localStorage.removeItem('seg');
-                    localStorage.removeItem('min');
-                    localStorage.removeItem('hor');
+                    alert('error');
+                    onCall(cel);
                     
                 });
 }
@@ -87,11 +113,11 @@ function onDeclineCallClick() {
                 });
 }
         
-function onSendDtmfClick(cod) {
+function onSendDtmfClick() {
             Linphone.sendDtmf(
-                cod,
+                document.getElementsByName("dtmf_key")[0].value,
                 function(id) {
-                    //alert('SENT DTMF');
+                   // alert('SENT DTMF -> ');
                 });
 }
         
@@ -199,15 +225,38 @@ function onAdjustVolumeClick() {
                                     localStorage.removeItem('seg');
                                     localStorage.removeItem('min');
                                     localStorage.removeItem('hor');
+                                    var argument="llamar.html";
+                                   $(location).attr('href',argument);
                             break;
                         }
 
-                    } else if (data.event == "REGISTRATION_CHANGE") {
+                    }else if (data.event == "REGISTRATION_CHANGE") {
                         console.log("Event: " + data.event + "\n"
                             + "State: " + data.state + "\n"
                             + "Message: " + data.message + "\n"
                             + "Username: " + data.username + "\n"
                             + "Domain: " + data.domain);
+                       
+                        if(data.state == "RegistrationFailed" || data.state == "RegistrationNone"){
+                            $('#palabraD').css('background','#ED565A');
+                              $('#goodD').css('color','#fff');
+                              $('#goodD').html('No estas Registrado');
+                              ("#btnllam").attr("disabled", true);
+                        }else{
+                            if(data.state == "RegistrationOk"){
+                              $('#palabraD').css('background','#D0E86F');
+                              $('#goodD').css('color','#4470B4');
+                              input=localStorage.getItem('credit');
+                                  var num = input.replace(/\./g,'');
+                                    if(!isNaN(num)){
+                                    num = num.toString().split('').reverse().join('').replace(/(?=\d*\.?)(\d{3})/g,'$1.');
+                                    num = num.split('').reverse().join('').replace(/^[\.]/,'');
+                                    
+                                  }
+                               document.getElementById('goodD').innerHTML= "Bienvenido "+localStorage.getItem('name')+"! - Saldo: $<span id='saldo_good'>"+num+"</span>";
+                                $("#btnllam").removeAttr("disabled");
+                            }
+                        }
                     }
                 },
                 function(e) {
@@ -215,25 +264,13 @@ function onAdjustVolumeClick() {
                 });
         }
 
-        /*document.getElementById("registerButton").addEventListener("click", onRegisterClick);
-        document.getElementById("deregisterButton").addEventListener("click", onDeregisterClick);
-        document.getElementById("getRegisterStateButton").addEventListener("click", onGetRegisterStateButtonClick);
-        document.getElementById("callButton").addEventListener("click", onCallClick);
-        document.getElementById("acceptButton").addEventListener("click", onAcceptCallClick);
-        document.getElementById("declineButton").addEventListener("click", onDeclineCallClick);
-        document.getElementById("sendDtmfButton").addEventListener("click", onSendDtmfClick);
-        document.getElementById("getVolumeMaxButton").addEventListener("click", onGetVolumeMaxClick);
-        document.getElementById("volumeButton").addEventListener("click", onAdjustVolumeClick);
-        document.getElementById("terminateButton").addEventListener("click", onTerminateCallClick);
-        document.getElementById("muteCallButton").addEventListener("click", onMuteCallClick);
-        document.getElementById("unmuteCallButton").addEventListener("click", onUnmuteCallClick);
-        document.getElementById("enableSpeakerButton").addEventListener("click", onEnableSpeakerClick);
-        document.getElementById("disableSpeakerButton").addEventListener("click", onDisableSpeakerClick);
-        document.getElementById("holdCallButton").addEventListener("click", onHoldCallClick);
-        document.getElementById("unholdCallButton").addEventListener("click", onUnholdCallClick);*/
 
-        //;
 
-        Linphone.initLinphoneCore(function(id) {
-            alert('linphoneCore will be ready a few second!');
-        });
+        
+
+
+
+
+
+
+

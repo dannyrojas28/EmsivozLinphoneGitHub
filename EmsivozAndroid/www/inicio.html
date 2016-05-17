@@ -23,7 +23,7 @@
     <script src="js/init.js"></script> 
     <script src="js/list.js"></script> 
     <script type="text/javascript">
-    app.initialize();
+    sss.initialize();
           //cuando se presione la tecla back button (flecha que indica hacia atras, ejecute esta funcion)
           document.addEventListener("BackButton", onBackKeyDown, false); 
             function onBackKeyDown(e) {
@@ -48,7 +48,7 @@
                  $('#micont').html('<br><br><center><img src="img/unnamed.png" style="with:270px;height:150px;"><h5>NO TIENES CONEXION A INTERNET</h5><br><a href="inicio.html" style="color:#AAB2A;font-size:24px;"><i class="material-icons" style="color:#AAB2A;font-size:34px;">&#xE863;</i></a></center>');
               }
             }
-
+          
         //verificamos si la session existe
         if(localStorage.getItem('usname') == null && localStorage.getItem('uspass') == null){
              var argument="index.html";
@@ -237,13 +237,13 @@
                 <img src="img/icono_destin.jpg" id="icon" onclick="ContenidoPrincipal('indicativos')" style="float:right;margin-right:10px;">
             </div>
             <div class="col s6">
-                <img src="img/icono_llama.jpg" id="icon" onclick="ContenidoPrincipal('llamar')" style="float:left;margin-left:10px;">
+                <a href="llamar.html"><img src="img/icono_llama.jpg" id="icon" style="float:left;margin-left:10px;"></a>
             </div>
             <div class="col s12">
                 <br>
             </div>
             <div class="col s6">
-                 <img src="img/icono_histor.jpg" id="icon" onclick="ContenidoPrincipal('balance')" style="float:right;margin-right:10px;">
+                 <a href="balance.html"><img src="img/icono_histor.jpg" id="icon" style="float:right;margin-right:10px;"></a>
             </div> 
             <div class="col s6" id="imagen_promo">
                 

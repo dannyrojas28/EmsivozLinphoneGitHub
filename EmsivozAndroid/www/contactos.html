@@ -1,8 +1,9 @@
- <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no,initial-scale=1, maximum-scale=1">
-    <meta http-equiv="Content-Script-Type" content="type">
+<html>
+  <head>
     <title>AppMovil</title>
-    <script src="http://maps.google.com/maps/api/js?sensor=false"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no,initial-scale=1, maximum-scale=1">
+
 
 
     <link rel="stylesheet" type="text/css" href="css/style.css">
@@ -10,61 +11,639 @@
     <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
     <link rel="stylesheet" href="css/animate.css"><link rel="stylesheet" href="css/materialdesign.css">
 
+    <link rel="stylesheet" type="text/css" href="css/teclado.css">
     <script type="text/javascript" src="js/jquery.js" ></script>
     <script type="text/javascript" src="index.js"></script>
     <script type="text/javascript" src="js/functions.js"></script>
     <script type="text/javascript" src="js/bootstrap.js"></script>
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="js/notificacion.js"></script>
-    <script src="js/materialdesig.js"></script>
-    <script src="js/materialize.js"></script>
-    <script src="js/init.js"></script> 
-    <script src="js/list.js"></script> 
- <div class="row" id="contactos" >
+    <script type="text/javascript" src="js/materialdesig.js"></script>
+    <script type="text/javascript" src="js/materialize.js"></script>
+    <script type="text/javascript" src="js/init.js"></script> 
+    
+    <style type="text/css">
+      .top{
+        margin-top: 7px;
+      }
+    #teclado{
+      width: 100%;
+    }
+
+     
+    </style>
+    <script type="text/javascript">
+
+       sss.initialize();
+          //cuando se presione la tecla back button (flecha que indica hacia atras, ejecute esta funcion)
+          document.addEventListener("BackButton", onBackKeyDown, false); 
+            function onBackKeyDown(e) {
+                e.preventDefault();
+                var existeNav=$('#salir').val();
+                if(existeNav == 1){
+                 var argument="inicio.html";
+                    $(location).attr('href',argument);
+                }else{
+                  navigator.app.exitApp();
+                }
+            }
+
+            // funcion para saber si estamos conectados a internet
+            //
+           function onDeviceReady() {
+                checkConnection();
+            }
+            function checkConnection() {
+              var networkState = navigator.connection.type;
+              if(networkState == Connection.NONE){
+                 $('#micont').html('<br><br><center><img src="img/unnamed.png" style="with:270px;height:150px;"><h5>NO TIENES CONEXION A INTERNET</h5><br><a href="inicio.html" style="color:#AAB2A;font-size:24px;"><i class="material-icons" style="color:#AAB2A;font-size:34px;">&#xE863;</i></a></center>');
+              }
+            }
+
+        //verificamos si la session existe
+        if(localStorage.getItem('usname') == null && localStorage.getItem('uspass') == null){
+             var argument="index.html";
+            $(location).attr('href',argument);
+        }else{
+            $(document).ready(function(){
+              localStorage.removeItem("RegisCount");
+              setTimeout(function(){
+                  $('#fade').css('display','block');
+                  $('#carga').css('display','none');
+
+              },100);
+          
+
+              //si el usuario tiene un regalo
+              var paramId = {'id':localStorage.getItem('session')};
+               $.ajax({
+                   data:paramId,
+                    type:'POST',
+                    url:"https://app.emsivoz.co/funciones/prod/usuario-app/regalos.php",
+                    success:function(rta){
+                      var regalo=JSON.parse(rta);
+                        if(regalo.estado == 1){
+                          $('#regalo').html('<a class="modal-trigger" href="#modal1"><img src="img/Regalo3.gif" class="animated" style="width:60px;height:60px;position:absolute;right:10px;margin-top:0px;" onclick="TomarRegalo('+regalo.monto+','+regalo.id+')"  id="rg_img" > <audio id="musicafondo"   loop><source src="/img/sound.wav" type="audio/wav"></audio><audio id="price" ><source src="/img/price.mp3" type="audio/mp3"></audio>');
+                          $('#html-modal').html('<center><img src="https://app.emsivoz.co/fidelizar_cliente.jpg" ></center>');
+                           $('.modal-trigger').leanModal({
+                              dismissible: true, // Modal can be dismissed by clicking outside of the modal
+                              opacity: .5, // Opacity of modal background
+                              in_duration: 0, // Transition in duration
+                              out_duration: 0, // Transition out duration
+                              ready: function() { }, // Callback for Modal open
+                              complete: function(){ } // Callback for Modal close
+                            }
+                          );
+
+                        }
+                    }
+                }); 
+               if (localStorage.getItem('ms') == null){
+                //obtenemos el credito o saldo del usuario
+                            input=localStorage.getItem('credit');
+                            var num = input.replace(/\./g,'');
+                              if(!isNaN(num)){
+                              num = num.toString().split('').reverse().join('').replace(/(?=\d*\.?)(\d{3})/g,'$1.');
+                              num = num.split('').reverse().join('').replace(/^[\.]/,'');
+                              
+                            }
+                         document.getElementById('goodD').innerHTML= "Bienvenido "+localStorage.getItem('name')+"! - Saldo: $<span id='saldo_good'>"+num+"</span>";
+                  setTimeout(function(){
+                         
+                        var miId=localStorage.getItem('session');
+                        var micred=localStorage.getItem('credit');
+                        var param={'credit':miId};
+                        console.log(localStorage.getItem('name')+"! - Saldo: $"+localStorage.getItem('credit'));
+                          $.ajax({
+                             data:param,
+                              type:'POST',
+                              url:"https://app.emsivoz.co/funciones/prod/usuario-app/getCredit.php",
+                               
+                              success:function(data){
+
+                                if(data == "En estos momentos estamos realizando cambios "){
+                                    document.getElementById('goodD').innerHTML= "En estos momentos estamos realizando cambios";
+                                     $('#palabraD').css('background','#F2A914');
+                                }else{
+                                  console.log(data);
+                                  if(data != micred){
+                                     localStorage.setItem('credit',data);
+                                      input=localStorage.getItem('credit');
+                                  var num = input.replace(/\./g,'');
+                                    if(!isNaN(num)){
+                                    num = num.toString().split('').reverse().join('').replace(/(?=\d*\.?)(\d{3})/g,'$1.');
+                                    num = num.split('').reverse().join('').replace(/^[\.]/,'');
+                                    
+                                  }
+                                  if(input <= 500 ){
+                                    $('#palabraD').css('background','#ED565A');
+                                    $('#goodD').css('color','#fff');
+                                    $('#malD').html('¡No olvides Recargar!');
+                                    $('#sdf').html('<br>');
+                                 }else{
+                                    $('#palabraD').css('background','#D0E86F');
+                                    $('#goodD').css('color','#4470B4');
+                                    $('#malD').html('');
+                                 }
+                                     document.getElementById('goodD').innerHTML= "Bienvenido "+localStorage.getItem('name')+"! - Saldo: $<span id='saldo_good'>"+num+"</span>" ;
+                                  }
+                              }
+                          }
+                        });
+                  
+                     if(localStorage.getItem('credit') <= 500){
+                        $('#palabraD').css('background','#ED565A');
+                        $('#goodD').css('color','#fff');
+                        $('#malD').html('¡No olvides Recargar!');
+                     }
+                },1500);
+               }else{
+                    $('#palabraD').css('background','#4470B4');
+                    $('#goodD').css('color','#fff');
+                    $('#malD').html('');
+                     document.getElementById('goodD').innerHTML= localStorage.getItem('ms');
+                     localStorage.removeItem('ms');
+               }
+
+
+            }); //document ready
+        }
+
         
-        <input  type="text" class="search" placeholder="Buscar Contacto">
-        <div id="result" class="col s12 conts">
-            <center>
-              <div style="margin-top: 240px;">
-                <div class="preloader-wrapper small active">
-                    <div class="spinner-layer spinner-green-only">
-                      <div class="circle-clipper left">
-                        <div class="circle"></div>
-                      </div><div class="gap-patch">
-                        <div class="circle"></div>
-                      </div><div class="circle-clipper right">
-                        <div class="circle"></div>
+        </script>
+      <style>
+          .btn{
+              text-transform: capitalize;
+          }
+      </style>
+</head> 
+<body> 
+<span id="number" style="color:#424242 ;margin-left:5px;display:none;margin-top: 10px;font-size: 34px"></span> 
+    <input type="hidden" id="registrado" value="0">
+    <div id="fade" style="display:none">
+            <div class="navbar-fixed" style="height:110px;" id="nav">
+                <nav class="todo"     style="height:110px;">
+                    <div class="nav-wrapper" >
+                      <center><img  class="brand-logo " src="img/logo.png"  style="width:154px;height:70px;" ></center>
+                      <!-- Dropdown Trigger -->
+                      <h1 id="refresh" style="position:absolute;margin:10px;font-size:18px;">
+                          <span style="top:30px;font-size:35px;" class="material-icons" onclick="Contenido('inicio.html')">&#xE863;</span>
+                      </h1>
+                      <div id="regalo">
+                          <a id="demo-menu-lower-right" class="mdl-button mdl-js-button mdl-button--icon " style="color:#4470B4;position:absolute;right:10px;margin-top:10px;">
+                            <i class="material-icons" >&#xE5D4;</i>
+                          </a>
+                      </div>  
+                          <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
+                            for="demo-menu-lower-right" style="background:#f1f1f1" style="background:#f0f0f0">
+                              <li class="mdl-menu__item" onclick="ContenidoPrincipal('ayudam')"> 
+                                  <p style="color:#757575;"><span class="material-icons">&#xE88F;</span> <a style="color:#757575;display:inline-block" >   Ayuda </a></p>
+                              </li>
+                              <li class="mdl-menu__item" onclick="ContenidoPrincipal('datos')">
+                                 <p style="color:#757575;"><span  class="material-icons">&#xE853;</span><a style="color:#757575;display:inline-block">  Datos de mi softphone </a> </p>
+                              </li>
+                              <li class="mdl-menu__item" onclick="Close()">
+                                  <p style="color:#757575;"><span  class="material-icons">&#xE8AC;</span> <a style="color:#757575;display:inline-block" >  Cerrar Sesiòn </a></p>
+                              </li>
+                          </ul>
+
+                        
+                       
+                      <br>
+                      <div style="height:25px;width:100%;background:#D0E86F;font-size:14px;margin-top:10px;" id="palabraD" >
+                        <p style='color:#4470B4;text-align:center;font-size:14px;margin-top:5px;' id="goodD"></p>
                       </div>
-                    </div>
-                 </div>
-                 <br>
-                    Estamos cargando tus contactos
+                        <center><p onclick="ContenidoPrincipal('recarga')"style='color:#ED565A;background:#fff;' id="malD"></p></center>
+                      <div id="barraD" >
+                      </div>
+                  </div>   
+                </nav>
+            </div>
+
+      <div id="micont">
+              <div id="modal8" class="modal modal-fixed-footer" style="height: 200px;width: 70%;text-align: center;margin: auto;">
+                          <div class="modal-content" id="paises">
+                             
+                          </div>
+                          <div class="modal-footer">
+                            <a href="#!" class=" modal-action modal-close waves-green red btn">Cancelar</a>
+                          </div>
               </div>
-            </center>
-            
+              <div class="app" >
+                              <div class="row" id="telefono-llamar" >  
+                    <br><br>
+                     
+                    <!--<input type="text" class="search" placeholder="Buscar Contacto"  style="border:none">-->
+                    <div  class="" style="position: fixed;top: 140px;background: #fff;z-index: 997;border-bottom:1px solid #f1f1f1;width: 100%">
+                        <div class="input-field col s12 input"> 
+                              <i class="material-icons iconIn prefix usuario validate " id="icosearch">&#xE8B6;</i>
+                              <input  type="text" class="search" placeholder="Buscar Contacto"  style="border:none" id="contbus" >
+                              <label for="search"  data-error="" data-success=""></label>
+                        </div>
+                    <br><br><br><br>
+                    </div><br><br><br><br>
+                    <div id="result" class="col s12 conts">
+                        <center>
+                          <div style="margin-top: 240px;">
+                            <div class="preloader-wrapper small active">
+                                <div class="spinner-layer spinner-green-only">
+                                  <div class="circle-clipper left">
+                                    <div class="circle"></div>
+                                  </div><div class="gap-patch">
+                                    <div class="circle"></div>
+                                  </div><div class="circle-clipper right">
+                                    <div class="circle"></div>
+                                  </div>
+                                </div>
+                             </div>
+                             <br>
+                                Estamos cargando tus contactos
+                          </div>
+                        </center>
+                        
+                    </div>
+              </div>
+                <div class="row" id="telefono-contestado" style="position:fixed;width:100%;height:100%;top:0;left:0;z-index:100000;background:white;display: none">
+                              <center>
+                              <img src="img/logo.png" id="img-llam"><p style="color:#000" id="dtmf"></p>
+                                  
+                              </center>
+                            <div class="col s12 row" >
+                                <center>
+                                    <div  id="opciones">
+                                      <h5 style="font-style:italic ;font-family: GillSans, Calibri, Trebuchet, sans-serif;color:#4470B4;" id="num-llama"></h5>
+                                    <div class="col s12 img-back">
+                                        <center>  
+                                            <div id="time-llama" style="color:#000;">
+                                              <div class="progress" style="color:#000;background:#D0E86F;">
+                                                <div class="indeterminate" style="color:#000;background:#4470B4;"></div>
+                                              </div>
+                                              <p style="color:#000" id="llamando">Llamando..</p>
+                                            </div> 
+                                        </center>
+                                    </div>
+                                      <div class="col s4">
+                                           <button class="bg btn-floating btn waves-effect waves-light ds" style="background:#fff;border:1px solid #9e9e9e" >  <i class="material-icons" style="color:#333;font-size:30px;">&#xE02B;</i></button>
+                                        </div>
+                                        <div class="col s4" >
+                                           <button class="btn-floating  waves-effect waves-light  ds bg" style="background:#fff;border:1px solid #9e9e9e" >  <i class="material-icons" style="color:#333;font-size:30px;" onclick="TecladoPequeno()" >&#xE0BC;</i></button>
+                                        </div>
+                                        <div class="col s4" id="speaker">    
+                                           <a class="btn-floating  waves-effect bg " style="background:#fff;border:1px solid #9e9e9e" onclick="ActivarParlante()">   <i class="material-icons" style="color:#333;font-size:30px;" >&#xE04D;</i> </a>
+                                        </div>
+                                        <div class="col s12"><span></span></div>
+                                       <!-- <div class="col s4">
+                                           <button class="a btn-floating  waves-effect waves-light ds bg" style="background:#fff;border:1px solid #9e9e9e" >  <i class="material-icons" style="color:#333;font-size:30px;">&#xE145;</i></button>
+                                        </div>
+                                        <div class="col s4" id="estados-llama">
+                                           <button class="a btn-floating btn waves-effect waves-light  ds bg" style="background:#fff;border:1px solid #9e9e9e" >  <i class="material-icons" style="color:#333;font-size:30px;" >&#xE034;</i></button>
+                                        </div>
+                                         <div class="col s4" >    
+                                            <a class="a btn-floating waves-effect waves-light bg"  onclick="ConctsHtml()" style="background:#fff;border:1px solid #9e9e9e" >  <i class="material-icons" style="color:#333;font-size:30px;">&#xE853;</i>   </a>
+                                        </div>-->
+                                    </div>
+                                    <div class="col s12" id="tecladopequeno" style="display:none">
+
+                                           <center>
+                                                 <div class="col s12">
+                                                    <a class="btn-floating btn waves-effect waves-light sm" style="background:#fff;color:#333 ;border:1px solid #9e9e9e" onclick="OcultarTeclado()"><i class="material-icons" style="color: #333">&#xE318;</i></a>
+                                                    <br><br>
+                                                 </div>
+                                                <div class="col s4">
+                                                    <a class="btn-floating btn waves-effect waves-light sm" style="background:#fff;color:#333 ;border:1px solid #9e9e9e" onclick="Dtmf(1)">1</a>
+                                                     
+                                                </div>
+                                                <div class="col s4">
+                                                    <a class="btn-floating btn waves-effect waves-light sm" style="background:#fff;color:#333 ;border:1px solid #9e9e9e" onclick="Dtmf(2)">2 </a>
+                                                        
+                                                </div>
+                                                <div class="col s4">
+                                                    <a class="btn-floating btn waves-effect waves-light sm" style="background:#fff;color:#333 ;border:1px solid #9e9e9e" onclick="Dtmf(3)">3</a>
+                                                           
+                                                </div>
+                                                <div class="col s4">
+                                                    <a class="btn-floating btn waves-effect waves-light a sm" style="background:#fff;color:#333 ;border:1px solid #9e9e9e" onclick="Dtmf(4)">4</a>
+                                                </div>
+                                                <div class="col s4">
+                                                    <a class="btn-floating btn waves-effect waves-light a sm" style="background:#fff;color:#333 ;border:1px solid #9e9e9e" onclick="Dtmf(5)">5</a>
+                                                </div>
+                                                <div class="col s4">
+                                                    <a class="btn-floating btn waves-effect waves-light a sm" style="background:#fff;color:#333 ;border:1px solid #9e9e9e" onclick="Dtmf(6)">6</a>
+                                                </div>
+                                                <div class="col s4">
+
+                                                      <a class="btn-floating btn waves-effect waves-light a sm" style="background:#fff;color:#333 ;border:1px solid #9e9e9e" onclick="Dtmf(7)">7</a>
+                                                </div>
+                                                <div class="col s4">
+                                                      <a class="btn-floating btn waves-effect waves-light a sm" style="background:#fff;color:#333 ;border:1px solid #9e9e9e" onclick="Dtmf(8)">8</a>
+                                                </div>
+                                                <div class="col s4">
+                                                      <a class="btn-floating btn waves-effect waves-light a sm" style="background:#fff;color:#333 ;border:1px solid #9e9e9e" onclick="Dtmf(9)">9</a>
+                                                </div>
+                                                 <div class="col s4">
+
+                                                      <a class="btn-floating btn waves-effect waves-light a sm" style="background:#fff;color:#333 ;border:1px solid #9e9e9e" onclick="Dtmf('*')">*</a>
+                                                </div>
+                                                <div class="col s4">
+                                                      <a class="btn-floating btn waves-effect waves-light a sm" style="background:#fff;color:#333 ;border:1px solid #9e9e9e" onclick="Dtmf(0)">0</a>
+                                                </div>
+                                                <div class="col s4">
+                                                      <a class="btn-floating btn waves-effect waves-light a sm" style="background:#fff;color:#333 ;border:1px solid #9e9e9e" onclick="Dtmf('#')">#</a>
+                                                </div>
+                                            </center>
+                                    </div>
+                                    <div class="col s12" id="contacs" style="display: none">
+                                        <center>
+                                                <div class="col s12">
+                                                    <a class="btn-floating btn waves-effect waves-light " style="background:#fff;color:#333 ;border:1px solid #9e9e9e" onclick="OcultarTeclado()"><i class="material-icons" style="color:#333">&#xE318;</i></a>
+                                                    <br><br>
+                                                     <div id="htCons" style="overflow-y: auto;min-height: 1000px"></div>
+                                                 </div>
+                                             
+                                    </div>
+                                        <div class="col s12 fixed-action-btn" style="bottom: 10px;" id="colgar-di">
+                                       
+                                             <button class="btn-floating  btn-large waves-effect waves-light red darken-4" style="color:#fff32;width:68px;height:68.5px;font-size:45px;display: block" onclick="Colgar()" id="btncolllam" ><i class="material-icons" style="color:#fff32;font-size:38px;"  >&#xE0D1;</i></button > 
+                                             <img src="img/bol.jpg" style="width:164px;height:70px;">
+                                        </div>
+                                </center>
+                            </div>
+                </div>
+            </div>
+  
+
+
+  
+            <div id='lio'>
+                   <input   type="hidden" id="minutos" value="00">
+                   <input   type="hidden" id="segundos" value="00">
+                   <input   type="hidden" id="horas" value="00">
+                   <input   type="hidden" id="esta" value="telefono-llamar">
+                   <input   type="hidden" id="colgado" value="false">
+                   <input   type="hidden" id="contas_load" value="1">
+                   <input   type="hidden" id="numero-llam" value="">
+                   <input   type="hidden" name="dtmf_key" id="dtmf_key" value="0">
+            </div>
+        
+
+
+        <script type="text/javascript" src="js/contactos.js"></script>
+        <script type="text/javascript" src="js/linphone.js"></script> 
+        <script type="text/javascript" src="js/linphone_conf.js"></script> 
+        <script type="text/javascript" src="js/list.js"></script> 
+     
+              <script type="text/javascript">
+              $(document).ready(function(){
+                
+                setTimeout(function(){
+
+                   
+                    join.initialize();
+                    pol.initialize();
+                    document.getElementById('barraD').innerHTML='<a type="button"  style="background:#fff;color:#4470B4;" class="btn barraT material-icons" " href="llamar.html">&#xE0CD;</a><a type="button"  style="background:#fff;color:#4470B4;" class="btn barraT material-icons" href="contactos.html">&#xE853;</a><a type="button"  style="background:#fff;color:#4470B4;" class="btn barraT material-icons" href="balance.html">&#xE8B0;</a>';
+                    if(localStorage.getItem('contactos') != null){
+                        document.getElementById('result').innerHTML = localStorage.getItem('contactos');
+                    }
+                     app.initialize();
+                },400);
+              });
+                 
+               
+
+              
+               
+                var mySip;
+                var interval;
+                var options;
+                var rf= false;
+                function LlamarOtroMedio(numero){
+                    var numeroenvi="";
+                  for (var i = 0; i < numero.length; i++) {
+                      for (var j = 0; j <= 9;j++) {
+                          if(numero[i] != " "){
+                              if(numero[i] == j){
+                                  numeroenvi = numeroenvi + numero[i];
+                              }
+                          }
+                      }
+                     if(i == 2){
+                        if(numeroenvi == '57' || numeroenvi == '037'){
+                          numeroenvi="";
+                          console.log('sew cambio el numero');
+                        }
+                      }
+                     
+                  }
+
+                  $('#number').html(numero);
+                  $('#numero-llam').val(numeroenvi)
+                  Llamar();
+                }
+
+                
+                function Llamar(){
+                  if (localStorage.getItem('llamada') == null) {
+                    navigator.proximity.enableSensor();
+
+                    setInterval(function(){
+                      navigator.proximity.getProximityState(onSuccessProx);
+                    }, 1000);
+                    var num= $('#numero-llam').val();
+                    var numeroenvi="";
+                    for (var i = 0; i < num.length; i++) {
+                        for (var j = 0; j <= 9;j++) {
+                            if(num[i] != " "){
+                                if(num[i] == j){
+                                    numeroenvi = numeroenvi + num[i];
+                                }
+                            }
+                        }
+                       if(i == 2){
+                          if(numeroenvi == '57' || numeroenvi == '037'){
+                            numeroenvi="";
+                            console.log('sew cambio el numero');
+                          }
+                        }
+                       
+                    }
+                    if(numeroenvi.length >= 3){
+                      console.log(numeroenvi);
+                     onCall(numeroenvi);
+                     localStorage.setItem('llamada',numeroenvi);
+                    }
+                  }else{
+                    
+                  }
+                }
+
+                function Colgar(){
+
+                    //var $toastContent = $('<span>Llamada Finalizada</span>');
+                   // Materialize.toast($toastContent, 3000);
+                    clearInterval(interval);
+                    localStorage.removeItem('llamada');
+                    localStorage.removeItem('seg');
+                    localStorage.removeItem('min');
+                    localStorage.removeItem('hor');
+                    $('#colgado').val('true');
+                    onTerminateCall();
+                    onDeregister();
+                    var argument="contactos.html";
+                   $(location).attr('href',argument);
+                }
+                function ActivarParlante(){
+                    $('#speaker').html('<a class="btn-floating btn-large waves-effect waves-light " style="background:#D0E86F;border:1px solid #D0E86F">  <i class="material-icons" style="color:#fff;font-size:30px;" onclick="DescativarParlante()">&#xE050;</i> </a>');
+                      onEnableSpeakerClick();
+                }
+                function DescativarParlante(){
+                    $('#speaker').html('<a class="btn-floating  waves-effect bg " style="background:#fff;border:1px solid #9e9e9e" onclick="ActivarParlante()">   <i class="material-icons" style="color:#333;font-size:30px;" >&#xE04D;</i> </a>');
+                      onDisableSpeakerClick();
+
+                }
+                function TecladoPequeno(){
+                    $('#opciones').css('display','none');
+                    $('#contacs').css('display','none');
+                    $('#tecladopequeno').css('display','block');
+                }
+                function OcultarTeclado(){
+                    $('#opciones').css('display','block');
+                    $('#tecladopequeno').css('display','none');
+                    $('#contacs').css('display','none');
+                    $('#colgar-di').css('display','block');
+                }
+                function Dtmf(num){
+                    console.log(num);
+                  $('#dtmf_key').val(num);
+                   onSendDtmfClick();
+                   $('#dtmf').html($('#dtmf').html() + num);
+                }
+                function callEstablished(){
+                    interval=  setInterval(tiempo,1000);
+                }
+                function tiempo(){
+                      
+                        var min = $('#minutos').val();
+                        var seg = $('#segundos').val();
+                        var hor = $('#horas').val();
+                        var dddd = hor +':'+ min + ':'+ seg;
+                        console.log(dddd);
+                            if(seg == 59){
+                                seg=00;
+                                min=01+parseInt(min);
+                                if(min < 10){
+                                    min='0'+min;
+                                  }
+                            }else{
+                                seg=01+parseInt(seg);
+                            }
+                            if(min == 59){
+                                min=00;
+                                hor=01+parseInt(hor);
+                            }
+                            
+                          var string = "";
+                          if(seg < 10){
+                            seg='0'+seg;
+                          }
+                          
+                          string += hor +':'+ min + ':'+ seg;
+                          console.log(string);
+                          $('#horas').val(hor);
+                          $('#minutos').val(min);
+                          $('#segundos').val(seg);
+                          document.getElementById("time-llama").innerHTML = string;
+                          localStorage.setItem('seg',seg);
+                          localStorage.setItem('min',min);
+                          localStorage.setItem('hor',hor);
+                      
+                }
+
+                function callEnd(){
+                   // var $toastContent = $('<span>Llamada Finalizada</span>');
+                     //Materialize.toast($toastContent, 3000);
+                    clearInterval(interval);
+                    localStorage.removeItem('llamada');
+                    $('#colgado').val("true");
+                    localStorage.removeItem('seg');
+                    localStorage.removeItem('min');
+                    localStorage.removeItem('hor');
+                    var argument="contactos.html";
+                   $(location).attr('href',argument);
+
+                }
+                function Mute(){
+                   //mySip.muteCall('on');
+                }
+                function Stop(){
+                    $('#estados-llama').html('<a class="btn-floating btn-large waves-effect waves-light transparent" style="border:1px solid #fff">  <i class="material-icons" style="color:#fff;font-size:30px;" onclick="Listen()">&#xE037;</i></a>');
+                    //mySip.stopListenCall();
+                }
+                function Listen(){
+                   $('#estados-llama').html('<a class="btn-floating btn-large waves-effect waves-light transparent" style="border:1px solid #fff">  <i class="material-icons" style="color:#fff;font-size:30px;" onclick="Stop()">&#xE034;</i></a>');
+                  // mySip.listenCall();
+                }
+
+                function Destin(){
+                  $('#modal5').openModal();
+                  
+                }
+                 function callRingingBack(){
+                    $("#btncolllam").removeAttr("disabled");
+                    $("#btncolllam").removeAttr("disabled");
+                }
+                function onSuccessProx(state) {
+                      console.log('Proximity state: ' + (state ? 'near' : 'far'));
+                };
+                function ConctsHtml(){
+                    $('#opciones').css('display','none');
+                    $('#tecladopequeno').css('display','none');
+                    $('#contacs').css('display','block');
+                    $('#colgar-di').css('display','none');
+                    $('#htCons').html($('#result').html());
+                }
+        </script>
+   
+        </script>
+
+   
+
+  
+             
+   
+        <div id="fadexinz" class="fadeboxinz" ></div>
+        <input type="hidden" id="desvanecido" value="0">
+        <div id="carga" style="text-align:center;margin-top:200px;">
+            <div class="preloader-wrapper small active">
+            <div class="spinner-layer spinner-green-only">
+              <div class="circle-clipper left">
+                <div class="circle"></div>
+              </div><div class="gap-patch">
+                <div class="circle"></div>
+              </div><div class="circle-clipper right">
+                <div class="circle"></div>
+              </div>
+            </div>
+          </div>
+           <br>
+           <p id="loadtext"></p>
         </div>
-  </div>
 
-  <script src="js/init.js"></script>
-  <script src="js/contactos.js"></script>
-  <script type="text/javascript">
-   var impri="";
-     for (var i = 0; i <= 110; i++) {
-       impri = impri +"<ul class='collection'>"+
-                                      "<li class='collection-item avatar'>"+
-                                        " <i class='material-icons circle green'>&#xE853;</i>"+
-                                        "<span class='title nameCon'>nombredelsusu"+i+"</span> "+
-                                         "<button class='btn-floating btn-large waves-effect waves-light' id='btnllam' style='background:#D0E86F;color:#fff;margin:10px;float:right;' onclick='LlamarOtroMedio(\""+i+"\")' ><i class='material-icons' style='color:#4470B4;'>&#xE0CD;</i></button>"+
-                                        "<p class='phoneCon'>312"+i+"</p>"+
-                                      "</li>"+
-                                    "</ul>";
+       <input type="hidden" id="salir" value="1">  
+       <input type="hidden" id="llamar-contact" value="0">  
 
-     }
+         <div id="modal1" class="modal">
+            <div class="modal-content" id="html-modal">
+              
+            </div>
+            <div class="modal-footer">
+              <a href="#!" class=" modal-action modal-close waves-green btn">Muchas Gracias <i class="material-icons">&#xE7F2;</i> </a>
+            </div>
+          </div>
 
-     document.getElementById('result').innerHTML='<ul class="list">'+impri+'</ul>';
-              var options = {
-                    valueNames: [ 'nameCon', 'phoneCon' ]
-                  };
+      </div>
+    </div>
 
-                  var userList = new List('contactos', options);
-  </script>
+        </body>
+
+      </html>
+  

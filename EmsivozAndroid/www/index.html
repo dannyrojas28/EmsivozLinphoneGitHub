@@ -20,7 +20,7 @@
      <script type="text/javascript" src="cordova.js"></script>
      <script type="text/javascript" src="cordova_plugins.js"></script>
      <script>
-     app.initialize();
+     sss.initialize();
       document.addEventListener("BackButton", onBackKeyDown, false); 
               function onBackKeyDown(e) {
                   e.preventDefault();
@@ -35,7 +35,6 @@
                           $('#fade').html('<br><br><center><img src="img/unnamed.png" style="width:200px;height:120px;"><h5>NO TIENES CONEXION A INTERNET</h5><br><a href="index.html" style="color:#AAB2A;font-size:24px;"><i class="material-icons" style="color:#AAB2A;font-size:34px;">&#xE863;</i></a></center>');
                       }
                   }
-         
           if(localStorage.getItem('usname') != null && localStorage.getItem('uspass') != null){
                var argument="inicio.html";
               $(location).attr('href',argument);

@@ -142,7 +142,8 @@ module.exports.metadata =
     "phonegap-plugin-push": "1.6.1",
     "com.techstorm.linphone": "0.0.1",
     "com.dbaq.cordova.contactsPhoneNumbers": "0.0.8",
-    "org.awokenwell.proximity": "0.2.1"
+    "org.awokenwell.proximity": "0.2.1",
+    "com.voicekick.cordova.microphone": "1.2.1"
 };
 // BOTTOM OF METADATA
 });

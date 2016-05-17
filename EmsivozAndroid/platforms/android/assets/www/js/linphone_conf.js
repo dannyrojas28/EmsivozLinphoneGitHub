@@ -1,30 +1,30 @@
 var pol = {
     // Application Constructor
     initialize: function() {
-        this.bindEvents();
+        this.bindEventsx();
     },
     // Bind Event Listeners
     //
     // Bind any events that are required on startup. Common events are:
     // 'load', 'deviceready', 'offline', and 'online'.
-    bindEvents: function() {
-        document.addEventListener('deviceready', this.onDeviceReady, false);
+    bindEventsx: function() {
+        document.addEventListener('deviceready', this.onDeviceReadyx, false);
     },
     // deviceready Event Handler
     //
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicitly call 'app.receivedEvent(...);'
-    onDeviceReady: function() {
-        pol.receivedEvent('deviceready');
+    onDeviceReadyx: function() {
+        pol.receivedEventx();
     },
     // Update DOM on a Received Event
-    receivedEvent: function(id) {
-         var mySip;
-                var interval;
-                var options;
-                var rf= false;
-
-                    document.getElementById('barraD').innerHTML='';
+    receivedEventx: function() {
+              var mySip;
+              var interval;
+              var options;
+              var rf= false;
+                    
+                   
                     document.getElementById('refresh').innerHTML='<i><span style="top:30px;font-size:35px;" class="material-icons"  onclick="Contenido(\'inicio.html\')">&#xE317;</span></i>';
                       if(localStorage.getItem('llamada') != null){
                            $('#telefono-contestado').css('display','block');
@@ -57,7 +57,7 @@ var pol = {
                           console.log(cel);
                           console.log(pas);
 
-                        
+                          onDeregister();
                           onRegister(cel,pas);
                          navigator.proximity.disableSensor();
                          console.log("se cargaron los contactos");

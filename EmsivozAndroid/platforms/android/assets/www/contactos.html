@@ -99,8 +99,7 @@
                     }
                 }); 
                if (localStorage.getItem('ms') == null){
-                  setTimeout(function(){
-                         //obtenemos el credito o saldo del usuario
+                //obtenemos el credito o saldo del usuario
                             input=localStorage.getItem('credit');
                             var num = input.replace(/\./g,'');
                               if(!isNaN(num)){
@@ -109,6 +108,8 @@
                               
                             }
                          document.getElementById('goodD').innerHTML= "Bienvenido "+localStorage.getItem('name')+"! - Saldo: $<span id='saldo_good'>"+num+"</span>";
+                  setTimeout(function(){
+                         
                         var miId=localStorage.getItem('session');
                         var micred=localStorage.getItem('credit');
                         var param={'credit':miId};
@@ -378,7 +379,7 @@
                    <input   type="hidden" id="segundos" value="00">
                    <input   type="hidden" id="horas" value="00">
                    <input   type="hidden" id="esta" value="telefono-llamar">
-                   <input   type="hidden" id="colgado" value="0">
+                   <input   type="hidden" id="colgado" value="false">
                    <input   type="hidden" id="contas_load" value="1">
                    <input   type="hidden" id="numero-llam" value="">
                    <input   type="hidden" name="dtmf_key" id="dtmf_key" value="0">
@@ -386,18 +387,25 @@
         
 
 
+        <script type="text/javascript" src="js/contactos.js"></script>
         <script type="text/javascript" src="js/linphone.js"></script> 
         <script type="text/javascript" src="js/linphone_conf.js"></script> 
-        <script type="text/javascript" src="js/contactos.js"></script>
         <script type="text/javascript" src="js/list.js"></script> 
      
               <script type="text/javascript">
               $(document).ready(function(){
+                
                 setTimeout(function(){
+
+                   
                     join.initialize();
                     pol.initialize();
-                    app.initialize();
-                },300);
+                    document.getElementById('barraD').innerHTML='<a type="button"  style="background:#fff;color:#4470B4;" class="btn barraT material-icons" " href="llamar.html">&#xE0CD;</a><a type="button"  style="background:#fff;color:#4470B4;" class="btn barraT material-icons" href="contactos.html">&#xE853;</a><a type="button"  style="background:#fff;color:#4470B4;" class="btn barraT material-icons" href="balance.html">&#xE8B0;</a>';
+                    if(localStorage.getItem('contactos') != null){
+                        document.getElementById('result').innerHTML = localStorage.getItem('contactos');
+                    }
+                     app.initialize();
+                },400);
               });
                  
                
@@ -510,12 +518,10 @@
                    $('#dtmf').html($('#dtmf').html() + num);
                 }
                 function callEstablished(){
-                    $(".ds").removeAttr("disabled");
                     interval=  setInterval(tiempo,1000);
                 }
                 function tiempo(){
-                      var colgado = $('#colgado').val();
-                      if(colgado == "false"){
+                      
                         var min = $('#minutos').val();
                         var seg = $('#segundos').val();
                         var hor = $('#horas').val();
@@ -549,9 +555,7 @@
                           localStorage.setItem('seg',seg);
                           localStorage.setItem('min',min);
                           localStorage.setItem('hor',hor);
-                      }else{
-                          clearInterval(interval);
-                      }
+                      
                 }
 
                 function callEnd(){

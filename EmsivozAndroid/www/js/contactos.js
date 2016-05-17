@@ -15,33 +15,34 @@ var app = {
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
-    	navigator.contactsPhoneNumbers.list(function(contacts) {
+
+      
+
+        navigator.contactsPhoneNumbers.list(function(contacts) {
             var impri="";
-    	      var imprD="";
-     	      for(var i = 0; i < contacts.length; i++) {
-    	    	 if(contacts[i].phoneNumbers != undefined && contacts[i].displayName != undefined){
-   	    	         for(var j = 0; j < contacts[i].phoneNumbers.length; j++) {
-   	    	            var phone = contacts[i].phoneNumbers[j];
-   	    	            impri = impri +"<ul class='collection'>"+
-                                      "<li class='collection-item avatar'>"+
-                                        " <i class='material-icons circle green'>&#xE853;</i>"+
-                                        "<span class='title nameCon'>"+contacts[i].displayName+"</span> "+
-                                         "<button class='btn-floating btn-large waves-effect waves-light' id='btnllam' style='background:#D0E86F;color:#fff;margin:10px;float:right;' onclick='LlamarOtroMedio(\""+phone.number+"\")' ><i class='material-icons' style='color:#4470B4;'>&#xE0CD;</i></button>"+
-                                        "<p class='phoneCon'>"+phone.number+"</p>"+
-                                      "</li>"+
-                                    "</ul>";
-   	    	         }
-   	    	      }
-    	      }
-            document.getElementById('result').innerHTML='<ul class="list">'+impri+'</ul>';
-              var options = {
-                    valueNames: [ 'collection','collection-item','avatar','material-icons','circle','green', 'title','btn-floating','btn-large','waves-effect','waves-light','nameCon', 'phoneCon' ]
+              var imprD="";
+              for(var i = 0; i < contacts.length; i++) {
+                 if(contacts[i].phoneNumbers != undefined && contacts[i].displayName != undefined){
+                     for(var j = 0; j < contacts[i].phoneNumbers.length; j++) {
+                        var phone = contacts[i].phoneNumbers[j];
+                        impri = impri +"<li style='background-color: #fff;line-height: 1.5rem; padding: 10px 20px;margin: 0;border-bottom: 1px solid #e0e0e0;min-height: 84px;padding-left:10px;position: relative;'>"+
+                                        "<span class='nameCon' style='font-size:18px;font-weight: 550;'>"+contacts[i].displayName+"</span> "+
+                                        "<p class='phoneCon' onclick='LlamarOtroMedio(\""+phone.number+"\")'>"+phone.number+"</p>"+
+                                         "<button class='btn-floating btn-large waves-effect waves-light secondary-content' id='btnllam' style='background:#D0E86F;color:#fff;float:right;position: absolute;top: 16px;right: 16px;' onclick='LlamarOtroMedio(\""+phone.number+"\")' ><i class='material-icons' style='color:#4470B4;'>&#xE0CD;</i></button>"+
+                                      "</li>";
+                     }
+                  }
+              }
+            document.getElementById('result').innerHTML='<ul class="list" style="margin: 0.5rem 0 1rem 0;border: 1px solid #e0e0e0;border-radius: 2px;overflow: hidden;position: relative;">'+impri+'</ul>';
+            localStorage.setItem('contactos',$('#result').html());  
+            var options = {
+                    valueNames: [ 'nameCon', 'phoneCon' ]
                   };
 
-                  var userList = new List('contactos', options);
-    	   }, function(error) {
-    	      console.error(error);
-    	   });
+                  var userList = new List('telefono-llamar', options);
+           }, function(error) {
+              console.error(error);
+           });
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {

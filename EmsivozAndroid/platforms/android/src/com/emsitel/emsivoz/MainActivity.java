@@ -40,6 +40,7 @@ public class MainActivity extends CordovaActivity
         super.onCreate(savedInstanceState);
         // Set by <content src="index.html" /> in config.xml
         loadUrl(launchUrl);
+       
       /*  NotificationManager nManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         mRunningNotification = createRunningNotification(R.string.sip_active_title, R.string.sip_active_content,
 				R.string.sip_active_ticker);

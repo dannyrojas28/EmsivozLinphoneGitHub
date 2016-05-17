@@ -16,10 +16,7 @@ var app = {
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
 
-      if(localStorage.getItem('contactos') != null){
-          document.getElementById('result').innerHTML = localStorage.getItem('contactos');
-      }
-
+      
         navigator.contactsPhoneNumbers.list(function(contacts) {
             var impri="";
               var imprD="";

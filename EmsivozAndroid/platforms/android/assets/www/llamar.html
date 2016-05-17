@@ -1,6 +1,6 @@
-<html>
+  <html>
   <head>
-    <title>AppMovil</title>
+    <title>AppMovil666</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, user-scalable=no,initial-scale=1, maximum-scale=1">
 
@@ -99,8 +99,7 @@
                     }
                 }); 
                if (localStorage.getItem('ms') == null){
-                  setTimeout(function(){
-                         //obtenemos el credito o saldo del usuario
+                  //obtenemos el credito o saldo del usuario
                             input=localStorage.getItem('credit');
                             var num = input.replace(/\./g,'');
                               if(!isNaN(num)){
@@ -109,6 +108,8 @@
                               
                             }
                          document.getElementById('goodD').innerHTML= "Bienvenido "+localStorage.getItem('name')+"! - Saldo: $<span id='saldo_good'>"+num+"</span>";
+                  setTimeout(function(){
+                         
                         var miId=localStorage.getItem('session');
                         var micred=localStorage.getItem('credit');
                         var param={'credit':miId};
@@ -228,7 +229,7 @@
                           </div>
               </div>
               <div class="app" >
-                              <div class="row" id="telefono-llamar" style="display:none">  
+                              <div class="row" id="telefono-llamar">  
                                   <div class="fixed-action-btn" style="bottom: 0;background:#fff32;width:100%;float: bottom;">
                                         <div class="col s12">
                                          <center> <p style="font-size:18px;color:#4470B4" id="connect"></p></center>
@@ -293,7 +294,7 @@
                                               <a  href="contactos.html" class="material-icons" style="color:#4470B4;margin-top:12px;font-size:37px;">&#xE853;</a>
                                          </div>
                                          <div class="col s4">
-                                              <button class="btn-floating btn-large waves-effect waves-light" id="btnllam" style="background:#D0E86F;color:#fff;margin:10px;" onclick="Llamar()" disabled><i class="material-icons" style="color:#4470B4;">&#xE0CD;</i> Llamar</button>
+                                              <button class="btn-floating btn-large waves-effect waves-light" id="btnllam" style="background:#D0E86F;color:#fff;margin:10px;" onclick="Llamar()"><i class="material-icons" style="color:#4470B4;">&#xE0CD;</i> Llamar</button>
                                         </div>
                                         <div class="col s4">
 
@@ -480,8 +481,9 @@
               join.initialize();
               pol.initialize();
               loadIndiLlamar();
-            },300);
-            
+              document.getElementById('barraD').innerHTML='';
+            },900);
+        });
               
                var mySip;
                 var interval;

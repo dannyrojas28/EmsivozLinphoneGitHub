@@ -650,27 +650,21 @@ function loadIndiLlamar(){
             var print=data.split("+");
                   var option = "";
                   var sum=print.length - 1;
-                  var select='<ul class="collection">'+
-                                '<li class="collection-item avatar" onclick="FiltrarPrecioLlamar(0)">'+
-                                  '<img src="" alt="" class="circle">'+
-                                  '<span class="title">Seleccionar..</span>'+
-                                '</li>'; 
+                  var select='<div class="input-field  input"  style="display:block;"><select style="display:block;" onchange="FiltrarPrecioLlamar()" name="pais_ll" class=""  id="pais_ll" > <option value="0">Selecciona el Pais</option>';
                    for (var i = 0; i < print.length;i=i+3){
                     if(i != sum){
-                      option=option+'<li class="collection-item avatar" onclick="FiltrarPrecioLlamar('+print[i]+')">'+
-                                        '<img src="https://www.emsivoz.co/img/banderas-tarifas/'+print[i+2]+'" style="width: 35px;height: 35px;" alt="" class="circle">'+
-                                        '<span class="title">'+print[i+1]+'</span>'+
-                                    '</li>';
+                      option=option+'<option value="'+print[i]+'">'+print[i+1]+'</option>';
                     }
                    }
-                   $('#paises').html(select+option+'</ul>');
+                   $('#paises').html(select+option+'</select></div>');
           }else{
             $('#indi').html('no hay ningun pais');
           }
         });
 }
 
-function FiltrarPrecioLlamar(pais){
+function FiltrarPrecioLlamar(){
+  var pais = $('#pais_ll').val();
   $('#modal8').closeModal();
   console.log(pais);
   esta = pais;
@@ -850,7 +844,7 @@ function Historial(){
                                                   " <i class='circle white' style='"+color+"font-size:16px;'>"+print[i]['start']+"</i>"+
                                                   "<span class='title' style='"+color+"' >"+print[i]['dnid']+"</span> "+
                                                   "<button class='btn-floating btn-large waves-effect waves-light' id='btnllam' style='background:#D0E86F;color:#fff;margin:10px;float:right;' onclick='LlamarOtroMedio(\""+print[i]['dnid']+"\")' ><i class='material-icons' style='color:#4470B4;'>&#xE0CD;</i> Llamar</button>"+
-                                                    "<p><i style='color:#4470B4;' class='material-icons'></i>  "+print[i]['tiempo']+" segundos <i><i style='color:#4470B4;' class='material-icons'>&#xE227;</i>  "+print[i]['precio']+"</i></p>"+
+                                                    "<p><i style='color:#4470B4;' class='material-icons'></i>  "+print[i]['tiempo']+"  <i><i style='color:#4470B4;' class='material-icons'>&#xE227;</i>  "+print[i]['precio']+"</i></p>"+
                                                 "</li>"+
                                               "</ul>";
                                         }
@@ -861,6 +855,12 @@ function Historial(){
                                      
                               }
                           });
+}
+
+
+function ClicSearch(){
+  var h= $('#contbus').val();
+  $('#seca').val(h);
 }
 /*
   function SING(){

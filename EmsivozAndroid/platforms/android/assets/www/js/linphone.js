@@ -1,3 +1,34 @@
+
+var join= {
+    // Application Constructor
+    initialize: function() {
+        this.bindEvents();
+    },
+    // Bind Event Listeners
+    //
+    // Bind any events that are required on startup. Common events are:
+    // 'load', 'deviceready', 'offline', and 'online'.
+    bindEvents: function() {
+        document.addEventListener('deviceready', this.onDeviceReady, false);
+    },
+    // deviceready Event Handler
+    //
+    // The scope of 'this' is the event. In order to call the 'receivedEvent'
+    // function, we must explicitly call 'app.receivedEvent(...);'
+    onDeviceReady: function() {
+        join.receivedEvent();
+    },
+    // Update DOM on a Received Event
+    receivedEvent: function() {
+         
+         Linphone.initLinphoneCore(function(id) {
+                  //alert('linphoneCore will be ready a few second!');
+        });
+    }
+};
+
+
+
 function onRegister(cel,pass) {
 
                 Linphone.registerSIP(
@@ -19,8 +50,7 @@ function onRegister(cel,pass) {
                 },
                 function(e) {
                    // alert(e);
-                   $('#connect').css('color','red');
-                    var $toastContent = $('<span>No se puede Conectar</span>');
+                    var $toastContent = $('<span>No se puede Conectar vuelve a cargar</span>');
                      Materialize.toast($toastContent, 3000);
                      
                 });
@@ -58,16 +88,13 @@ function onCall(cel){
                     $('#num-llama').html(num);
                     $('#telefono-contestado').css('display','block');
                     onDisableSpeakerClick();
-                   
                     //alert('CALLING');
                 },
                 function(e){
                    // var $toastContent = $('<span>Problemas al realizar Llamada</span>');
                   //   Materialize.toast($toastContent, 3000);
-                    localStorage.removeItem('llamada');
-                    localStorage.removeItem('seg');
-                    localStorage.removeItem('min');
-                    localStorage.removeItem('hor');
+                    alert('error');
+                    onCall(cel);
                     
                 });
 }
@@ -199,6 +226,8 @@ function onAdjustVolumeClick() {
                                     localStorage.removeItem('seg');
                                     localStorage.removeItem('min');
                                     localStorage.removeItem('hor');
+                                    var argument="llamar.html";
+                                   $(location).attr('href',argument);
                             break;
                         }
 
@@ -240,33 +269,6 @@ function onAdjustVolumeClick() {
 
         
 
-
-var join= {
-    // Application Constructor
-    initialize: function() {
-        this.bindEvents();
-    },
-    // Bind Event Listeners
-    //
-    // Bind any events that are required on startup. Common events are:
-    // 'load', 'deviceready', 'offline', and 'online'.
-    bindEvents: function() {
-        document.addEventListener('deviceready', this.onDeviceReady, false);
-    },
-    // deviceready Event Handler
-    //
-    // The scope of 'this' is the event. In order to call the 'receivedEvent'
-    // function, we must explicitly call 'app.receivedEvent(...);'
-    onDeviceReady: function() {
-        join.receivedEvent('deviceready');
-    },
-    // Update DOM on a Received Event
-    receivedEvent: function(id) {
-         Linphone.initLinphoneCore(function(id) {
-                  //alert('linphoneCore will be ready a few second!');
-        });
-    }
-};
 
 
 

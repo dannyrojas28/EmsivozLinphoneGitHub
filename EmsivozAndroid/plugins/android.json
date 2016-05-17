@@ -49,6 +49,9 @@
         },
         "org.awokenwell.proximity": {
             "PACKAGE_NAME": "com.emsitel.emsivoz"
+        },
+        "com.voicekick.cordova.microphone": {
+            "PACKAGE_NAME": "com.emsitel.emsivoz"
         }
     },
     "dependent_plugins": {}

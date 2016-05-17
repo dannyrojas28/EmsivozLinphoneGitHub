@@ -99,8 +99,7 @@
                     }
                 }); 
                if (localStorage.getItem('ms') == null){
-                  setTimeout(function(){
-                         //obtenemos el credito o saldo del usuario
+                 //obtenemos el credito o saldo del usuario
                             input=localStorage.getItem('credit');
                             var num = input.replace(/\./g,'');
                               if(!isNaN(num)){
@@ -109,6 +108,8 @@
                               
                             }
                          document.getElementById('goodD').innerHTML= "Bienvenido "+localStorage.getItem('name')+"! - Saldo: $<span id='saldo_good'>"+num+"</span>";
+                  setTimeout(function(){
+                        
                         var miId=localStorage.getItem('session');
                         var micred=localStorage.getItem('credit');
                         var param={'credit':miId};
@@ -228,7 +229,7 @@
                           </div>
               </div>
               <div class="app" >
-                  <div class="row" id="telefono-llamar" style="display:none"> 
+                  <div class="row" id="telefono-llamar"> 
                    <div>
                   <br><br>
                   <div id="historial"  style="margin-top:10px;">
@@ -391,12 +392,13 @@
      
               <script type="text/javascript">
               $(document).ready(function(){
-                  Historial();
+                  
                 setTimeout(function(){
                       join.initialize();
                       pol.initialize();
-                      
-                },300);
+                      document.getElementById('barraD').innerHTML='<a type="button"  style="background:#fff;color:#4470B4;" class="btn barraT material-icons" " href="llamar.html">&#xE0CD;</a><a type="button"  style="background:#fff;color:#4470B4;" class="btn barraT material-icons" href="contactos.html">&#xE853;</a><a type="button"  style="background:#fff;color:#4470B4;" class="btn barraT material-icons" href="balance.html">&#xE8B0;</a>';
+                      Historial();
+                },900);
               });
                  
                
@@ -509,12 +511,9 @@
                    $('#dtmf').html($('#dtmf').html() + num);
                 }
                 function callEstablished(){
-                    $(".ds").removeAttr("disabled");
                     interval=  setInterval(tiempo,1000);
                 }
                 function tiempo(){
-                      var colgado = $('#colgado').val();
-                      if(colgado == "false"){
                         var min = $('#minutos').val();
                         var seg = $('#segundos').val();
                         var hor = $('#horas').val();
@@ -548,9 +547,7 @@
                           localStorage.setItem('seg',seg);
                           localStorage.setItem('min',min);
                           localStorage.setItem('hor',hor);
-                      }else{
-                          clearInterval(interval);
-                      }
+
                 }
 
                 function callEnd(){
