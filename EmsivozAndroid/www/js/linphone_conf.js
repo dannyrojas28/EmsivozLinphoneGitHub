@@ -23,7 +23,7 @@ var pol = {
               var interval;
               var options;
               var rf= false;
-
+                    
                    
                     document.getElementById('refresh').innerHTML='<i><span style="top:30px;font-size:35px;" class="material-icons"  onclick="Contenido(\'inicio.html\')">&#xE317;</span></i>';
                       if(localStorage.getItem('llamada') != null){

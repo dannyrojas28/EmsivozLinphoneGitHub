@@ -20,6 +20,7 @@ var join= {
     },
     // Update DOM on a Received Event
     receivedEvent: function() {
+         
          Linphone.initLinphoneCore(function(id) {
                   //alert('linphoneCore will be ready a few second!');
         });

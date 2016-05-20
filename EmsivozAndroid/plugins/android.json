@@ -52,7 +52,14 @@
         },
         "com.voicekick.cordova.microphone": {
             "PACKAGE_NAME": "com.emsitel.emsivoz"
+        },
+        "cordova-plugin-contacts": {
+            "PACKAGE_NAME": "com.emsitel.emsivoz"
         }
     },
-    "dependent_plugins": {}
+    "dependent_plugins": {
+        "cordova-plugin-compat": {
+            "PACKAGE_NAME": "com.emsitel.emsivoz"
+        }
+    }
 }

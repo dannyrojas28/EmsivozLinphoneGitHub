@@ -41,6 +41,9 @@
     <feature name="Proximity">
         <param name="android-package" value="org.awokenwell.proximity.ProximitySensorListener" />
     </feature>
+    <feature name="Contacts">
+        <param name="android-package" value="org.apache.cordova.contacts.ContactManager" />
+    </feature>
     <preference name="loglevel" value="DEBUG" />
     <allow-intent href="market:*" />
     <name>Emsivoz</name>

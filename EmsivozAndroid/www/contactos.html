@@ -17,7 +17,6 @@
     <script type="text/javascript" src="js/functions.js"></script>
     <script type="text/javascript" src="js/bootstrap.js"></script>
     <script type="text/javascript" src="cordova.js"></script>
-    <script type="text/javascript" src="js/notificacion.js"></script>
     <script type="text/javascript" src="js/materialdesig.js"></script>
     <script type="text/javascript" src="js/materialize.js"></script>
     <script type="text/javascript" src="js/init.js"></script> 
@@ -138,12 +137,9 @@
                                   if(input <= 500 ){
                                     $('#palabraD').css('background','#ED565A');
                                     $('#goodD').css('color','#fff');
-                                    $('#malD').html('¡No olvides Recargar!');
-                                    $('#sdf').html('<br>');
                                  }else{
                                     $('#palabraD').css('background','#D0E86F');
                                     $('#goodD').css('color','#4470B4');
-                                    $('#malD').html('');
                                  }
                                      document.getElementById('goodD').innerHTML= "Bienvenido "+localStorage.getItem('name')+"! - Saldo: $<span id='saldo_good'>"+num+"</span>" ;
                                   }
@@ -154,13 +150,11 @@
                      if(localStorage.getItem('credit') <= 500){
                         $('#palabraD').css('background','#ED565A');
                         $('#goodD').css('color','#fff');
-                        $('#malD').html('¡No olvides Recargar!');
                      }
                 },1500);
                }else{
                     $('#palabraD').css('background','#4470B4');
                     $('#goodD').css('color','#fff');
-                    $('#malD').html('');
                      document.getElementById('goodD').innerHTML= localStorage.getItem('ms');
                      localStorage.removeItem('ms');
                }
@@ -181,16 +175,16 @@
 <span id="number" style="color:#424242 ;margin-left:5px;display:none;margin-top: 10px;font-size: 34px"></span> 
     <input type="hidden" id="registrado" value="0">
     <div id="fade" style="display:none">
-            <div class="navbar-fixed" style="height:110px;" id="nav">
-                <nav class="todo"     style="height:110px;">
+            <div class="navbar-fixed" style="height:90px;" id="nav">
+                <nav class="todo"     style="height:90px;">
                     <div class="nav-wrapper" >
-                      <center><img  class="brand-logo " src="img/logo.png"  style="width:154px;height:70px;" ></center>
+                      <center><img  class="brand-logo " src="img/logo.png"  style="width:144px;height:50px;margin-top:10px;" ></center>
                       <!-- Dropdown Trigger -->
-                      <h1 id="refresh" style="position:absolute;margin:10px;font-size:18px;">
+                      <h1 id="refresh" style="position:absolute;margin:10px;margin-top:27px;font-size:18px;">
                           <span style="top:30px;font-size:35px;" class="material-icons" onclick="Contenido('inicio.html')">&#xE863;</span>
                       </h1>
                       <div id="regalo">
-                          <a id="demo-menu-lower-right" class="mdl-button mdl-js-button mdl-button--icon " style="color:#4470B4;position:absolute;right:10px;margin-top:10px;">
+                          <a id="demo-menu-lower-right" class="mdl-button mdl-js-button mdl-button--icon " style="color:#4470B4;position:absolute;right:10px;margin-top:27px;">
                             <i class="material-icons" >&#xE5D4;</i>
                           </a>
                       </div>  
@@ -211,11 +205,9 @@
                        
                       <br>
                       <div style="height:25px;width:100%;background:#D0E86F;font-size:14px;margin-top:10px;" id="palabraD" >
-                        <p style='color:#4470B4;text-align:center;font-size:14px;margin-top:5px;' id="goodD"></p>
+                        <p style='color:#4470B4;text-align:center;font-size:14px;margin-top:5px;' onclick="ContenidoPrincipal('recarga')" id="goodD"></p>
                       </div>
-                        <center><p onclick="ContenidoPrincipal('recarga')"style='color:#ED565A;background:#fff;' id="malD"></p></center>
-                      <div id="barraD" >
-                      </div>
+                      <div id="barraD"></div>
                   </div>   
                 </nav>
             </div>
@@ -234,10 +226,10 @@
                     <br><br>
                      
                     <!--<input type="text" class="search" placeholder="Buscar Contacto"  style="border:none">-->
-                    <div  class="" style="position: fixed;top: 140px;background: #fff;z-index: 997;border-bottom:1px solid #f1f1f1;width: 100%">
+                    <div  class="" style="position: fixed;top: 120px;background: #fff;z-index: 997;border-bottom:1px solid #f1f1f1;width: 100%">
                         <div class="input-field col s12 input"> 
                               <i class="material-icons iconIn prefix usuario validate " id="icosearch">&#xE8B6;</i>
-                              <input  type="text" class="search" placeholder="Buscar Contacto"  style="border:none" id="contbus" >
+                              <input  type="text" onkeyup="FiltrarContacto()" placeholder="Buscar Contacto"  style="border:none" id="contbus" >
                               <label for="search"  data-error="" data-success=""></label>
                         </div>
                     <br><br><br><br>
@@ -361,7 +353,7 @@
                                                  </div>
                                              
                                     </div>
-                                        <div class="col s12 fixed-action-btn" style="bottom: 10px;" id="colgar-di">
+                                        <div class="col s12 fixed-action-btn" style="margin: auto;bottom: 10px;left:0" id="colgar-di">
                                        
                                              <button class="btn-floating  btn-large waves-effect waves-light red darken-4" style="color:#fff32;width:68px;height:68.5px;font-size:45px;display: block" onclick="Colgar()" id="btncolllam" ><i class="material-icons" style="color:#fff32;font-size:38px;"  >&#xE0D1;</i></button > 
                                              <img src="img/bol.jpg" style="width:164px;height:70px;">
@@ -396,15 +388,15 @@
               $(document).ready(function(){
                 
                 setTimeout(function(){
-
-                   
-                    join.initialize();
-                    pol.initialize();
                     document.getElementById('barraD').innerHTML='<a type="button"  style="background:#fff;color:#4470B4;" class="btn barraT material-icons" " href="llamar.html">&#xE0CD;</a><a type="button"  style="background:#fff;color:#4470B4;" class="btn barraT material-icons" href="contactos.html">&#xE853;</a><a type="button"  style="background:#fff;color:#4470B4;" class="btn barraT material-icons" href="balance.html">&#xE8B0;</a>';
-                    if(localStorage.getItem('contactos') != null){
+                      /*  if(localStorage.getItem('contactos') != null){
                         document.getElementById('result').innerHTML = localStorage.getItem('contactos');
-                    }
-                     app.initialize();
+                      }*/
+                      app.initialize();
+                      join.initialize();
+                      pol.initialize();
+                    
+                    
                 },400);
               });
                  
@@ -600,6 +592,23 @@
                     $('#contacs').css('display','block');
                     $('#colgar-di').css('display','none');
                     $('#htCons').html($('#result').html());
+                }
+                function FiltrarContacto(){ 
+                  var cmpo = $('#contbus').val();
+                   if(cmpo.length == 3){
+                      $('#contbus').addClass('search');
+                      var options = {
+                        valueNames: [ 'nameCon', 'phoneCon' ]
+                      };
+
+                      var userList = new List('telefono-llamar', options);
+                    }
+                      
+                    if(cmpo.length == 0){
+                      $('#contbus').removeClass('search');
+                    }
+                    
+
                 }
         </script>
    

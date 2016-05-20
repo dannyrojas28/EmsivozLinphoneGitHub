@@ -31,14 +31,15 @@ var app = {
                                       "</li>";
                      }
                   }
-              }
-            document.getElementById('result').innerHTML='<ul class="list" style="margin: 0.5rem 0 1rem 0;border: 1px solid #e0e0e0;border-radius: 2px;overflow: hidden;position: relative;">'+impri+'</ul>';
-            localStorage.setItem('contactos',$('#result').html());  
-            var options = {
-                    valueNames: [ 'nameCon', 'phoneCon' ]
-                  };
 
-                  var userList = new List('telefono-llamar', options);
+              }
+              var imp = '<ul class="list" style="margin: 0.5rem 0 1rem 0;border: 1px solid #e0e0e0;border-radius: 2px;overflow: hidden;position: relative;">'+impri+'</ul>';
+             /* if(imp !=  localStorage.getItem('contactos')){
+                document.getElementById('result').innerHTML=imp;
+                localStorage.setItem('contactos',$('#result').html());  
+              }*/
+
+              document.getElementById('result').innerHTML=imp;
            }, function(error) {
               console.error(error);
            });
