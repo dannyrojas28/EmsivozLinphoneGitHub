@@ -258,6 +258,16 @@
                         }
                     ]
                 }
+            },
+            "config.xml": {
+                "parents": {
+                    "/*": [
+                        {
+                            "xml": "<feature name=\"Diagnostic\"><param name=\"android-package\" value=\"cordova.plugins.Diagnostic\" /></feature>",
+                            "count": 1
+                        }
+                    ]
+                }
             }
         }
     },
@@ -312,6 +322,12 @@
             "PACKAGE_NAME": "com.emsitel.emsivoz"
         },
         "cordova-plugin-contacts": {
+            "PACKAGE_NAME": "com.emsitel.emsivoz"
+        },
+        "com.bandpad.cordova.microphone": {
+            "PACKAGE_NAME": "com.emsitel.emsivoz"
+        },
+        "cordova.plugins.diagnostic": {
             "PACKAGE_NAME": "com.emsitel.emsivoz"
         }
     },
@@ -508,6 +524,13 @@
             "merges": [
                 ""
             ]
+        },
+        {
+            "file": "plugins/cordova.plugins.diagnostic/www/android/diagnostic.js",
+            "id": "cordova.plugins.diagnostic.Diagnostic",
+            "clobbers": [
+                "cordova.plugins.diagnostic"
+            ]
         }
     ],
     "plugin_metadata": {
@@ -527,6 +550,8 @@
         "org.awokenwell.proximity": "0.2.1",
         "com.voicekick.cordova.microphone": "1.2.1",
         "cordova-plugin-compat": "1.0.0",
-        "cordova-plugin-contacts": "2.1.0"
+        "cordova-plugin-contacts": "2.1.0",
+        "com.bandpad.cordova.microphone": "1.2.1",
+        "cordova.plugins.diagnostic": "2.3.17"
     }
 }

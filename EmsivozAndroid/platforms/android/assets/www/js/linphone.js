@@ -43,6 +43,7 @@ function onRegister(cel,pass) {
                     $('#connect').css('color','green');
                     $("#btnllam").removeAttr("disabled");
                     $('#registrado').val(1);
+                   // alert('coonect')
                     // var $toastContent = $('<span>Estas Conectado</span>');
                      //Materialize.toast($toastContent, 3000,'rounded');
                     
@@ -238,13 +239,7 @@ function onAdjustVolumeClick() {
                             + "Username: " + data.username + "\n"
                             + "Domain: " + data.domain);
                        
-                        if(data.state == "RegistrationFailed" || data.state == "RegistrationNone"){
-                            $('#palabraD').css('background','#ED565A');
-                              $('#goodD').css('color','#fff');
-                              $('#goodD').html('No estas Registrado');
-                              ("#btnllam").attr("disabled", true);
-                        }else{
-                            if(data.state == "RegistrationOk"){
+                        if(data.state == "RegistrationOk"){
                               $('#palabraD').css('background','#D0E86F');
                               $('#goodD').css('color','#4470B4');
                               input=localStorage.getItem('credit');
@@ -256,7 +251,11 @@ function onAdjustVolumeClick() {
                                   }
                                document.getElementById('goodD').innerHTML= "Bienvenido "+localStorage.getItem('name')+"! - Saldo: $<span id='saldo_good'>"+num+"</span>";
                                 $("#btnllam").removeAttr("disabled");
-                            }
+                        }else{
+                            $('#palabraD').css('background','#ED565A');
+                            $('#goodD').css('color','#fff');
+                            $('#goodD').html('No estas Registrado');
+                            $("#btnllam").attr("disabled", true);
                         }
                     }
                 },

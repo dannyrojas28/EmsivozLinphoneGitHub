@@ -24,7 +24,11 @@ var pol = {
               var options;
               var rf= false;
                     
-                   
+              cordova.plugins.diagnostic.requestMicrophoneAuthorization(function(status){
+                      console.log("Microphone access is: "+status);
+                  }, function(error){
+                      console.log(error);
+              });
                     document.getElementById('refresh').innerHTML='<i><span style="top:30px;font-size:35px;" class="material-icons"  onclick="Contenido(\'inicio.html\')">&#xE317;</span></i>';
                       if(localStorage.getItem('llamada') != null){
                            $('#telefono-contestado').css('display','block');

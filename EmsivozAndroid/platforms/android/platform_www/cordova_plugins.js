@@ -191,6 +191,13 @@ module.exports = [
         "merges": [
             ""
         ]
+    },
+    {
+        "file": "plugins/cordova.plugins.diagnostic/www/android/diagnostic.js",
+        "id": "cordova.plugins.diagnostic.Diagnostic",
+        "clobbers": [
+            "cordova.plugins.diagnostic"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -212,7 +219,9 @@ module.exports.metadata =
     "org.awokenwell.proximity": "0.2.1",
     "com.voicekick.cordova.microphone": "1.2.1",
     "cordova-plugin-compat": "1.0.0",
-    "cordova-plugin-contacts": "2.1.0"
+    "cordova-plugin-contacts": "2.1.0",
+    "com.bandpad.cordova.microphone": "1.2.1",
+    "cordova.plugins.diagnostic": "2.3.17"
 };
 // BOTTOM OF METADATA
 });

@@ -55,6 +55,12 @@
         },
         "cordova-plugin-contacts": {
             "PACKAGE_NAME": "com.emsitel.emsivoz"
+        },
+        "com.bandpad.cordova.microphone": {
+            "PACKAGE_NAME": "com.emsitel.emsivoz"
+        },
+        "cordova.plugins.diagnostic": {
+            "PACKAGE_NAME": "com.emsitel.emsivoz"
         }
     },
     "dependent_plugins": {

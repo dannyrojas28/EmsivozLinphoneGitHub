@@ -44,6 +44,9 @@
     <feature name="Contacts">
         <param name="android-package" value="org.apache.cordova.contacts.ContactManager" />
     </feature>
+    <feature name="Diagnostic">
+        <param name="android-package" value="cordova.plugins.Diagnostic" />
+    </feature>
     <preference name="loglevel" value="DEBUG" />
     <allow-intent href="market:*" />
     <name>Emsivoz</name>

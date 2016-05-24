@@ -821,41 +821,7 @@ function CambiarImgPromo(){
   console.log(d);
 }
 
-function Historial(){
-   //cargar historial de llamadas
-                            console.log("MI SESSION ES "+localStorage.getItem('session'));
-                            var parametro={'session':localStorage.getItem('session')};
-                              $.ajax({
-                                  data:parametro,
-                                  type:"POST",
-                                  url:'https://app.emsivoz.co/funciones/prod/usuario-app/historial.php',
-                                  success:function(data){
-                                        var print=JSON.parse(data);
-                                        var res = "";
-                                      if(print[0]['resul'] == "ok"){
-                                         for (var i = 0; i < print.length;i++){
-                                            if(print[i]['precio'] >= '1'){
-                                                  color="color:#227538;";
-                                              }else{
-                                                  color="color:#ED565A;";
-                                              }
-                                             res += "<ul class='collection'>"+
-                                                "<li class='collection-item avatar'>"+
-                                                  " <i class='circle white' style='"+color+"font-size:16px;'>"+print[i]['start']+"</i>"+
-                                                  "<span class='title' style='"+color+"' >"+print[i]['dnid']+"</span> "+
-                                                  "<button class='btn-floating btn-large waves-effect waves-light' id='btnllam' style='background:#D0E86F;color:#fff;margin:10px;float:right;' onclick='LlamarOtroMedio(\""+print[i]['dnid']+"\")' ><i class='material-icons' style='color:#4470B4;'>&#xE0CD;</i> Llamar</button>"+
-                                                    "<p><i style='color:#4470B4;' class='material-icons'></i>  "+print[i]['tiempo']+"  <i><i style='color:#4470B4;' class='material-icons'>&#xE227;</i>  "+print[i]['precio']+"</i></p>"+
-                                                "</li>"+
-                                              "</ul>";
-                                        }
-                                      }else{
-                                          res="<center><h5>No has realizado Ninguna Llamada</h5></center>"
-                                      }
-                                      $("#historial").html(res);
-                                     
-                              }
-                          });
-}
+
 
 
 function ClicSearch(){

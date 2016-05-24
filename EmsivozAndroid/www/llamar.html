@@ -1,4 +1,4 @@
-  <html>
+    <html>
   <head>
     <title>AppMovil666</title>
     <meta charset="utf-8">
@@ -220,6 +220,21 @@
                             <a href="#!" class=" modal-action modal-close waves-green red btn">Cancelar</a>
                           </div>
               </div>
+               <div id="modal9" class="modal modal-fixed-footer" style="height: 400px;width: 90%;margin: auto;">
+                          <div class="modal-content">
+                              <center>
+                                  <i class="material-icons" style="font-size:60px">&#xE853;</i><hr>
+                              </center>
+                              <div id="Contactos_lon">
+                                  
+                              </div>
+            
+                             
+                          </div>
+                          <div class="modal-footer">
+                            <a href="#!" class=" modal-action modal-close waves-green red btn">Cancelar</a>
+                          </div>
+              </div>
               <div class="app" >
                               <div class="row" id="telefono-llamar">  
                                   <div class="fixed-action-btn" style="bottom: 0;background:#fff32;width:100%;float: bottom;">
@@ -232,7 +247,7 @@
                                             <span id="number" style="color:#424242 ;margin-left:5px;display:inline-block;margin-top: 10px;font-size: 34px"></span> 
                                           </div>
                                           <div class="col s1"  id="btn-borr">
-                                             <h5 class="material-icons right" style="color:transparent;margin-top:12px;font-size:32px;" onclick="BorrarNumero();" >&#xE14A;</h5>
+                                             <h5 class="material-icons right" style="color:transparent;margin-top:12px;font-size:32px;" onclick="BorrarNumero();" onkeypress="BorrarNumero();">&#xE14A;</h5>
                                           </div>
 
                                         </div>
@@ -284,7 +299,7 @@
                                         </div>
                                         <div class="col s12"></div>
                                           <div class="col s4">
-                                              <a  href="contactos.html" class="material-icons" style="color:#4470B4;margin-top:12px;font-size:37px;">&#xE853;</a>
+                                              <a onclick="Contactos()" class="material-icons" style="color:#4470B4;margin-top:12px;font-size:37px;">&#xE853;</a>
                                          </div>
                                          <div class="col s4">
                                               <button class="btn-floating btn-large waves-effect waves-light" id="btnllam" style="background:#D0E86F;color:#fff;margin:10px;" onclick="Llamar()"><i class="material-icons" style="color:#4470B4;">&#xE0CD;</i> Llamar</button>
@@ -348,47 +363,48 @@
                                                                   <a class="btn-floating btn waves-effect waves-light sm" style="background:#fff;color:#333 ;border:1px solid #9e9e9e" onclick="OcultarTeclado()"><i class="material-icons" style="color: #333">&#xE318;</i></a>
                                                                   <br><br>
                                                                </div>
-                                                              <div class="col s4">
-                                                                  <a class="btn-floating btn waves-effect waves-light sm" style="background:#fff;color:#333 ;border:1px solid #9e9e9e" onclick="Dtmf(1)">1</a>
-                                                                   
-                                                              </div>
-                                                              <div class="col s4">
-                                                                  <a class="btn-floating btn waves-effect waves-light sm" style="background:#fff;color:#333 ;border:1px solid #9e9e9e" onclick="Dtmf(2)">2 </a>
-                                                                      
-                                                              </div>
-                                                              <div class="col s4">
-                                                                  <a class="btn-floating btn waves-effect waves-light sm" style="background:#fff;color:#333 ;border:1px solid #9e9e9e" onclick="Dtmf(3)">3</a>
-                                                                         
-                                                              </div>
-                                                              <div class="col s4">
-                                                                  <a class="btn-floating btn waves-effect waves-light a sm" style="background:#fff;color:#333 ;border:1px solid #9e9e9e" onclick="Dtmf(4)">4</a>
-                                                              </div>
-                                                              <div class="col s4">
-                                                                  <a class="btn-floating btn waves-effect waves-light a sm" style="background:#fff;color:#333 ;border:1px solid #9e9e9e" onclick="Dtmf(5)">5</a>
-                                                              </div>
-                                                              <div class="col s4">
-                                                                  <a class="btn-floating btn waves-effect waves-light a sm" style="background:#fff;color:#333 ;border:1px solid #9e9e9e" onclick="Dtmf(6)">6</a>
-                                                              </div>
-                                                              <div class="col s4">
+                                                               <div class="col s4" onclick="Dtmf('1')">
+                                                                  <img src="img/1.png" class="img-responsive img-cir" >
+                                                                </div>
+                                                                <div class="col s4" onclick="Dtmf('2')">
+                                                                  <img src="img/2.png" class="img-responsive img-cir" >
+                                                                </div>
+                                                                <div class="col s4" onclick="Dtmf('3')">
+                                                                  <img src="img/3.png" class="img-responsive img-cir" >
+                                                                </div>
+                                                                <div class="col s12"></div>
+                                                                <div class="col s4" onclick="Dtmf('4')" style="margin-top:3px">
+                                                                  <img src="img/4.png" class="img-responsive img-cir" >
+                                                                </div>
+                                                                <div class="col s4" onclick="Dtmf('5')" style="margin-top:3px">
+                                                                  <img src="img/5.png" class="img-responsive img-cir" >
+                                                                </div>
+                                                                <div class="col s4" onclick="Dtmf('6')" style="margin-top:3px">
+                                                                  <img src="img/6.png" class="img-responsive img-cir" >
+                                                                </div>
+                                                                <div class="col s12"></div> 
+                                                                <div class="col s4" onclick="Dtmf('7')" style="margin-top:3px">
+                                                                  <img src="img/7.png" class="img-responsive img-cir" >
+                                                                </div>
+                                                                <div class="col s4" onclick="Dtmf('8')" style="margin-top:3px">
+                                                                  <img src="img/8.png" class="img-responsive img-cir" >
+                                                                </div>
+                                                                <div class="col s4" onclick="Dtmf('9')" style="margin-top:3px">
+                                                                  <img src="img/9.png" class="img-responsive img-cir" >
+                                                                </div>
+                                                                <div class="col s12"></div>
+                                                                 <div class="col s4" onclick="Dtmf('*')" style="margin-top:3px">
+                                                                  <img src="img/x.png" class="img-responsive img-cir" >
+                                                                 </div>
+                                                                  
+                                                                <div class="col s4" onclick="Dtmf('0')" style="margin-top:3px">
+                                                                  <img src="img/0.png" class="img-responsive img-cir" >
+                                                                </div>
 
-                                                                    <a class="btn-floating btn waves-effect waves-light a sm" style="background:#fff;color:#333 ;border:1px solid #9e9e9e" onclick="Dtmf(7)">7</a>
-                                                              </div>
-                                                              <div class="col s4">
-                                                                    <a class="btn-floating btn waves-effect waves-light a sm" style="background:#fff;color:#333 ;border:1px solid #9e9e9e" onclick="Dtmf(8)">8</a>
-                                                              </div>
-                                                              <div class="col s4">
-                                                                    <a class="btn-floating btn waves-effect waves-light a sm" style="background:#fff;color:#333 ;border:1px solid #9e9e9e" onclick="Dtmf(9)">9</a>
-                                                              </div>
-                                                               <div class="col s4">
-
-                                                                    <a class="btn-floating btn waves-effect waves-light a sm" style="background:#fff;color:#333 ;border:1px solid #9e9e9e" onclick="Dtmf('*')">*</a>
-                                                              </div>
-                                                              <div class="col s4">
-                                                                    <a class="btn-floating btn waves-effect waves-light a sm" style="background:#fff;color:#333 ;border:1px solid #9e9e9e" onclick="Dtmf(0)">0</a>
-                                                              </div>
-                                                              <div class="col s4">
-                                                                    <a class="btn-floating btn waves-effect waves-light a sm" style="background:#fff;color:#333 ;border:1px solid #9e9e9e" onclick="Dtmf('#')">#</a>
-                                                              </div>
+                                                                <div class="col s4" onclick="Dtmf('#')" style="margin-top:3px">
+                                                                  <img src="img/nu.png" class="img-responsive img-cir" >
+                                                                </div>
+                                                              
                                                           </center>
                                                   </div>
                                                   <div class="col s12" id="contacs" style="display: none">
@@ -844,6 +860,38 @@
                     $('#colgar-di').css('display','none');
                     $('#htCons').html($('#result').html());
                 }
+               function Contactos(){
+                  navigator.contacts.pickContact(function(contact){
+                    var impri = "";
+                        impri = '<p style="font-size:16px">'+getName(contact)+'</p></center><hr><ul class="collection with-header">';
+                        console.log(contact.phoneNumbers.length);
+                           for(var j = 0; j < contact.phoneNumbers.length; j++) {
+                              var phone = contact.phoneNumbers[j].value;
+                              impri = impri +'<li class="collection-item">'+
+                                                '<div onclick="LlamarOtroMedio(\''+phone+'\')">'+phone+'<a onclick="LlamarOtroMedio(\''+phone+'\')" class="secondary-content"><i class="material-icons"><i class="material-icons" style="color:#4470B4;">&#xE0CD;</i></i></a>'+
+                                                '</div>'+
+                                              '</li>';
+                           }
+                        
+                        $('#Contactos_lon').html(impri+"</ul>");
+                        $('#modal9').openModal();
+                    
+                  },function(err){
+                    if(err != 6){
+                      alert('ERROR, No Hemos podido acceder a tus contactos: ' + err);
+                    }
+                  });
+                }
+
+                function getName(c) {
+                  var name = c.displayName;
+                  if(!name || name === "") {
+                      if(c.name.formatted) return c.name.formatted;
+                      if(c.name.givenName && c.name.familyName) return c.name.givenName +" "+c.name.familyName;
+                      return "Nameless";
+                  }
+                  return name;
+              }
       </script>
         </body>
 

@@ -610,6 +610,14 @@
                     
 
                 }
+
+                function Contactos(){
+                  navigator.contacts.pickContact(function(contact){
+                   alert('The following contact has been selected:' + JSON.stringify(contact));
+                  },function(err){
+                    alert('Error: ' + err);
+                  });
+                }
         </script>
    
         </script>
