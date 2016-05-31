@@ -333,6 +333,10 @@ function NuevaPestana(url){
         win.focus()
     }
 
+    function Href(argument){
+       $(location).attr('href',argument);
+    }
+
 function ContenidoPrincipal(argument){ 
     $('#salir').val(1);
     $('#llamar-contact').val(0);
@@ -827,6 +831,44 @@ function CambiarImgPromo(){
 function ClicSearch(){
   var h= $('#contbus').val();
   $('#seca').val(h);
+}
+function ValorLlamada(numero){
+  var num  = "";
+  var imd  = false;
+  var bandera,precio,nombre;
+  for (var i = 0; i < numero.length; i++) {
+    num = num + numero[i];
+    if (num.length >= 4){
+        $.post('https://app.emsivoz.co/funciones/prod/programadas/indicativos_pais.php',{'pais':num},function(data){
+          console.log(data);
+            if(data != 0){   
+                imd = true;
+                console.log("se cambio");         
+                var print=JSON.parse(data);
+                nombre=print[0]['nombre'];
+                  if(print[0]['indi'] == 1){
+                      precio=print[0]['precio'];
+                  }else{
+                      precio=print[1]['precio'];
+                  }
+                 bandera = print[0]['bandera'];
+            }
+        });
+    }
+  }
+  setTimeout(function(){
+      console.log(imd);         
+
+      if(imd == true){
+          var text ='<img src="https://www.emsivoz.co/img/banderas-tarifas/'+bandera+'" style="width: 35px;height: 35px;display:inline-block" alt="" class="circle">';
+          text = text + '<span style="font-style:bold;font-size:20px;font-weight: 900;margin-left:7px;">'+nombre+'</span> valor min. <span style="font-style:bold;font-size:20px;font-weight: 900;"> $'+precio +'</span>';
+      }else{
+        Colombia();
+          var text ='<img src="https://www.emsivoz.co/img/banderas-tarifas/colombia.png" style="margin-right:7px;width: 35px;height: 35px;display:inline-block" alt="" class="circle">';
+          text = text + $('#connect').html();
+      }        
+      $('#p_valor').html(text);  
+    },900);      
 }
 /*
   function SING(){

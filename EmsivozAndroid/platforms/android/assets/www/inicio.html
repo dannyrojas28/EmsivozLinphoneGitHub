@@ -13,17 +13,16 @@
     <link rel="stylesheet" href="css/animate.css"><link rel="stylesheet" href="css/materialdesign.css">
 
     <script type="text/javascript" src="js/jquery.js" ></script>
-    <script type="text/javascript" src="index.js"></script>
     <script type="text/javascript" src="js/functions.js"></script>
     <script type="text/javascript" src="js/bootstrap.js"></script>
-    <!--<script type="text/javascript" src="js/notificacion.js"></script>-->
+    <script type="text/javascript" src="js/notificacion.js"></script>
     <script type="text/javascript" src="cordova.js"></script>
     <script src="js/materialdesig.js"></script>
     <script src="js/materialize.js"></script>
     <script src="js/init.js"></script> 
     <script src="js/list.js"></script> 
     <script type="text/javascript">
-    sss.initialize();
+
           //cuando se presione la tecla back button (flecha que indica hacia atras, ejecute esta funcion)
                  document.addEventListener("BackButton", onBackKeyDown, false); 
             function onBackKeyDown(e) {
@@ -193,12 +192,25 @@
                       </div>  
                           <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
                             for="demo-menu-lower-right" style="background:#f1f1f1" style="background:#f0f0f0">
-                              <li class="mdl-menu__item" onclick="ContenidoPrincipal('ayudam')"> 
-                                  <p style="color:#757575;"><span class="material-icons">&#xE88F;</span> <a style="color:#757575;display:inline-block" >   Ayuda </a></p>
+                              <li class="mdl-menu__item" onclick="ContenidoPrincipal('puntos')">
+                                <p style="color:#757575;"><span class="material-icons">&#xE56A;</span> <a style="color:#757575;display:inline-block" >   Puntos de Recarga </a></p>
                               </li>
-                              <li class="mdl-menu__item" onclick="ContenidoPrincipal('datos')">
-                                 <p style="color:#757575;"><span  class="material-icons">&#xE853;</span><a style="color:#757575;display:inline-block">  Datos de mi softphone </a> </p>
+                              <li class="mdl-menu__item" onclick="ContenidoPrincipal('recarga')">
+                                <p style="color:#757575;"><span class="material-icons">&#xE870;</span> <a style="color:#757575;display:inline-block" >   Recarga en Linea</a></p>
                               </li>
+                              <li class="mdl-menu__item" onclick="ContenidoPrincipal('indicativos')">
+                                <p style="color:#757575;"><span class="material-icons">&#xE80B;</span> <a style="color:#757575;display:inline-block" >   Destinos</a></p>
+                              </li>
+                              <li class="mdl-menu__item" onclick="Href('llamar.html')">
+                                <p style="color:#757575;"><span class="material-icons">&#xE0BB;</span> <a style="color:#757575;display:inline-block" >   Llamar</a></p>
+                              </li>
+                              <li class="mdl-menu__item" onclick="Href('balance.html')">
+                                <p style="color:#757575;"><span class="material-icons">&#xE873;</span> <a style="color:#757575;display:inline-block" >   Historial de Llamadas</a></p>
+                              </li>
+                              <li class="mdl-menu__item" onclick="ContenidoPrincipal('promocioneshoy')">
+                                <p style="color:#757575;"><span class="material-icons">&#xE8B1;</span> <a style="color:#757575;display:inline-block" >  Promociones</a></p>
+                              </li>
+                              <hr>
                               <li class="mdl-menu__item" onclick="Close()">
                                   <p style="color:#757575;"><span  class="material-icons">&#xE8AC;</span> <a style="color:#757575;display:inline-block" >  Cerrar Sesiòn </a></p>
                               </li>

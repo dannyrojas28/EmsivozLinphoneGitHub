@@ -13,7 +13,6 @@
 
     <link rel="stylesheet" type="text/css" href="css/teclado.css">
     <script type="text/javascript" src="js/jquery.js" ></script>
-    <script type="text/javascript" src="index.js"></script>
     <script type="text/javascript" src="js/functions.js"></script>
     <script type="text/javascript" src="js/bootstrap.js"></script>
     <script type="text/javascript" src="cordova.js"></script>
@@ -33,7 +32,6 @@
     </style>
     <script type="text/javascript">
 
-       sss.initialize();
           //cuando se presione la tecla back button (flecha que indica hacia atras, ejecute esta funcion)
           document.addEventListener("BackButton", onBackKeyDown, false); 
             function onBackKeyDown(e) {
@@ -189,16 +187,30 @@
                       </div>  
                           <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
                             for="demo-menu-lower-right" style="background:#f1f1f1" style="background:#f0f0f0">
-                              <li class="mdl-menu__item" onclick="ContenidoPrincipal('ayudam')"> 
-                                  <p style="color:#757575;"><span class="material-icons">&#xE88F;</span> <a style="color:#757575;display:inline-block" >   Ayuda </a></p>
+                              <li class="mdl-menu__item" onclick="ContenidoPrincipal('puntos')">
+                                <p style="color:#757575;"><span class="material-icons">&#xE56A;</span> <a style="color:#757575;display:inline-block" >   Puntos de Recarga </a></p>
                               </li>
-                              <li class="mdl-menu__item" onclick="ContenidoPrincipal('datos')">
-                                 <p style="color:#757575;"><span  class="material-icons">&#xE853;</span><a style="color:#757575;display:inline-block">  Datos de mi softphone </a> </p>
+                              <li class="mdl-menu__item" onclick="ContenidoPrincipal('recarga')">
+                                <p style="color:#757575;"><span class="material-icons">&#xE870;</span> <a style="color:#757575;display:inline-block" >   Recarga en Linea</a></p>
                               </li>
+                              <li class="mdl-menu__item" onclick="ContenidoPrincipal('indicativos')">
+                                <p style="color:#757575;"><span class="material-icons">&#xE80B;</span> <a style="color:#757575;display:inline-block" >   Destinos</a></p>
+                              </li>
+                              <li class="mdl-menu__item" onclick="Href('llamar.html')">
+                                <p style="color:#757575;"><span class="material-icons">&#xE0BB;</span> <a style="color:#757575;display:inline-block" >   Llamar</a></p>
+                              </li>
+                              <li class="mdl-menu__item" onclick="Href('balance.html')">
+                                <p style="color:#757575;"><span class="material-icons">&#xE873;</span> <a style="color:#757575;display:inline-block" >   Historial de Llamadas</a></p>
+                              </li>
+                              <li class="mdl-menu__item" onclick="ContenidoPrincipal('promocioneshoy')">
+                                <p style="color:#757575;"><span class="material-icons">&#xE8B1;</span> <a style="color:#757575;display:inline-block" >  Promociones</a></p>
+                              </li>
+                              <hr>
                               <li class="mdl-menu__item" onclick="Close()">
                                   <p style="color:#757575;"><span  class="material-icons">&#xE8AC;</span> <a style="color:#757575;display:inline-block" >  Cerrar Sesiòn </a></p>
                               </li>
                           </ul>
+
 
                         
                        
@@ -241,7 +253,7 @@
                   <br><br>
                   <div id="historial"  style="margin-top:10px;"></div>
                   </div>
-                  <div class="fixed-action-btn vertical left click-to-toggle" style="bottom: 45px; left: 24px;position:fixed;z-index:1002;">
+                <!--  <div class="fixed-action-btn vertical left click-to-toggle" style="bottom: 45px; left: 24px;position:fixed;z-index:1002;">
                       <a class="btn-floating btn-large btn-iosD" style="background:#4470B4;" onclick="Desvanceido()">
                         <i class="large material-icons" >&#xE896;</i>
                       </a>
@@ -253,11 +265,13 @@
                         <li ><a class="btn-floating btn-ios" style="background:#D0E86F;" href="balance.html" ><i class="material-icons" style="color:#4470B4">&#xE873;</i></a></li>
                         <li ><a class="btn-floating btn-ios" style="background:#4470B4;" onclick="Desvanceido();ContenidoPrincipal('promocioneshoy')"><i class="material-icons">&#xE8B1;</i></a></li>
                       </ul>
-                    </div>
+                    </div>-->
                 </div>
                 <div class="row" id="telefono-contestado" style="position:fixed;width:100%;height:100%;top:0;left:0;z-index:100000;background:white;display: none">
                               <center>
-                              <img src="img/logo.png" id="img-llam"><p style="color:#000" id="dtmf"></p>
+                              <img src="img/logo.png" id="img-llam">
+                              <div class="col s12" id="p_valor"></div>
+                              <p style="color:#000" id="dtmf"></p>
                                   
                               </center>
                             <div class="col s12 row" >
@@ -283,6 +297,7 @@
                                         <div class="col s4" id="speaker">    
                                            <a class="btn-floating  waves-effect bg " style="background:#fff;border:1px solid #9e9e9e" onclick="ActivarParlante()">   <i class="material-icons" style="color:#333;font-size:30px;" >&#xE04D;</i> </a>
                                         </div>
+                                        <div class="col s12" id="p_valor"></div>
                                         <div class="col s12"><span></span></div>
                                        <!-- <div class="col s4">
                                            <button class="a btn-floating  waves-effect waves-light ds bg" style="background:#fff;border:1px solid #9e9e9e" >  <i class="material-icons" style="color:#333;font-size:30px;">&#xE145;</i></button>
@@ -302,45 +317,45 @@
                                                     <br><br>
                                                  </div>
                                                <div class="col s4" onclick="Dtmf('1')">
-                                                                  <img src="img/1.png" class="img-responsive img-cir" >
+                                                                  <img src="img/1.png" class="img-responsive img-cirD" >
                                                                 </div>
                                                                 <div class="col s4" onclick="Dtmf('2')">
-                                                                  <img src="img/2.png" class="img-responsive img-cir" >
+                                                                  <img src="img/2.png" class="img-responsive img-cirD" >
                                                                 </div>
                                                                 <div class="col s4" onclick="Dtmf('3')">
-                                                                  <img src="img/3.png" class="img-responsive img-cir" >
+                                                                  <img src="img/3.png" class="img-responsive img-cirD" >
                                                                 </div>
                                                                 <div class="col s12"></div>
                                                                 <div class="col s4" onclick="Dtmf('4')" style="margin-top:3px">
-                                                                  <img src="img/4.png" class="img-responsive img-cir" >
+                                                                  <img src="img/4.png" class="img-responsive img-cirD" >
                                                                 </div>
                                                                 <div class="col s4" onclick="Dtmf('5')" style="margin-top:3px">
-                                                                  <img src="img/5.png" class="img-responsive img-cir" >
+                                                                  <img src="img/5.png" class="img-responsive img-cirD" >
                                                                 </div>
                                                                 <div class="col s4" onclick="Dtmf('6')" style="margin-top:3px">
-                                                                  <img src="img/6.png" class="img-responsive img-cir" >
+                                                                  <img src="img/6.png" class="img-responsive img-cirD" >
                                                                 </div>
                                                                 <div class="col s12"></div> 
                                                                 <div class="col s4" onclick="Dtmf('7')" style="margin-top:3px">
-                                                                  <img src="img/7.png" class="img-responsive img-cir" >
+                                                                  <img src="img/7.png" class="img-responsive img-cirD" >
                                                                 </div>
                                                                 <div class="col s4" onclick="Dtmf('8')" style="margin-top:3px">
-                                                                  <img src="img/8.png" class="img-responsive img-cir" >
+                                                                  <img src="img/8.png" class="img-responsive img-cirD" >
                                                                 </div>
                                                                 <div class="col s4" onclick="Dtmf('9')" style="margin-top:3px">
-                                                                  <img src="img/9.png" class="img-responsive img-cir" >
+                                                                  <img src="img/9.png" class="img-responsive img-cirD" >
                                                                 </div>
                                                                 <div class="col s12"></div>
                                                                  <div class="col s4" onclick="Dtmf('*')" style="margin-top:3px">
-                                                                  <img src="img/x.png" class="img-responsive img-cir" >
+                                                                  <img src="img/x.png" class="img-responsive img-cirD" >
                                                                  </div>
                                                                   
                                                                 <div class="col s4" onclick="Dtmf('0')" style="margin-top:3px">
-                                                                  <img src="img/0.png" class="img-responsive img-cir" >
+                                                                  <img src="img/0.png" class="img-responsive img-cirD" >
                                                                 </div>
 
                                                                 <div class="col s4" onclick="Dtmf('#')" style="margin-top:3px">
-                                                                  <img src="img/nu.png" class="img-responsive img-cir" >
+                                                                  <img src="img/nu.png" class="img-responsive img-cirD" >
                                                                 </div>
                                             </center>
                                     </div>
@@ -374,6 +389,7 @@
                    <input   type="hidden" id="contas_load" value="1">
                    <input   type="hidden" id="numero-llam" value="">
                    <input   type="hidden" name="dtmf_key" id="dtmf_key" value="0">
+                   <center> <p style="font-size:18px;color:#4470B4;display:none" id="connect"></p></center>
             </div>
         
 
@@ -412,7 +428,7 @@
                           }
                       }
                      if(i == 2){
-                        if(numeroenvi == '57' || numeroenvi == '037'){
+                        if(numeroenvi == '57'){
                           numeroenvi="";
                           console.log('sew cambio el numero');
                         }
@@ -444,7 +460,7 @@
                             }
                         }
                        if(i == 2){
-                          if(numeroenvi == '57' || numeroenvi == '037'){
+                          if(numeroenvi == '57'){
                             numeroenvi="";
                             console.log('sew cambio el numero');
                           }
@@ -452,6 +468,7 @@
                        
                     }
                     if(numeroenvi.length >= 3){
+                       ValorLlamada(numeroenvi);
                       console.log(numeroenvi);
                      onCall(numeroenvi);
                      localStorage.setItem('llamada',numeroenvi);
@@ -590,7 +607,7 @@
                     var impri = "";
                         impri = '<p style="font-size:16px">'+getName(contact)+'</p></center><hr><ul class="collection with-header">';
 
-                    alert('The following contact has been selected:' + JSON.stringify(contact));
+                   // alert('The following contact has been selected:' + JSON.stringify(contact));
                         console.log(contact.phoneNumbers.length);
                            for(var j = 0; j < contact.phoneNumbers.length; j++) {
                               var phone = contact.phoneNumbers[j].value;
