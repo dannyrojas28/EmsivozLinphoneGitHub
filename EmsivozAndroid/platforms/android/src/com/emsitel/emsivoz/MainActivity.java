@@ -18,16 +18,21 @@
  */
 
 package com.emsitel.emsivoz;
+import android.app.AlertDialog;
 import android.app.Notification;
 
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
-
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import org.apache.cordova.*;
 import android.support.v4.app.NotificationCompat;
+import android.widget.Toast;
+
 import com.emsitel.emsivoz.R;
 
 public class MainActivity extends CordovaActivity
@@ -41,13 +46,27 @@ public class MainActivity extends CordovaActivity
         // Set by <content src="index.html" /> in config.xml
         loadUrl(launchUrl);
        
-      /*  NotificationManager nManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+     /* NotificationManager nManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         mRunningNotification = createRunningNotification(R.string.sip_active_title, R.string.sip_active_content,
 				R.string.sip_active_ticker);
-        nManager.notify(RUNNING_NOTIFICATION_ID, mRunningNotification);*/
+        nManager.notify(RUNNING_NOTIFICATION_ID, mRunningNotification);
+        Toast.makeText(getBaseContext(),
+                "se cambio el estado ... ", Toast.LENGTH_SHORT)
+                .show();
+		 if (!verificaConexion(this)) {
+	            Toast.makeText(getBaseContext(),
+	                    "Comprueba tu conexión a Internet. Saliendo ... ", Toast.LENGTH_SHORT)
+	                    .show();
+	        }else{
+	        	 Toast.makeText(getBaseContext(),
+	                     "estas conectado ... ", Toast.LENGTH_SHORT)
+	                     .show();
+	        }*/
     }
     
-    /**
+   
+
+	/**
   	 * Creates and returns the persistent notification
   	 * 
   	 * @return
@@ -68,5 +87,23 @@ public class MainActivity extends CordovaActivity
   		runningNotification.flags |= Notification.FLAG_ONGOING_EVENT;
   		return runningNotification;
   	}
+  	public static boolean verificaConexion(Context ctx) {
+  	    boolean bConectado = false;
+  	    ConnectivityManager connec = (ConnectivityManager) ctx
+  	            .getSystemService(Context.CONNECTIVITY_SERVICE);
+  	    // No sólo wifi, también GPRS
+  	    NetworkInfo[] redes = connec.getAllNetworkInfo();
+  	    // este bucle debería no ser tan ñapa
+  	    for (int i = 0; i < 2; i++) {
+  	        // ¿Tenemos conexión? ponemos a true
+  	        if (redes[i].getState() == NetworkInfo.State.CONNECTED) {
+  	            bConectado = true;
+  	        }
+  	    }
+  	    return bConectado;
+  	}
+  
   	
+
+
 }

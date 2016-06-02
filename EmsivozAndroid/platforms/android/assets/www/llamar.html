@@ -350,15 +350,7 @@
                                                           </div> 
                                                       </center>
                                                   </div>
-                                                    <div class="col s4">
-                                                         <button class="bg btn-floating btn waves-effect waves-light ds" style="background:#fff;border:1px solid #9e9e9e" >  <i class="material-icons" style="color:#333;font-size:30px;">&#xE02B;</i></button>
-                                                      </div>
-                                                      <div class="col s4" >
-                                                         <button class="btn-floating  waves-effect waves-light  ds bg" style="background:#fff;border:1px solid #9e9e9e" >  <i class="material-icons" style="color:#333;font-size:30px;" onclick="TecladoPequeno()" >&#xE0BC;</i></button>
-                                                      </div>
-                                                      <div class="col s4" id="speaker">    
-                                                         <a class="btn-floating  waves-effect bg " style="background:#fff;border:1px solid #9e9e9e" onclick="ActivarParlante()">   <i class="material-icons" style="color:#333;font-size:30px;" >&#xE04D;</i> </a>
-                                                      </div>
+                                                     
                                                       <div class="col s12"><span></span></div>
                                                       <!--<div class="col s4">
                                                          <button class="a btn-floating  waves-effect waves-light ds bg" style="background:#fff;border:1px solid #9e9e9e" >  <i class="material-icons" style="color:#333;font-size:30px;">&#xE145;</i></button>
@@ -373,10 +365,6 @@
                                                   <div class="col s12" id="tecladopequeno" style="display:none">
 
                                                          <center>
-                                                               <div class="col s12">
-                                                                  <a class="btn-floating btn waves-effect waves-light sm" style="background:#fff;color:#333 ;border:1px solid #9e9e9e" onclick="OcultarTeclado()"><i class="material-icons" style="color: #333">&#xE318;</i></a>
-                                                                  <br><br>
-                                                               </div>
                                                                <div class="col s4" onclick="Dtmf('1')">
                                                                   <img src="img/1.png" class="img-responsive img-cirD" >
                                                                 </div>
@@ -431,10 +419,19 @@
                                                       </center>
                                                            
                                                   </div>
-                                                      <div class="col s12 fixed-action-btn" style="margin: auto;bottom: 10px;left:0" id="colgar-di">
-                                                     
-                                                           <button class="btn-floating  btn-large waves-effect waves-light red darken-4" style="color:#fff32;width:68px;height:68.5px;font-size:45px;display: block" onclick="Colgar()" id="btncolllam" ><i class="material-icons" style="color:#fff32;font-size:38px;"  >&#xE0D1;</i></button > 
-                                                           <img src="img/bol.jpg" style="width:164px;height:70px;">
+                                                    <div class="fixed-action-btn" style="margin: auto;bottom: 10px;left:0;width:100%" id="colgar-di">
+                                                          <div class="col s4" id="touchdtmf">
+                                                             <button class="btn-floating btn-large waves-effect waves-light" style="background:#fff;border:1px solid #9e9e9e" >  <i class="material-icons" style="color:#333;font-size:30px;" onclick="TecladoPequeno()" >&#xE0BC;</i></button>
+                                                          </div>
+                                                          <div class="col s4" >
+                                                              <button class="btn-floating  btn-large waves-effect waves-light red darken-4" style="color:#fff32;width:68px;height:68.5px;font-size:45px;display: block" onclick="Colgar()" id="btncolllam" ><i class="material-icons" style="color:#fff32;font-size:38px;"  >&#xE0D1;</i></button>
+                                                          </div>
+                                                          <div class="col s4" id="speaker">    
+                                                              <a class="btn-floating btn-large waves-effect waves-light" style="background:#fff;border:1px solid #9e9e9e" onclick="ActivarParlante()"> <i class="material-icons" style="color:#333;font-size:30px;" >&#xE04D;</i> </a>
+                                                          </div>
+                                                          <div class="col s12">
+                                                            <img src="img/bol.jpg" style="width:164px;height:70px;">
+                                                          </div>
                                                       </div>
                                               </center>
                                           </div>
@@ -497,12 +494,14 @@
       
           <script type="text/javascript" src="js/linphone.js"></script> 
           <script type="text/javascript" src="js/linphone_conf.js"></script> 
+          <script type="text/javascript" src="js/connection.js"></script> 
      
       <script type="text/javascript">
         $(document).ready(function(){
             setTimeout(function(){
               join.initialize();
               pol.initialize();
+              connectionN.initialize();
               loadIndiLlamar();
               document.getElementById('barraD').innerHTML='';
             },900);
@@ -514,7 +513,17 @@
                 var rf= false;
                 var sum=0;
                 function Numero(num){
-
+                  var numf = $('#numero-llam').val();
+                  console.log(numf.length);
+                  if(numf.length == 0 ){
+                    if(num == 3){
+                      au = 4;
+                      sum = 6;
+                    }else{
+                      sum = 7;
+                      au = 3;
+                    }
+                  }
                   console.log('algo');
                   var num = num;
                   $('#btn-borr').html('<h5 class="material-icons right" style="color:#4470B4;margin-top:12px;font-size:32px;" onclick="BorrarNumero();" >&#xE14A;</h5>');
@@ -541,7 +550,7 @@
 
                     if ($('#number').html().length == 3 && $('#number').html() != '08 ' ){
                       $('#number').html($('#number').html() + " "+num);
-                      sum = 7;
+                     
                     }else{
                         $('#number').html($('#number').html() + num);
                        
@@ -556,23 +565,28 @@
                      $.post('https://app.emsivoz.co/funciones/prod/programadas/indicativos_pais.php',{'pais':pais},function(data){
                       console.log(data);
                         if(data != 0){   
-                        var h="";                                                
-                        for ( i = 0; i < numero.length; i++) {
-                            h = h+ numero[i];
-                            if(i == 2){
-                                h= h + " ";
-                                sum = $('#numero-llam').val().length + 3;
-                            }
-                            if (i == (parseInt(numero.length)- 1 )) {
-                                h = h + " ";
-                                sum=$('#numero-llam').val().length + 3;
-                            }
-                         }       
-
-                         $('#number').html(h);           
-                            rf=true;
-                            $('#number').html(h);                           
+                          rf=true;                         
                           var print=JSON.parse(data);
+                          var h="";    
+                                                               
+                            for ( i = 0; i < numero.length; i++) {
+                                h = h+ numero[i];
+                                if(i == 2){
+                                    h= h + " ";
+                                    sum = $('#numero-llam').val().length + au;
+                                }
+                                if (i == (parseInt(numero.length)- 2)) {
+                                    if(print[0]['indi'] == 2){
+                                      h = h + " ";
+                                      sum=$('#numero-llam').val().length + au;
+                                    }
+                                }
+                                if (i == (parseInt(numero.length)- 1 )) {
+                                    h = h + " ";
+                                    sum=$('#numero-llam').val().length + au;
+                                }
+                             }       
+                         $('#number').html(h); 
                           $('#botton').html('<img src="https://www.emsivoz.co/img/banderas-tarifas/'+print[0]['bandera']+'" style="width: 35px;height: 35px;" alt="" class="circle">');
                           nombre=print[0]['nombre'];
                             if(print[0]['indi'] == 1){
@@ -587,7 +601,7 @@
                       }
                        if($('#numero-llam').val().length == sum){
                          $('#number').html( $('#number').html() + " ");
-                         sum=$('#numero-llam').val().length + 3;
+                         sum=$('#numero-llam').val().length + au;
                        }
                    });
 
@@ -664,6 +678,11 @@
                             h = h+ numeroD[i];
                             if(i == 2){
                                 h= h + " ";
+                            }
+                            if (i == (parseInt(numeroD.length)- 2 )) {
+                                if(print[0]['indi'] == 2){
+                                   h = h + " ";
+                                }
                             }
                             if (i == (parseInt(numeroD.length)- 1 )) {
                                 h = h + " ";
@@ -769,7 +788,7 @@
                       onEnableSpeakerClick();
                 }
                 function DescativarParlante(){
-                    $('#speaker').html('<a class="btn-floating  waves-effect bg " style="background:#fff;border:1px solid #9e9e9e" onclick="ActivarParlante()">   <i class="material-icons" style="color:#333;font-size:30px;" >&#xE04D;</i> </a>');
+                    $('#speaker').html('<a class="btn-floating btn-large waves-effect waves-light " style="background:#fff;border:1px solid #9e9e9e" onclick="ActivarParlante()">   <i class="material-icons" style="color:#333;font-size:30px;" >&#xE04D;</i> </a>');
                       onDisableSpeakerClick();
 
                 }
@@ -777,12 +796,14 @@
                     $('#opciones').css('display','none');
                     $('#contacs').css('display','none');
                     $('#tecladopequeno').css('display','block');
+                    $('#touchdtmf').html('<button class="btn-floating  waves-effect waves-light  ds bg" style="background:#D0E86F;border:1px solid #D0E86F" >  <i class="material-icons" style="color:#fff;font-size:30px;" onclick="OcultarTeclado()" >&#xE0BC;</i></button>');
                 }
                 function OcultarTeclado(){
                     $('#opciones').css('display','block');
                     $('#tecladopequeno').css('display','none');
                     $('#contacs').css('display','none');
                     $('#colgar-di').css('display','block');
+                    $('#touchdtmf').html('<button class="btn-floating btn-large waves-effect waves-light" style="background:#fff;border:1px solid #9e9e9e" >  <i class="material-icons" style="color:#333;font-size:30px;" onclick="TecladoPequeno()" >&#xE0BC;</i></button>');
                 }
                 function Dtmf(num){
                     console.log(num);

@@ -66,7 +66,7 @@ function onDeregister() {
                 localStorage.getItem('cel'),
                 'sip.emsivoz.co',
                 function(id) {
-                    //alert('DE-REGISTERED');
+                    alert('DE-REGISTERED');
                 });
 }
 
@@ -239,8 +239,13 @@ function onAdjustVolumeClick() {
                             + "Username: " + data.username + "\n"
                             + "Domain: " + data.domain);
                        
-                        if(data.state == "RegistrationOk"){
-                              $('#palabraD').css('background','#D0E86F');
+                        if(data.state == "RegistrationFailed"){
+                            $('#palabraD').css('background','#ED565A');
+                            $('#goodD').css('color','#fff');
+                            $('#goodD').html('No estas Registrado');
+                            $("#btnllam").attr("disabled", true);
+                        }else{
+                             $('#palabraD').css('background','#D0E86F');
                               $('#goodD').css('color','#4470B4');
                               input=localStorage.getItem('credit');
                                   var num = input.replace(/\./g,'');
@@ -251,11 +256,6 @@ function onAdjustVolumeClick() {
                                   }
                                document.getElementById('goodD').innerHTML= "Bienvenido "+localStorage.getItem('name')+"! - Saldo: $<span id='saldo_good'>"+num+"</span>";
                                 $("#btnllam").removeAttr("disabled");
-                        }else{
-                            $('#palabraD').css('background','#ED565A');
-                            $('#goodD').css('color','#fff');
-                            $('#goodD').html('No estas Registrado');
-                            $("#btnllam").attr("disabled", true);
                         }
                     }
                 },

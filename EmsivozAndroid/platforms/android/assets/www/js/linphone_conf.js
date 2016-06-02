@@ -61,7 +61,7 @@ var pol = {
                           console.log(cel);
                           console.log(pas);
 
-                          onDeregister();
+                         
                           onRegister(cel,pas);
                          navigator.proximity.disableSensor();
                          console.log("se cargaron los contactos");

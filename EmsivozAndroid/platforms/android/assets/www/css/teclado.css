@@ -97,7 +97,7 @@
         width: 70%;
     }
     .img-cirD{
-        width: 45%;
+        width: 62%;
     }
   #btnllam{
         width: 65.5px;
@@ -105,7 +105,7 @@
     }
     #btnllam i{
         line-height: 65.5px;
-        font-size: 1.6rem;
+        font-size: 30px ;
     }
 @media screen and (min-height: 560px) {
     .span4
@@ -150,7 +150,7 @@
         width: 80%;
     }
     .img-cirD{
-        width: 58%;
+        width: 70%;
     }
     #img-llam{
         width:164px;
@@ -172,7 +172,7 @@
     }
     #btnllam i{
         line-height: 72.5px;
-        font-size: 1.9rem;
+        font-size: 35px;
     }
 
 }
@@ -201,7 +201,7 @@
         width: 80%;
     }
     .img-cirD{
-        width: 58%;
+        width: 70%;
     }
      #btnllam{
         width: 70.5px;
@@ -209,7 +209,7 @@
     }
     #btnllam i{
         line-height: 70.5px;
-        font-size: 1.7rem;
+        font-size: 34px;
     }
 }
 @media screen and (min-height: 630px) {
@@ -217,7 +217,7 @@
         width: 90%;
     }
     .img-cirD{
-        width: 70%;
+        width: 75%;
     }
     #btnllam{
         width: 75.5px;
@@ -225,6 +225,6 @@
     }
     #btnllam i{
         line-height: 75.5px;
-         font-size: 2.1rem;
+         font-size: 40px;
     }
 }

@@ -690,8 +690,20 @@ function FiltrarPrecioLlamar(){
         console.log(esta);
          if (esta != 1) {
             $('#numero-llam').val(imprim);
-            $('#number').html(imprim);
+            var h = "";
+             for ( i = 0; i < imprim.length; i++) {
+                h = h+ imprim[i];
+                  if(i == 2){
+                    h= h + " ";
+                  }
+                  
+                  if (i == (parseInt(imprim.length)- 1 )) {
+                    h = h + " ";
+                  }
+             } 
+            $('#number').html(h);
          }else{
+
              $('#number').html('');
              $('#numero-llam').val('');
          }
