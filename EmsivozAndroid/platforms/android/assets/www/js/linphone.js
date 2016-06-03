@@ -66,7 +66,7 @@ function onDeregister() {
                 localStorage.getItem('cel'),
                 'sip.emsivoz.co',
                 function(id) {
-                    alert('DE-REGISTERED');
+                  //  alert('DE-REGISTERED');
                 });
 }
 

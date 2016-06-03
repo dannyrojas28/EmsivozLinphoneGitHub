@@ -45,12 +45,16 @@ var connectionN = {
                  if(mj == 0){
                    console.log("No Tienes Conexion a Interet");
                    mj = 1;
-                   onDeregister();
+                   window.echo("echome", function(echoValue) {
+                        console.log("AQUI 2");
+                        navigator.notification.alert(echoValue == "echome"); // should alert true.
+                    });
                 }
               }else{
-                if(mj == 1){
+                if(mj == 1){    
                     console.log('estas conectado a intert');
                     mj = 0;
+                    onStartListenerClick();
                 }
                 
               }

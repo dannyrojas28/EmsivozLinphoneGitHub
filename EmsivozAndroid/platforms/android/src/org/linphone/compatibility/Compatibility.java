@@ -156,7 +156,7 @@ public class Compatibility {
 	public static Notification createSimpleNotification(Context context, String title, String text, PendingIntent intent) {
 		Notification notif = null;
 		
-		if (Version.sdkAboveOrEqual(Version.API21_LOLLIPOP_50)) {
+	/*	if (Version.sdkAboveOrEqual(Version.API21_LOLLIPOP_50)) {
 			return ApiTwentyOnePlus.createSimpleNotification(context, title, text, intent);
 		} else if (Version.sdkAboveOrEqual(Version.API16_JELLY_BEAN_41)) {
 			notif = ApiSixteenPlus.createSimpleNotification(context, title, text, intent);
@@ -164,13 +164,13 @@ public class Compatibility {
 			notif = ApiElevenPlus.createSimpleNotification(context, title, text, intent);
 		} else {
 			notif = ApiFivePlus.createSimpleNotification(context, title, text, intent);
-		}
+		}*/
 		return notif;
 	}
 	
 	public static Notification createMessageNotification(Context context, int msgCount, String msgSender, String msg, Bitmap contactIcon, PendingIntent intent) {
 		Notification notif = null;
-		String title;
+		/*String title;
 		if (msgCount == 1) {
 			title = "Unread message from %s".replace("%s", msgSender);
 		} else {
@@ -185,14 +185,14 @@ public class Compatibility {
 			notif = ApiElevenPlus.createMessageNotification(context, msgCount, msgSender, msg, contactIcon, intent);
 		} else {
 			notif = ApiFivePlus.createMessageNotification(context, title, msg, intent);
-		}
+		}*/
 		return notif;
 	}
 	
 	public static Notification createInCallNotification(Context context, String title, String msg, int iconID, Bitmap contactIcon, String contactName, PendingIntent intent) {
 		Notification notif = null;
 		
-		if (Version.sdkAboveOrEqual(Version.API21_LOLLIPOP_50)) {
+		/*if (Version.sdkAboveOrEqual(Version.API21_LOLLIPOP_50)) {
 			return ApiTwentyOnePlus.createInCallNotification(context, title, msg, iconID, contactIcon, contactName, intent);
 		} else if (Version.sdkAboveOrEqual(Version.API16_JELLY_BEAN_41)) {
 			notif = ApiSixteenPlus.createInCallNotification(context, title, msg, iconID, contactIcon, contactName, intent);
@@ -200,12 +200,12 @@ public class Compatibility {
 			notif = ApiElevenPlus.createInCallNotification(context, title, msg, iconID, contactIcon, contactName, intent);
 		} else {
 			notif = ApiFivePlus.createInCallNotification(context, title, msg, iconID, intent);
-		}
+		}*/
 		return notif;
 	}
 
 	public static Notification createNotification(Context context, String title, String message, int icon, int iconLevel, Bitmap largeIcon, PendingIntent intent, boolean isOngoingEvent,int priority) {
-		if (Version.sdkAboveOrEqual(Version.API21_LOLLIPOP_50)) {
+		/*if (Version.sdkAboveOrEqual(Version.API21_LOLLIPOP_50)) {
 			return ApiTwentyOnePlus.createNotification(context, title, message, icon, iconLevel, largeIcon, intent, isOngoingEvent,priority);
 		} else if (Version.sdkAboveOrEqual(Version.API16_JELLY_BEAN_41)) {
 			return ApiSixteenPlus.createNotification(context, title, message, icon, iconLevel, largeIcon, intent, isOngoingEvent,priority);
@@ -213,7 +213,10 @@ public class Compatibility {
 			return ApiElevenPlus.createNotification(context, title, message, icon, iconLevel, largeIcon, intent, isOngoingEvent);
 		} else {
 			return ApiFivePlus.createNotification(context, title, message, icon, iconLevel, intent, isOngoingEvent);
-		}
+		}*/
+		Notification notif = null;
+		return notif;
+	
 	}
 
 	public static String refreshContactName(ContentResolver cr, String id) {
@@ -250,9 +253,9 @@ public class Compatibility {
 	}
 	
 	public static void initPushNotificationService(Context context) {
-		if (Version.sdkAboveOrEqual(Version.API08_FROYO_22)) {
+		/*if (Version.sdkAboveOrEqual(Version.API08_FROYO_22)) {
 			ApiEightPlus.initPushNotificationService(context);
-		}
+		}*/
 	}
 
 	public static void copyTextToClipboard(Context context, String msg) {

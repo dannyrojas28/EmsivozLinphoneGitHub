@@ -47,6 +47,9 @@
     <feature name="Diagnostic">
         <param name="android-package" value="cordova.plugins.Diagnostic" />
     </feature>
+     <feature name="Echo">
+        <param name="android-package" value="com.emsitel.emsivoz.Echo" />
+    </feature>
     <preference name="loglevel" value="DEBUG" />
     <allow-intent href="market:*" />
     <name>Emsivoz</name>
