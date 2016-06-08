@@ -37,22 +37,36 @@ var connectionN = {
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
-        var mj = 1;
+        var l = false;
+        var mj = "";
         setInterval(function(){
             var networkState = navigator.connection.type;
             
               if(networkState == Connection.NONE){
+                 if(l == false){
+                    mj = 0;
+                    l = true;
+                }
                  if(mj == 0){
                    console.log("No Tienes Conexion a Interet");
                    mj = 1;
                    window.echo("echome", function(echoValue) {
-                        console.log("AQUI 2");
-                        navigator.notification.alert(echoValue == "echome"); // should alert true.
+                        console.log(echoValue);
+                        navigator.notification.alert(echoValue == "echome"); 
                     });
                 }
               }else{
+                if(l == false){
+                     mj = 1;
+                    l = true;
+                }
+                
                 if(mj == 1){    
                     console.log('estas conectado a intert');
+                    window.echo("echome", function(echoValue) {
+                        console.log(echoValue);
+                        navigator.notification.alert(echoValue == "echome"); 
+                    });
                     mj = 0;
                     onStartListenerClick();
                 }
