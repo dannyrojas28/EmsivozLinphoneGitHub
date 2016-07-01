@@ -2,6 +2,7 @@ package com.dbaq.cordova.contactsPhoneNumbers;
 
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaPlugin;
+import org.apache.cordova.LOG;
 import org.apache.cordova.PluginResult;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -49,10 +50,11 @@ public class ContactsManager extends CordovaPlugin {
 
         this.callbackContext = callbackContext;
         this.executeArgs = args;
-
+        String num = args.getString(0); 
+        LOG.e("numero", num);
         if (ACTION_LIST_CONTACTS.equals(action)) {
             if (cordova.hasPermission(android.Manifest.permission.READ_CONTACTS)) {
-                execHelper();
+                execHelper(num);
             } else {
                 cordova.requestPermission(this, READ_CONTACTS_REQ_CODE, android.Manifest.permission.READ_CONTACTS);
             }
@@ -70,18 +72,19 @@ public class ContactsManager extends CordovaPlugin {
                 return;
             }
         }
-        execHelper();
+        String num = "*.*";
+        execHelper(num);
     }
 
-    private void execHelper() {
+    private void execHelper(final String num) {
         this.cordova.getThreadPool().execute(new Runnable() {
             public void run() {
-                callbackContext.success(list());
+                callbackContext.success(list(num));
             }
         });
     }
 
-    private JSONArray list() {
+    private JSONArray list(String num) {
         JSONArray contacts = new JSONArray();
         ContentResolver cr = this.cordova.getActivity().getContentResolver();
         String[] projection = new String[] {
@@ -102,9 +105,10 @@ public class ContactsManager extends CordovaPlugin {
        // WhereOptions whereOptions = buildWhereClause( fields,searchTerm, hasPhoneNumber);
         Cursor cursor = cr.query(ContactsContract.Data.CONTENT_URI,
                 projection,
-                ContactsContract.Contacts.HAS_PHONE_NUMBER + " = 1",
+                ContactsContract.Contacts.HAS_PHONE_NUMBER + " = 1" + " AND " +
+                		ContactsContract.CommonDataKinds.Phone.NUMBER  + " = " + num,
                 null,
-                ContactsContract.Data.DISPLAY_NAME + " ASC");
+                ContactsContract.Data.CONTACT_ID + " ASC");
 
         contacts = populateContactArray(cursor);
         return contacts;
@@ -238,13 +242,12 @@ public class ContactsManager extends CordovaPlugin {
 
                     mimetype = c.getString(c.getColumnIndex(ContactsContract.Data.MIMETYPE)); // Grab the mimetype of the current row as it will be used in a lot of comparisons
 
-                    if (mimetype.equals(ContactsContract.CommonDataKinds.StructuredName.CONTENT_ITEM_TYPE)) {
-                        contact.put("firstName", c.getString(c.getColumnIndex(ContactsContract.CommonDataKinds.StructuredName.GIVEN_NAME)));
+                    contact.put("firstName", c.getString(c.getColumnIndex(ContactsContract.CommonDataKinds.StructuredName.GIVEN_NAME)));
                         contact.put("lastName", c.getString(c.getColumnIndex(ContactsContract.CommonDataKinds.StructuredName.FAMILY_NAME)));
                         contact.put("middleName", c.getString(c.getColumnIndex(ContactsContract.CommonDataKinds.StructuredName.MIDDLE_NAME)));
                         contact.put("displayName", c.getString(c.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME)));
-                    }
-                    else if (mimetype.equals(ContactsContract.CommonDataKinds.Phone.CONTENT_ITEM_TYPE)) {
+                    
+                        if (mimetype.equals(ContactsContract.CommonDataKinds.Phone.CONTENT_ITEM_TYPE)) {
                         phones.put(getPhoneNumber(c));
                     }
 

@@ -19,40 +19,78 @@
 
 package com.emsitel.emsivoz;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.support.v4.app.NotificationCompat;
+
+import java.util.Timer;
+import java.util.TimerTask;
+
 import org.apache.cordova.*;
+import org.linphone.mediastream.Log;
+
 import android.widget.Toast;
 
 
 public class MainActivity extends CordovaActivity
 {
-	public Notificacion noti;
+	private static final int RUNNING_NOTIFICATION_ID = 72046;
+	private Notification mRunningNotification;
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         // Set by <content src="index.html" /> in config.xml
         loadUrl(launchUrl);
-        
-     /* 
+        new Timer().scheduleAtFixedRate(new TimerTask(){
+            @Override
+            public void run(){
+             	Verifica();
+            }
+        },0,3000);
+       
+     /*
         Toast.makeText(getBaseContext(),
                 "se cambio el estado ... ", Toast.LENGTH_SHORT)
                 .show();
 		 if (!verificaConexion(this)) {
 	            Toast.makeText(getBaseContext(),
-	                    "Comprueba tu conexiÃ³n a Internet. Saliendo ... ", Toast.LENGTH_SHORT)
+	                    "Comprueba tu conexiòn a internet ", Toast.LENGTH_SHORT)
 	                    .show();
 	        }else{
 	        	 Toast.makeText(getBaseContext(),
-	                     "estas conectado ... ", Toast.LENGTH_SHORT)
+	                     "Conectado a internet ", Toast.LENGTH_SHORT)
 	                     .show();
-	        }*/
+	        }
+	        */
     }
     
    
+    public void Verifica(){
+    	if (!verificaConexion(this)) {
+           Log.e("Comprueba tu conexiòn a internet");
+           NotificationManager nManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+           nManager.cancel(RUNNING_NOTIFICATION_ID);
+        }else{
+           Log.i("Conectado a internet");
+           NotificationManager nManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+			mRunningNotification = createRunningNotification(R.string.sip_active_title, R.string.sip_active_content,
+					R.string.sip_active_ticker);
+			nManager.notify(RUNNING_NOTIFICATION_ID, mRunningNotification);
+			startForeground(RUNNING_NOTIFICATION_ID, mRunningNotification);
+        }
+    }
+	private boolean startForeground(int runningNotificationId, Notification mRunningNotification2) {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
 
 	public static boolean verificaConexion(Context ctx) {
   	    boolean bConectado = false;
@@ -71,6 +109,21 @@ public class MainActivity extends CordovaActivity
   	}
   
   	
-
+	private Notification createRunningNotification(int titleResId, int contentResId, int tickerResId) {
+		PendingIntent notificationTapIntent = PendingIntent.getActivity(this, 0, new Intent(this, MainActivity.class),
+				PendingIntent.FLAG_UPDATE_CURRENT);
+		
+		NotificationCompat.Builder nBuilder = new NotificationCompat.Builder(this);
+		nBuilder.setSmallIcon(R.drawable.icon2)
+				.setContentIntent(notificationTapIntent)
+				.setOnlyAlertOnce(true)
+				.setTicker(getString(tickerResId))
+				.setContentTitle(getString(titleResId))
+				.setContentText(getString(contentResId));
+		
+		Notification runningNotification = nBuilder.build();
+		runningNotification.flags |= Notification.FLAG_ONGOING_EVENT;
+		return runningNotification;
+	}
 
 }

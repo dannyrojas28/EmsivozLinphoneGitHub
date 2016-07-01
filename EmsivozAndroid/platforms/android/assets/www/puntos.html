@@ -1,49 +1,54 @@
- <div id="" class=" animated bounceInLeft">
-  
- <center><h5  style="color:#4470B4;">  <span class="material-icons icopC">&#xE56A; </span>  PUNTOS DE RECARGA</h5></center> 
-<div id="mapdiv">
-<input type="hidden" id="existe" value="0">
-       <div id="carga" style="text-align:center;margin-top:200px;">
-        <div class="preloader-wrapper small active">
-        <div class="spinner-layer spinner-green-only">
-          <div class="circle-clipper left">
-            <div class="circle"></div>
-          </div><div class="gap-patch">
-            <div class="circle"></div>
-          </div><div class="circle-clipper right">
-            <div class="circle"></div>
+
+ <div id="cT" class=" animated bounceInLeft" style="">
+         <br><br>
+    <div id="mapdiv">
+    <input type="hidden" id="existe" value="0">
+           <div id="carga" style="text-align:center;margin-top:200px;">
+            <div class="preloader-wrapper small active">
+            <div class="spinner-layer spinner-green-only">
+              <div class="circle-clipper left">
+                <div class="circle"></div>
+              </div><div class="gap-patch">
+                <div class="circle"></div>
+              </div><div class="circle-clipper right">
+                <div class="circle"></div>
+              </div>
+            </div>
           </div>
+           <br>
+           <p id="loadtext">Cargando Nuestros Puntos</p>
         </div>
-      </div>
-       <br>
-       <p id="loadtext">Cargando Nuestros Puntos</p>
     </div>
-</div>
-</div>
-<input type="hidden" id="bd"  value="ac">
-<button class="btn btn-info" id="mapa" onclick="initialize()" style="display:none;" >
-    VER MAPA
-</button>
+    </div>
+    <input type="hidden" id="bd"  value="ac">
+    <button class="btn btn-info" id="mapa" onclick="initialize()" style="display:none;" >
+        VER MAPA
+    </button>
+ <div id='lio'>
+                   <input   type="hidden" id="minutos" value="00">
+                   <input   type="hidden" id="segundos" value="00">
+                   <input   type="hidden" id="horas" value="00">
+                   <input   type="hidden" id="esta" value="telefono-llamar">
+                   <input   type="hidden" id="colgado" value="false">
+                   <input   type="hidden" id="contas_load" value="1">
+                   <input   type="hidden" id="numero-llam" value="">
+                   <input   type="hidden" name="dtmf_key" id="dtmf_key" value="0">
+                   <input type="hidden" id="salir" value="1">  
+                   <input type="hidden" id="llamar-contact" value="0">  
+                   <input type="hidden" id="call_esta" value="0">  
+                   <input type="hidden" id="page" value="puntos">  
+                  <input type="hidden" id="registrado" value="0">
+                  
+         </div>
+          <div id="telefono-llamar">
+              <span id="number" style="color:#424242 ;margin-left:5px;display:none;margin-top: 10px;font-size: 34px"></span> 
+              <center><p style="font-size:18px;color:#4470B4;display:none" id="connect"></p></center>
+          </div>
 
-
-<!--
-<div class="fixed-action-btn vertical left click-to-toggle" style="bottom: 45px; left: 24px;position:fixed;z-index:1002;">
-    <a class="btn-floating btn-large btn-iosD" style="background:#4470B4;" onclick="Desvanceido()">
-      <i class="large material-icons" >&#xE896;</i>
-    </a>
-    <ul  > 
-      <li ><a class="btn-floating btn-ios" style="background:#D0E86F" onclick="Desvanceido();ContenidoPrincipal('puntos')"><i class="material-icons" style="color:#4470B4">&#xE56A;</i></a></li>
-      <li ><a class="btn-floating btn-ios" style="background:#4470B4;" onclick="Desvanceido();ContenidoPrincipal('recarga')"><i class="material-icons">&#xE870;</i></a></li>
-      <li ><a class="btn-floating btn-ios" style="background:#4470B4;" onclick="Desvanceido();ContenidoPrincipal('indicativos')"><i class="material-icons">&#xE80B;</i></a></li>
-      <li ><a class="btn-floating btn-ios" style="background:#4470B4;" href="llamar.html"><i class="material-icons">&#xE0BB;</i></a></li>
-      <li ><a class="btn-floating btn-ios" style="background:#4470B4;" href="balance.html" ><i class="material-icons">&#xE873;</i></a></li>
-      <li ><a class="btn-floating btn-ios" style="background:#4470B4;" onclick="Desvanceido();ContenidoPrincipal('promocioneshoy')"><i class="material-icons">&#xE8B1;</i></a></li>
-    </ul>
-  </div>-->
 <script languaje="javascript">
    $(document).ready(function(){
-        document.getElementById('barraD').innerHTML='';
-   document.getElementById('refresh').innerHTML='<i><span style="top:30px;font-size:35px;" class="material-icons"  onclick="Contenido(\'inicio.html\')">&#xE317;</span></i>';$('#mapa').click();
+      document.getElementById('barraGD').innerHTML='<img src="img/tab-puntoB.png" style="width:100%">';
+      $('#mapa').click();
    });
    
    var as=function demora(){

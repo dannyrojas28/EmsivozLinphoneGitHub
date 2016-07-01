@@ -7,6 +7,7 @@
     <script src="http://maps.google.com/maps/api/js?sensor=false"></script>
 
 
+    <link rel="stylesheet" type="text/css" href="css/teclado.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link href="css/icons.css" rel="stylesheet">
     <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
@@ -21,10 +22,15 @@
     <script src="js/materialize.js"></script>
     <script src="js/init.js"></script> 
     <script src="js/list.js"></script> 
+    <script type="text/javascript" src="js/linphone.js"></script> 
+    <script type="text/javascript" src="js/linphone_conf.js"></script> 
+    <script type="text/javascript" src="js/llamar.js"></script> 
+    <!-- <script type="text/javascript" src="js/badge_notifi.js"></script> 
+        <script type="text/javascript" src="js/connection.js"></script> -->
     <script type="text/javascript">
 
           //cuando se presione la tecla back button (flecha que indica hacia atras, ejecute esta funcion)
-                 document.addEventListener("BackButton", onBackKeyDown, false); 
+            document.addEventListener("BackButton", onBackKeyDown, false); 
             function onBackKeyDown(e) {
                 e.preventDefault();
                 var existeNav=$('#salir').val();
@@ -54,117 +60,52 @@
             $(location).attr('href',argument);
         }else{
             $(document).ready(function(){
-              localStorage.removeItem("RegisCount");
-              setTimeout(function(){
-                  $('#fade').css('display','block');
-                  $('#carga').css('display','none');
+                localStorage.removeItem("RegisCount");
+                setTimeout(function(){
+                    $('#fade').css('display','block');
+                    $('#carga').css('display','none');
 
-              },100);
-              //preguntamos si el usuario entro a la aplicacion y ya presiono el boton de promociones
-              console.log(localStorage.getItem('img_promo')+'sdsd');
-              if(localStorage.getItem('img_promo') != null){
-                  var d= new Date();
-                  console.log(d.getYear()+" "+d.getMonth()+""+d.getDay());
-                  if(localStorage.getItem('img_promo') == d.getYear()+" "+d.getMonth()+""+d.getDay() ){
-                    $('#imagen_promo').html('<img src="img/icono_prom.jpg" id="icon" onclick="ContenidoPrincipal(\'promocioneshoy\')" style="float:left;margin-left:10px;">');
-                  }else{
-                    $('#imagen_promo').html('<img src="img/icono_prom.gif" id="icon" onclick="CambiarImgPromo();ContenidoPrincipal(\'promocioneshoy\')" style="float:left;margin-left:10px;">');
-                    localStorage.removeItem('img_promo');
-                  }
-              }else{
-              
-                $('#imagen_promo').html('<img src="img/icono_prom.gif" id="icon" onclick="CambiarImgPromo();ContenidoPrincipal(\'promocioneshoy\')" style="float:left;margin-left:10px;">');
-              }
-          
-
-              //si el usuario tiene un regalo
-              var paramId = {'id':localStorage.getItem('session')};
-               $.ajax({
-                   data:paramId,
-                    type:'POST',
-                    url:"https://app.emsivoz.co/funciones/prod/usuario-app/regalos.php",
-                    success:function(rta){
-                      var regalo=JSON.parse(rta);
-                        if(regalo.estado == 1){
-                          $('#regalo').html('<a class="modal-trigger" href="#modal1"><img src="img/Regalo3.gif" class="animated" style="width:60px;height:60px;position:absolute;right:10px;margin-top:0px;" onclick="TomarRegalo('+regalo.monto+','+regalo.id+')"  id="rg_img" > <audio id="musicafondo"   loop><source src="/img/sound.wav" type="audio/wav"></audio><audio id="price" ><source src="/img/price.mp3" type="audio/mp3"></audio>');
-                          $('#html-modal').html('<center><img src="https://app.emsivoz.co/fidelizar_cliente.jpg" ></center>');
-                           $('.modal-trigger').leanModal({
-                              dismissible: true, // Modal can be dismissed by clicking outside of the modal
-                              opacity: .5, // Opacity of modal background
-                              in_duration: 0, // Transition in duration
-                              out_duration: 0, // Transition out duration
-                              ready: function() { }, // Callback for Modal open
-                              complete: function(){ } // Callback for Modal close
-                            }
-                          );
-
-                        }
+                },100);
+                //preguntamos si el usuario entro a la aplicacion y ya presiono el boton de promociones
+                console.log(localStorage.getItem('img_promo')+'sdsd');
+                if(localStorage.getItem('img_promo') != null){
+                    var d= new Date();
+                    console.log(d.getYear()+" "+d.getMonth()+""+d.getDay());
+                    if(localStorage.getItem('img_promo') == d.getYear()+" "+d.getMonth()+""+d.getDay() ){
+                      $('#imagen_promo').html('<img src="img/icono_prom.png" id="icon" onclick="ContenidoPrincipal(\'promocioneshoy\')" style="float:left;margin-left:10px;">');
+                    }else{
+                      $('#imagen_promo').html('<img src="img/icono_prom.gif" id="icon" onclick="CambiarImgPromo();ContenidoPrincipal(\'promocioneshoy\')" style="float:left;margin-left:10px;">');
+                      localStorage.removeItem('img_promo');
                     }
-                }); 
-               if (localStorage.getItem('ms') == null){
-               //obtenemos el credito o saldo del usuario
-                  input=localStorage.getItem('credit');
-                  var num = input.replace(/\./g,'');
-                    if(!isNaN(num)){
-                    num = num.toString().split('').reverse().join('').replace(/(?=\d*\.?)(\d{3})/g,'$1.');
-                    num = num.split('').reverse().join('').replace(/^[\.]/,'');
-                    
-                  }
-               document.getElementById('goodD').innerHTML= "Bienvenido "+localStorage.getItem('name')+"! - Saldo: $<span id='saldo_good'>"+num+"</span>";
-              var miId=localStorage.getItem('session');
-              var micred=localStorage.getItem('credit');
-              var param={'credit':miId};
-              console.log(localStorage.getItem('name')+"! - Saldo: $"+localStorage.getItem('credit'));
-                $.ajax({
-                   data:param,
-                    type:'POST',
-                    url:"https://app.emsivoz.co/funciones/prod/usuario-app/getCredit.php",
-                     
-                    success:function(data){
-
-                      if(data == "En estos momentos estamos realizando cambios "){
-                          document.getElementById('goodD').innerHTML= "En estos momentos estamos realizando cambios";
-                           $('#palabraD').css('background','#F2A914');
-                      }else{
-                        console.log(data);
-                        if(data != micred){
-                           localStorage.setItem('credit',data);
-                            input=localStorage.getItem('credit');
-                        var num = input.replace(/\./g,'');
-                          if(!isNaN(num)){
-                          num = num.toString().split('').reverse().join('').replace(/(?=\d*\.?)(\d{3})/g,'$1.');
-                          num = num.split('').reverse().join('').replace(/^[\.]/,'');
-                          
-                        }
-                        if(input <= 500 ){
-                          $('#palabraD').css('background','#ED565A');
-                          $('#goodD').css('color','#fff');
-                       }else{
-                          $('#palabraD').css('background','#D0E86F');
-                          $('#goodD').css('color','#4470B4');
-                       }
-                           document.getElementById('goodD').innerHTML= "Bienvenido "+localStorage.getItem('name')+"! - Saldo: $<span id='saldo_good'>"+num+"</span>" ;
-                        }
-                    }
-                }
-              });
+                }else{
                 
-               if(localStorage.getItem('credit') <= 500){
-                  $('#palabraD').css('background','#ED565A');
-                  $('#goodD').css('color','#fff');
-               }
-           }else{
-                $('#palabraD').css('background','#4470B4');
-                $('#goodD').css('color','#fff');
-                 document.getElementById('goodD').innerHTML= localStorage.getItem('ms');
-                 localStorage.removeItem('ms');
-           }
+                  $('#imagen_promo').html('<img src="img/icono_prom.gif" id="icon" onclick="CambiarImgPromo();ContenidoPrincipal(\'promocioneshoy\')" style="float:left;margin-left:10px;">');
+                }
+            
 
+                //si el usuario tiene un regalo
+                 ShowRegalo();
 
+               if (localStorage.getItem('ms') == null){
+                     ShowSaldo();
+                 }else{
+                      $('#palabraD').css('background','#89B137');
+                      $('#goodD').css('color','#fff');
+                       document.getElementById('goodD').innerHTML= localStorage.getItem('ms');
+                       localStorage.removeItem('ms');
+                 }
+
+              setTimeout(function(){
+                $('#palabraDF').html($('#palabraD').html());
+                join.initialize();
+                pol.initialize();
+                TelefonoContestado();
+               // connectionN.initialize();
+                
+              },1300);
             }); //document ready
         }
-
-        
+                    
       
 
     </script>
@@ -172,91 +113,167 @@
           .btn{
               text-transform: capitalize;
           }
+          html,body{
+             font-family: "Helvetica";
+             src: url("fonts/Helvetica/HelveticaCd_0.tff");
+             src: url("fonts/Helvetica/HelveticaLTStd-Light_0.otf");
+             src: url("fonts/Helvetica/HelveticaNeueBold_0.tff");
+             src: url("fonts/Helvetica/HelveticaNeueBoldItalic_0.tff");
+             src: url("fonts/Helvetica/HelveticaNeueLight_0.tff");
+             src: url("fonts/Helvetica/HelveticaThn_0.tff");
+             src: url("fonts/Helvetica/MyriadPro-lt.otf");
+             src: url("fonts/Helvetica/MyriadPro-Regular.otf");
+          }
       </style>
 </head> 
 <body> 
 <input type="hidden" id="registrado" value="0">
 <div id="fade" style="display:none">
-            <div class="navbar-fixed" style="height:90px;" id="nav">
-                <nav class="todo"     style="height:90px;">
-                    <div class="nav-wrapper" >
-                      <center><img  class="brand-logo " src="img/logo.png"  style="width:144px;height:50px;margin-top:10px;" ></center>
-                      <!-- Dropdown Trigger -->
-                      <h1 id="refresh" style="position:absolute;margin:10px;margin-top:27px;font-size:18px;">
-                          <span style="top:30px;font-size:35px;" class="material-icons" onclick="Contenido('inicio.html')">&#xE863;</span>
-                      </h1>
-                      <div id="regalo">
-                          <a id="demo-menu-lower-right" class="mdl-button mdl-js-button mdl-button--icon " style="color:#4470B4;position:absolute;right:10px;margin-top:27px;">
-                            <i class="material-icons" >&#xE5D4;</i>
-                          </a>
-                      </div>  
-                          <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
-                            for="demo-menu-lower-right" style="background:#f1f1f1" style="background:#f0f0f0">
-                              <li class="mdl-menu__item" onclick="ContenidoPrincipal('puntos')">
-                                <p style="color:#757575;"><span class="material-icons">&#xE56A;</span> <a style="color:#757575;display:inline-block" >   Puntos de Recarga </a></p>
-                              </li>
-                              <li class="mdl-menu__item" onclick="ContenidoPrincipal('recarga')">
-                                <p style="color:#757575;"><span class="material-icons">&#xE870;</span> <a style="color:#757575;display:inline-block" >   Recarga en Linea</a></p>
-                              </li>
-                              <li class="mdl-menu__item" onclick="ContenidoPrincipal('indicativos')">
-                                <p style="color:#757575;"><span class="material-icons">&#xE80B;</span> <a style="color:#757575;display:inline-block" >   Destinos</a></p>
-                              </li>
-                              <li class="mdl-menu__item" onclick="Href('llamar.html')">
-                                <p style="color:#757575;"><span class="material-icons">&#xE0BB;</span> <a style="color:#757575;display:inline-block" >   Llamar</a></p>
-                              </li>
-                              <li class="mdl-menu__item" onclick="Href('balance.html')">
-                                <p style="color:#757575;"><span class="material-icons">&#xE873;</span> <a style="color:#757575;display:inline-block" >   Historial de Llamadas</a></p>
-                              </li>
-                              <li class="mdl-menu__item" onclick="ContenidoPrincipal('promocioneshoy')">
-                                <p style="color:#757575;"><span class="material-icons">&#xE8B1;</span> <a style="color:#757575;display:inline-block" >  Promociones</a></p>
-                              </li>
-                              <hr>
-                              <li class="mdl-menu__item" onclick="Close()">
-                                  <p style="color:#757575;"><span  class="material-icons">&#xE8AC;</span> <a style="color:#757575;display:inline-block" >  Cerrar Sesiòn </a></p>
-                              </li>
-                          </ul>
+     <div class="navbar-fixed" id="nav" style="background:#ecedef;">
+                <div class=" row" >
+                    <div class="cD text-center" onclick="Href('inicio.html')" style="margin-top:10px;margin-left:3px;display:none" id="btn-atras">
+                        <img src="img/btn-back.png" style="width:70% !important;">
+                    </div>
 
-                        
-                       
-                      <br>
-                      <div style="height:25px;width:100%;background:#D0E86F;font-size:14px;margin-top:10px;" id="palabraD" >
-                        <p style='color:#4470B4;text-align:center;font-size:14px;margin-top:5px;' id="goodD" onclick="ContenidoPrincipal('recarga')"></p>
+                    <div class="col s3  psl" onclick="ContenidoPrincipal('promocioneshoy')" style="border-right:1px solid #ADACB2;margin-top:3px" id="loc">
+                        <img src="img/btn-prom.png" class="img-btn" style="width:100% !important;margin-right:3px">
+                    </div>
+                    <div class="col s3 psl"  style="border-right:1px solid #ADACB2;margin-top:3px" id="btn-ll"> 
+                      <div style="width:100%" onclick="ContenidoPrincipal('balance')" >
+                        <img src="img/btn-hist.png" class="img-btn" style="width:100% !important;margin-right:3px ">
                       </div>
-                        <div id="barraD"></div>
-                  </div>   
-                </nav>
-        </div>
+                    </div>
+                    <div class="col s3 psl"  onclick="Contactos()" style="border-right:1px solid #ADACB2;margin-top:3px" id="eve">
+                      <img src="img/btn-cont.png" class="img-btn" style="width:100% !important;margin-right:3px">
+                    </div>
+                    <div class="col s3  mdl-js-button psl" id="demo-menu-lower-right" style="margin-top:3px"> 
+                      <img src="img/btn-emsi.png" class="img-btn" style="width:100% !important;">
+                    </div>
+
+                    
+                      <div style="width:100%;background:#89B137;margin-top:10px;" id="palabraD" class="col s12">
+                          <p style='color:#fff;text-align:center;' id="goodD" onclick="ContenidoPrincipal('recarga')"></p>
+                      </div>
+                    <div id="barraGD"></div>
+                    <div id="barraD"></div>
+                </div>
+                 <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
+                  for="demo-menu-lower-right" style="background:#ecedef">
+                    <li class="mdl-menu__item" onclick="ContenidoPrincipal('puntos')" style="height: 38px;line-height: 38px;">
+                        <p style="color:#757575;margin: 4px" >
+                            <img src="img/icon-punto.png" width="24px" >
+                            <a style="color:#757575;display:inline-block" >   Puntos de Recarga </a>
+                        </p>
+                    </li>
+                        <hr style="margin:2px">
+
+                    <li class="mdl-menu__item" onclick="ContenidoPrincipal('recarga')" style="height: 38px;line-height: 38px;">
+
+
+                        <p style="color:#757575;margin:4px" >
+                            <img src="img/icon-recarg.png" width="24px" >
+                            <a style="color:#757575;display:inline-block" >   Recarga en Linea</a>
+                        </p>
+                    </li>
+                          <hr style="margin:2px">
+
+                    <li class="mdl-menu__item"  onclick="ContenidoPrincipal('llamar')" style="height: 38px;line-height: 38px;">
+
+                          <p style="color:#757575;margin: 4px" >
+                              <span class="material-icons left" style="color:#A6BC41;font-size:26px;font-weight:bold;">&#xE0CD;</span> 
+                              <a style="color:#757575;display:inline-block" >   Llamar</a>
+                          </p>
+                    </li>
+                       <hr style="margin:2px">
+
+                    <li class="mdl-menu__item" onclick="ContenidoPrincipal('indicativos')" style="height: 38px;line-height: 38px;">
+                        <p style="color:#757575;margin:4px" >
+                            <img src="img/icon-destin.png" width="24px" >
+                             <a style="color:#757575;display:inline-block" >   Destinos</a>
+                        </p>
+                  </li>
+                       <hr style="margin:2px">
+
+                  <li class="mdl-menu__item"  onclick="ContenidoPrincipal('balance')" style="height: 38px;line-height: 38px;">
+                        <p style="color:#757575;margin: 4px" >
+                            <span class="material-icons left" style="color:#99989d;font-size:24px;font-weight:bold">&#xE873;</span> 
+                            <a style="color:#757575;display:inline-block;margin-right:4px" >  Historial de Llamadas</a>
+                        </p>
+                  </li>
+                        <hr style="margin:2px">
+
+                  <li class="mdl-menu__item" onclick="ContenidoPrincipal('promocioneshoy')" style="height: 38px;line-height: 38px;">
+                        <p style="color:#757575;margin: 4px" >
+                            <img src="img/icon-promo.png" width="24px">
+                            <a style="color:#757575;display:inline-block" >  Promociones</a>
+                        </p>
+                  </li>
+
+                      <hr style="margin:2px">
+                  <li class="mdl-menu__item" onclick="Close()" style="height: 38px;line-height: 38px;">
+                        <p style="color:#757575;margin: 0 0 -13px" >
+                            <span  class="material-icons left" style="color:#99989d">&#xE8AC;</span>
+                            <a style="color:#757575;display:inline-block" >  Cerrar Sesiòn </a>
+                        </p>
+                  </li>
+                </ul>
+          </div>
+          <div class="fixed-action-btn" style="top: 0px; left: 14px;z-index:999;padding-top:0;display:none" id="regalo">
+          </div>
+
 
       <div id="micont">
+      <!-- INPUTS HIDDEN QUE SE UTILIZAN PARA GUARDAR VALORES AL REALIZAR UNA LLAMADA -->
+    <div id='lio'>
+                   <input   type="hidden" id="minutos" value="00">
+                   <input   type="hidden" id="segundos" value="00">
+                   <input   type="hidden" id="horas" value="00">
+                   <input   type="hidden" id="esta" value="telefono-llamar">
+                   <input   type="hidden" id="colgado" value="false">
+                   <input   type="hidden" id="contas_load" value="1">
+                   <input   type="hidden" id="numero-llam" value="">
+                   <input   type="hidden" name="dtmf_key" id="dtmf_key" value="0">
+                   <input type="hidden" id="salir" value="0">  
+                   <input type="hidden" id="llamar-contact" value="0">  
+                   <input type="hidden" id="call_esta" value="0">  
+                   <input type="hidden" id="page" value="inicio">  
+                  <input type="hidden" id="registrado" value="0">
+                  
+         </div>
+          <div id="telefono-llamar">
+              <span id="number" style="color:#424242 ;margin-left:5px;display:none;margin-top: 10px;font-size: 34px"></span> 
+              <center><p style="font-size:18px;color:#4470B4;display:none" id="connect"></p></center>
+          </div>
          <div class="row animated fadeIn" id="ICONOS" >
             <div class="col s6" >
-                <img src="img/icono_punto.jpg" id="icon" onclick="ContenidoPrincipal('puntos')" style="float:right;margin-right:10px;">
+                <img src="img/icono_punto.png" id="icon" onclick="ContenidoPrincipal('puntos')" style="float:right;margin-right:10px;">
             </div>
             <div class="col s6">
-                <img src="img/icono_recarg.jpg" id="icon" onclick="ContenidoPrincipal('recarga')" style="float:left;margin-left:10px;">
+                <img src="img/icono_recarg.png" id="icon" onclick="ContenidoPrincipal('recarga')" style="float:left;margin-left:10px;">
             </div>   
             <div class="col s12">
                 <br>
             </div>
             <div class="col s6">
-                <img src="img/icono_destin.jpg" id="icon" onclick="ContenidoPrincipal('indicativos')" style="float:right;margin-right:10px;">
+                <img src="img/icono_destin.png" id="icon" onclick="ContenidoPrincipal('indicativos')" style="float:right;margin-right:10px;">
             </div>
             <div class="col s6">
-                <a href="llamar.html"><img src="img/icono_llama.jpg" id="icon" style="float:left;margin-left:10px;"></a>
+                <img src="img/icono_llama.png" id="icon" onclick="ContenidoPrincipal('llamar')" style="float:left;margin-left:10px;">
             </div>
             <div class="col s12">
                 <br>
             </div>
             <div class="col s6">
-                 <a href="balance.html"><img src="img/icono_histor.jpg" id="icon" style="float:right;margin-right:10px;"></a>
+                 <img src="img/icono_histor.png" id="icon" onclick="ContenidoPrincipal('balance')" style="float:right;margin-right:10px;">
             </div> 
             <div class="col s6" id="imagen_promo">
                 
             </div>
         </div>
+
+          <img src="img/barra.png" style="width:100%;bottom: 0; right:0;" class="fixed-action-btn">
       </div>
   </div>
-
 <div id="fadexinz" class="fadeboxinz" ></div>
 <inpu type="hidden" id="desvanecido" value="0">
 <div id="carga" style="text-align:center;margin-top:200px;">
@@ -283,9 +300,32 @@
       
     </div>
     <div class="modal-footer">
-      <a href="#!" class=" modal-action modal-close waves-green btn">Muchas Gracias <i class="material-icons">&#xE7F2;</i> </a>
+    
+       <a class="btn-large modal-action modal-close"  style="background:#516AA3;color:#fff;font-size:18px;letter-spacing:0;margin-top:14px;height: 40px;line-height: 42px;padding: 0 1rem">
+                  <i class="material-icons left" style="color:#fff;font-size:36px">&#xE7F2;</i> Muchas Gracias
+                </a>
     </div>
   </div>
+
+<!-- MODAL PARA MOSTRAR EL CONTACTO SELECCIONADO-->
+               <div id="modal9" class="modal modal-fixed-footer" style="height: 100% !important;max-height:360px;width: 90%;margin: auto;margin-top:20%;">
+                    <div class="modal-content">
+                      <div id="Contactos_lon" class="row">
+
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <center>
+                        <a href="#!" class=" modal-action modal-close waves-green red btn" style="border-radius:8px;background:#C90000;float:none;font-size:18px">Cancelar</a>
+                      </center>
+                    </div>
+              </div>
+
+
+  <!-- PANTALLA CUANDO SE REALIZA UNA LLAMADA-->
+   <div class="row" id="telefono-contestado" style="position:fixed;width:100%;height:100%;top:0;left:0;z-index:100000;background:white;display:none">
+      
+   </div>
 
 
   </body>

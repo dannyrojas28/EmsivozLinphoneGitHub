@@ -1,10 +1,14 @@
 
 body{
-
+  @font-face{
+  font-family:"Helvetica35-Thin";
+  src:url("http://www.myfontfree.com/data/502/h/helvetica35-thin/HelveticaThn.ttf");
 }
+}
+
 .menu{
    background:#fff;
-    border-right:#d1d1d1;
+    border-right:#ADACB2;
 }
 label{font-size: 20px;}
 .estatica{
@@ -16,8 +20,8 @@ label{font-size: 20px;}
         left:0;
         top:0;
      margin-bottom:10px;
-    -webkit-box-shadow: 5px 5px 5px #d1d1d1;
-  -moz-box-shadow: 5px 5px 5px #d1d1d1;
+    -webkit-box-shadow: 5px 5px 5px #ADACB2;
+  -moz-box-shadow: 5px 5px 5px #ADACB2;
 }
 .Noestatica{
     position:relative;
@@ -28,8 +32,8 @@ label{font-size: 20px;}
 hr.style-eight {
     padding: 0;
     border: none;
-    border-top: medium double #d1d1d1;
-    color: #d1d1d1;
+    border-top: medium double #ADACB2;
+    color: #ADACB2;
     text-align: center;
 }
 hr.style-eight:after {
@@ -46,7 +50,8 @@ hr.style-eight:after {
   margin-left:30px;
 }
 .iconIn{
-  color:#26a69a;
+  color:#A6BC41;
+  font-size: 4em
 }
 
 /*
@@ -263,9 +268,9 @@ footer{
 }
 #formFoo{
     margin-bottom:0px;
-    -webkit-box-shadow:1px 5px 5px #d1d1d1;
-    -moz-box-shadow: 1px 5px 5px  #d1d1d1;
-    box-shadow: 1px 5px 5px #d1d1d1;
+    -webkit-box-shadow:1px 5px 5px #ADACB2;
+    -moz-box-shadow: 1px 5px 5px  #ADACB2;
+    box-shadow: 1px 5px 5px #ADACB2;
 }
 
 .float{
@@ -279,18 +284,38 @@ body *
 {
   text-shadow: none;
 }
-
-
+#icon{
+    width: 95px;
+  }
+#nav{
+  height:97px;
+}
+#cT{
+    margin-top:30%; 
+  }
 #ICONOS{
-    margin-top:2%;
+    margin-top:5%;
   }
 @media screen and (min-height: 510px) {
   #ICONOS{
-    margin-top:20%;
+    margin-top:10%;
+
 
   }
+
   #icon{
-    width: 20px;
+    width: 110px;
+  }
+}
+@media screen and (min-height: 640px) {
+  #ICONOS{
+    margin-top:20%;
+
+
+  }
+
+  #icon{
+    width: 120px;
   }
 }
 @media screen and (min-height: 650px) {
@@ -298,6 +323,28 @@ body *
     margin-top:28%;
   }
 
+}
+
+@media screen and (min-height: 800px){
+  #nav{
+    height:170px;
+  }
+  #cT{
+    margin-top:170px; 
+  }
+  #ICONOS{
+    margin-top:8%;
+  }
+  #icon{
+    width: 220px;
+  }
+  #palabraD{
+        height: 40px;
+        font-size: 28px;
+    }
+    #goodD{
+        font-size: 28px;
+    }
 }
   #fadein{
     animation-duration: 1s;
@@ -398,9 +445,7 @@ body *
     width:198px;
     height: 75px;
   } 
-  #icon{
-    width: 110px;
-  }
+  
   .pol{
     font-size: 14px;
   }
@@ -477,9 +522,9 @@ body *
     display: block;
   }
 }
-@media screen and (min-width: 630px){
+@media screen and (min-width: 600px){
   #icon{
-      width: 220px;
+      width: 200px;
     }
 
 }
@@ -498,7 +543,7 @@ body *
 .input{
     height: 45px;
     background:#fff;
-    border:1px solid #d1d1d1;
+    border:1px solid #ADACB2;
     border-radius:8px;
 }
 
@@ -545,8 +590,15 @@ body *
 .inputClas{
     height: 45px;
     background:#fff;
-    border:1px solid #d1d1d1;
+    border:1px solid #ADACB2;
     border-radius:8px;
 }
+.cD{
+  width: 13.0%;
+  display: inline-block;
+}
 
-
+.c{
+  width: 19.0%;
+  display: inline-block;
+}

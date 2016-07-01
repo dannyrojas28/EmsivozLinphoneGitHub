@@ -17,6 +17,5 @@
   white-space: nowrap;
   word-wrap: normal;
   direction: ltr;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
+  font-feature-settings: 'liga';
 }

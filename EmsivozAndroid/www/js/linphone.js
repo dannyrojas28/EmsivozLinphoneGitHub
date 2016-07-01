@@ -66,7 +66,7 @@ function onDeregister() {
                 localStorage.getItem('cel'),
                 'sip.emsivoz.co',
                 function(id) {
-                    //alert('DE-REGISTERED');
+                  //  alert('DE-REGISTERED');
                 });
 }
 
@@ -88,6 +88,7 @@ function onCall(cel){
                     var num= $('#number').html();
                     $('#num-llama').html(num);
                     $('#telefono-contestado').css('display','block');
+                    $('#palabraDF').html($('#palabraD').html());
                     onDisableSpeakerClick();
                     //alert('CALLING');
                 },
@@ -140,6 +141,7 @@ function onAdjustVolumeClick() {
         function onTerminateCall() {
             Linphone.terminateCall(
                 function(id) {
+                    $('#telefono-contestado').css('display','none');
                     //onDeregister();
                     //alert('TERMINATED CALL');
                 });
@@ -192,6 +194,7 @@ function onAdjustVolumeClick() {
 
                 function(data) {
                     console.log(data.event);
+                    var r=false;
                     if (data.event == "INCOMING_RECEIVED") {
                         console.log("Event: " + data.event + "\n"
                             + "State: " + data.state + "\n"
@@ -212,7 +215,8 @@ function onAdjustVolumeClick() {
                                    console.log("ESTA TIMBRANDO");
                             break; 
                             case "Connected":
-                                   if (localStorage.getItem('seg') == '00'){
+                                   if (r == false){
+                                       r= true;
                                        $('#colgado').val("false");
                                        callEstablished();
                                    }
@@ -239,23 +243,13 @@ function onAdjustVolumeClick() {
                             + "Username: " + data.username + "\n"
                             + "Domain: " + data.domain);
                        
-                        if(data.state == "RegistrationOk"){
-                              $('#palabraD').css('background','#D0E86F');
-                              $('#goodD').css('color','#4470B4');
-                              input=localStorage.getItem('credit');
-                                  var num = input.replace(/\./g,'');
-                                    if(!isNaN(num)){
-                                    num = num.toString().split('').reverse().join('').replace(/(?=\d*\.?)(\d{3})/g,'$1.');
-                                    num = num.split('').reverse().join('').replace(/^[\.]/,'');
-                                    
-                                  }
-                               document.getElementById('goodD').innerHTML= "Bienvenido "+localStorage.getItem('name')+"! - Saldo: $<span id='saldo_good'>"+num+"</span>";
-                                $("#btnllam").removeAttr("disabled");
-                        }else{
+                        if(data.state == "RegistrationFailed"){
                             $('#palabraD').css('background','#ED565A');
                             $('#goodD').css('color','#fff');
                             $('#goodD').html('No estas Registrado');
                             $("#btnllam").attr("disabled", true);
+                        }else{
+                             ShowSaldo();
                         }
                     }
                 },

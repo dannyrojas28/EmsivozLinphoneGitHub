@@ -29,7 +29,7 @@ var pol = {
                   }, function(error){
                       console.log(error);
               });
-                    document.getElementById('refresh').innerHTML='<i><span style="top:30px;font-size:35px;" class="material-icons"  onclick="Contenido(\'inicio.html\')">&#xE317;</span></i>';
+                   // document.getElementById('refresh').innerHTML='<i><span style="top:30px;font-size:35px;" class="material-icons"  onclick="Contenido(\'inicio.html\')">&#xE317;</span></i>';
                       if(localStorage.getItem('llamada') != null){
                            $('#telefono-contestado').css('display','block');
                            console.log(localStorage.getItem('llamada'));

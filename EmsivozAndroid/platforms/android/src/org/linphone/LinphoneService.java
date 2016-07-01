@@ -58,6 +58,7 @@ import org.linphone.mediastream.Version;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
+import com.emsitel.emsivoz.Notificacion;
 import com.emsitel.emsivoz.R;
 
 /**
@@ -133,7 +134,6 @@ public final class LinphoneService extends Service {
 	@Override
 	public void onCreate() {
 		super.onCreate();
-
 		// In case restart after a crash. Main in LinphoneActivity
 		mNotificationTitle = Constants.SERVICE_NAME;
 
@@ -216,6 +216,10 @@ public final class LinphoneService extends Service {
 			
 					if ((state == RegistrationState.RegistrationFailed || state == RegistrationState.RegistrationCleared) && (LinphoneManager.getLc().getDefaultProxyConfig() == null || !LinphoneManager.getLc().getDefaultProxyConfig().isRegistered())) {
 						sendNotification(IC_LEVEL_ORANGE, Constants.NOTIFICATION_REGISTER_FAILURE);
+						Log.e("logggggggggggggggggggggggggg  este era el momento para enviar la notificacion");						
+						
+						mNM.cancel(NOTIF_ID);
+						
 					}
 					
 					if (state == RegistrationState.RegistrationNone) {

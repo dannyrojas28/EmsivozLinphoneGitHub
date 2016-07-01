@@ -903,7 +903,8 @@ public class LinphoneManager implements LinphoneCoreListener, LinphoneChatMessag
 	}
 
 	public void registrationState(final LinphoneCore lc, final LinphoneProxyConfig proxy,final RegistrationState state,final String message) {
-		Log.i("New registration state ["+state+"]");
+		Log.i("aaaaaaaaaaaaaaa la registracuin New registration state ["+state+"]");
+		
 	}
 
 	private int savedMaxCallWhileGsmIncall;

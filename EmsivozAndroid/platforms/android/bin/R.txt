@@ -8,6 +8,8 @@ int drawable screen1 0x7f020006
 int drawable screen2 0x7f020007
 int drawable screen3 0x7f020008
 int drawable screen5 0x7f020009
+int drawable screen6 0x7f02000a
+int drawable screen7 0x7f02000b
 int raw hold 0x7f040000
 int raw incoming_chat 0x7f040001
 int raw linphonerc_default 0x7f040002

@@ -24,8 +24,8 @@ function ValidateText(id,icon){
     var idtext=$('#'+id).val();
     var Suusuario=document.getElementsByName(id);
        if(idtext.length >= 3){
-         document.getElementById(icon).style.color="green";
-         Suusuario[0].style.borderBottom = "thin dotted green";
+         document.getElementById(icon).style.color="#A6BC41";
+         Suusuario[0].style.borderBottom = "thin dotted #ADACB2";
             document.getElementsByName('btn')[0].disabled =false;
        }else{
          document.getElementById(icon).style.color="red";
@@ -37,8 +37,8 @@ function ValidateNumber(){
     var idtext=$('#celular').val();
     var Suusuario=document.getElementsByName('celular');
        if(idtext.length >= 9){
-         document.getElementById('icoCel').style.color="green";
-         Suusuario[0].style.borderBottom = "thin dotted green";
+         document.getElementById('icoCel').style.color="#A6BC41";
+         Suusuario[0].style.borderBottom = "thin dotted #ADACB2";
         document.getElementById('celular_error').innerHTML="";
         document.getElementsByName('btn')[0].disabled =false;
        }else{
@@ -52,8 +52,8 @@ function ValidateNumberasd(){
     var idtext=$('#celular').val();
     var Suusuario=document.getElementsByName('celular');
        if(idtext.length >= 9){
-         document.getElementById('icoCel').style.color="green";
-         Suusuario[0].style.borderBottom = "thin dotted green";
+         document.getElementById('icoCel').style.color="#A6BC41";
+         Suusuario[0].style.borderBottom = "thin dotted #ADACB2";
             document.getElementById('celular_error').innerHTML="";
             document.getElementsByName('btn')[0].disabled =false;
        }else{
@@ -71,8 +71,8 @@ function validateEmail(){
          document.getElementById('icoUser').style.color="red";
          document.getElementsByName('btn')[0].disabled = true;
        }else{
-           Suusuario[0].style.borderBottom = "thin dotted green";
-          document.getElementById('icoUser').style.color="green";
+           Suusuario[0].style.borderBottom = "thin dotted #ADACB2";
+          document.getElementById('icoUser').style.color="#A6BC41";
             document.getElementsByName('btn')[0].disabled =false;
        }
 }
@@ -86,8 +86,8 @@ function ValidatePass(){
          document.getElementsByName('btn')[0].disabled = true;
        }else{
            document.getElementById('pass_error').innerHTML="";
-           Supass[0].style.borderBottom = "thin dotted green";
-          document.getElementById('icoPass').style.color="green";
+           Supass[0].style.borderBottom = "thin dotted #ADACB2";
+          document.getElementById('icoPass').style.color="#A6BC41";
             document.getElementsByName('btn')[0].disabled =false;
        }
 }
@@ -97,11 +97,11 @@ function verPass(){
     if(verpassword == 0){
         document.getElementById('password').type="text";
         document.getElementById('verpass').value="1";
-        $('#ocultarPass').html('<i class="material-icons  iconIn prefix " onclick="verPass()"> &#xE8F5;</i>');
+        $('#ocultarPassD').html('<i class="material-icons  iconIn prefix " onclick="verPass()" style="color:#ADACB2"> &#xE8F5;</i>');
     }else{
         document.getElementById('password').type="password";
         document.getElementById('verpass').value="0";
-        $('#ocultarPass').html('<i class="material-icons  iconIn prefix " onclick="verPass()"> &#xE8F4;</i>');
+        $('#ocultarPassD').html('<i class="material-icons  iconIn prefix " onclick="verPass()" style="color:#ADACB2"> &#xE8F4;</i>');
     }
 }
 function verPassDos(){
@@ -109,11 +109,11 @@ function verPassDos(){
     if(verpassword == 0){
         document.getElementById('pass').type="text";
         document.getElementById('verpass').value="1";
-        $('#ocultarPass').html('<i class="material-icons  iconIn prefix " onclick="verPassDos()"> &#xE8F5;</i>');
+        $('#ocultarPass').html('<i class="material-icons  iconIn prefix " onclick="verPassDos()" style="color:#ADACB2"> &#xE8F5;</i>');
     }else{
         document.getElementById('pass').type="password";
         document.getElementById('verpass').value="0";
-        $('#ocultarPass').html('<i class="material-icons  iconIn prefix " onclick="verPassDos()"> &#xE8F4;</i>');
+        $('#ocultarPass').html('<i class="material-icons  iconIn prefix " onclick="verPassDos()" style="color:#ADACB2"> &#xE8F4;</i>');
     }
 }
 function VerificarCode(){
@@ -183,14 +183,14 @@ function Registrar(){
     var Supass=document.getElementsByName('password');
     var Supass2=document.getElementsByName('password2');
     if(nombre.length >= 3){
-         document.getElementById('icoName').style.color="green";
-         Sunombre[0].style.borderBottom = "thin dotted green";
+         document.getElementById('icoName').style.color="#A6BC41";
+         Sunombre[0].style.borderBottom = "thin dotted #ADACB2";
             if(apellido.length >= 3){
-                 document.getElementById('icoApell').style.color="green";
-                 Suapellido[0].style.borderBottom = "thin dotted green";
+                 document.getElementById('icoApell').style.color="#A6BC41";
+                 Suapellido[0].style.borderBottom = "thin dotted #ADACB2";
                     if(numero.length >= 9){
-                         document.getElementById('icoCel').style.color="green";
-                         Sunumero[0].style.borderBottom = "thin dotted green";
+                         document.getElementById('icoCel').style.color="#A6BC41";
+                         Sunumero[0].style.borderBottom = "thin dotted #ADACB2";
                         document.getElementById('celular_error').innerHTML="";
                         if(ciudad !=  0){
                             if(direccion.length >= 3){
@@ -198,13 +198,13 @@ function Registrar(){
                                  //Sudireccion[0].style.borderBottom = "thin dotted green";
                                 if(usuario.length > 0){  
                                       document.getElementById('usuario_error').innerHTML="";
-                                       Suemail[0].style.borderBottom = "thin dotted green";
-                                      document.getElementById('icoUser').style.color="green";
+                                       Suemail[0].style.borderBottom = "thin dotted #ADACB2";
+                                      document.getElementById('icoUser').style.color="#A6BC41";
                                         document.getElementsByName('btn')[0].disabled =false;
                                         if(pass.length >= 6){
                                             document.getElementById('pass_error').innerHTML="";
-                                            Supass[0].style.borderBottom = "thin dotted green";
-                                            document.getElementById('icoPass').style.color="green";
+                                            Supass[0].style.borderBottom = "thin dotted #ADACB2";
+                                            document.getElementById('icoPass').style.color="#A6BC41";
                                                      if (document.getElementById('checkbox').checked){
                                                           document.getElementById('chek').style.color="blue";
                                                          document.getElementById('fade').style.display="none";
@@ -221,7 +221,7 @@ function Registrar(){
                                                                  success:function(data){
                                                                       console.log(data);
                                                                       var print=JSON.parse(data);
-                                          	                           if(print.estado  ==  1 ){
+                                                                       if(print.estado  ==  1 ){
                                                                                 localStorage.setItem('usname', print.usuario);
                                                                                  localStorage.setItem('uspass', print.pass);
                                                                                  localStorage.setItem('name', print.nombre);
@@ -243,7 +243,7 @@ function Registrar(){
                                                                                 $("#ki").click();
                                                                                 document.getElementById('fade').style.display="block";
                                                                                 document.getElementById('carga').style.display="none";
-                                                                                document.getElementById('errorReg').innerHTML="<center><font color='red'><h5><i class='material-icons'>&#xE7F3;</i> Verifica Tu Informacion</h5></font></center>";
+                                                                                //document.getElementById('errorReg').innerHTML="<center><font color='red'><h5><i class='material-icons'>&#xE7F3;</i> Verifica Tu Informacion</h5></font></center>";
                                                                                if(print.estado == 2){
                                                                                      document.getElementById('usuario_error').innerHTML="<font color='red'>Este E-mail ya existe</font>";
                                                                                      Suemail[0].style.borderBottom = "thin dotted red";
@@ -275,7 +275,7 @@ function Registrar(){
                                                                            }
                                                                      }
                                                                  });
-                                                                        } ,500);
+                                                                        } ,10);
                                                             
       
                                                          }else{
@@ -333,15 +333,35 @@ function NuevaPestana(url){
         win.focus()
     }
 
+    function Href(argument){
+       $(location).attr('href',argument);
+    }
+function TelefonoContestado(){
+  var argument = "telefono_contestado";
+  crossDomain : true,
+     $.get(argument+".html").done(
+            function(data){
+                $(dom('telefono-contestado')).html(data);
+            });
+}
 function ContenidoPrincipal(argument){ 
     $('#salir').val(1);
+    $('#barraGD').html('');
+    $('#barraD').html('');
     $('#llamar-contact').val(0);
     document.addEventListener("deviceready", onDeviceReady, false);
-	  crossDomain : true,
+    $('#nav').css('position','fixed');
+    $('#nav').css('top','0');
+    $('#btn-atras').css('display','inline-block');
+    $('.psl').removeClass('col');
+    $('.psl').removeClass('s3');
+    $('.psl').addClass('c');
+    $('.img-btn').css('width','90%');
+    crossDomain : true,
      $.get(argument+".html").done(
             function(data){
                 $(dom('micont')).html(data);
-               document.addEventListener("deviceready", onDeviceReady, false);
+                document.addEventListener("deviceready", onDeviceReady, false);
             });
 }
 function LlamarCont(numero){
@@ -393,7 +413,7 @@ function showPosition(position) {
        
   }
 function onError(error) {
-	 document.getElementById('mapdiv').innerHTML='<center><h5>Tenemos Problemas </h5></center><br><div class="container"><p style="font-color:15px;">Para poder acceder a la geolocalizacion de tu telefono, sigue las instrucciones</p><p>1. Click en el menu de configuracion de tu telefono <br>2.Ingresa en la parte que dice Ubicacion o GPS<br>3. Verifica que este activada la opcion "Acceder a mi ubicacion"  y modo ubicacion-alta precision<br></div>';
+   document.getElementById('mapdiv').innerHTML='<center><h5>Tenemos Problemas </h5></center><br><div class="container"><p style="font-color:15px;">Para poder acceder a la geolocalizacion de tu telefono, sigue las instrucciones</p><p>1. Click en el menu de configuracion de tu telefono <br>2.Ingresa en la parte que dice Ubicacion o GPS<br>3. Verifica que este activada la opcion "Acceder a mi ubicacion"  y modo ubicacion-alta precision<br></div>';
 }
 
 function History(argument){
@@ -439,9 +459,9 @@ function FiltrarIndicativo(){
   $.post('https://app.emsivoz.co/funciones/prod/programadas/indicativos.php',{'pais':pais},function(data){
     console.log(data);
      var print=JSON.parse(data);
-     var tabla='<table  class=" bordered centered" id="tab"><thead><tr><th>Destino</th><th>celular</th><th>fijo</th> </tr></thead>';
+     var tabla='<table  class=" bordered centered" id="tab"><thead><tr><th>Destino</th><th>Celular</th><th>Fijo</th> </tr></thead>';
      for (var i = 0; i < print.length;i++){
-          var img='<img src="https://www.emsivoz.co/img/banderas-tarifas/'+print[i]['bandera']+'" style="width:180px;height:150px;"><br>';
+          var img='<div class="col offset-s2 s8"><img src="https://www.emsivoz.co/img/banderas-tarifas/'+print[i]['bandera']+'" style="width:100% !important;" class="circle"></div><br>';
           var td='<tbody><tr><td>'+print[i]['nombre']+'</td><td>'+print[i]['celular']+'</td><td>'+print[i]['fijo']+'</td></tr></tbody>';
      }
      $('#rta').html(tabla+td+'</table><br>'+img);
@@ -458,12 +478,12 @@ function FiltrarTarifa(){
     console.log(data);
      var print=JSON.parse(data);
      var td="";
-     var tabla='<table class=" bordered centered" id="tab"><thead><tr><th>Precio fijo</th><th>Precio celular</th></tr></thead><tbody><tr>';
+     var tabla='<table class=" bordered centered" id="tab"><thead><tr><th>Destino</th><th>Celular</th><th>Fijo</th> </tr></thead><tbody><tr><td>'+print[0]['nombre']+'</td>';
      for (var i = 0; i < print.length;i++){
-         var img='<h3>'+print[i]['nombre']+'</h3><img src="https://www.emsivoz.co/img/banderas-tarifas/'+print[i]['bandera']+'" style="width:180px;height:150px;"><br>';
+         var img='<br><br><div class="col offset-s2 s8"><img src="https://www.emsivoz.co/img/banderas-tarifas/'+print[i]['bandera']+'" style="width:100% !important;" class="circle"></div><br>';
          td=td+'<td>$ '+print[i]['precio']+'</td>';
      }
-     $('#rta').html(img+tabla+td+'</tr></tbody></table>');
+     $('#rta').html(tabla+td+'</tr></tbody></table>'+img);
   });
 }
 
@@ -511,7 +531,7 @@ function OlvidoPass(){
   setTimeout(function(){ 
      $('#fadeDos').css('display','block');
      $('#carga').css('display','none');
-  },1000);
+  },10);
 
 }
 function EnviarPass(){
@@ -595,8 +615,8 @@ function UpdatePass(){
   var Supass=document.getElementsByName('password');
     if(password.length >= 6){
       document.getElementById('pass_error').innerHTML="";
-      Supass[0].style.borderBottom = "thin dotted green";
-      document.getElementById('icoPass').style.color="green";
+      Supass[0].style.borderBottom = "thin dotted #A6BC41";
+      document.getElementById('icoPass').style.color="#A6BC41";
       document.getElementsByName('btn')[0].disabled =false;
       var parametros={'password':password,'usuario':usuario};
          $("#principalCuatro").css('display','none');
@@ -631,7 +651,7 @@ function loadIndi(){
             var print=data.split("+");
                   var option = "";
                   var sum=print.length - 1;
-                  var select='<div class="input-field  input"  style="display:block;"><select style="display:block;" onchange="FiltrarIndicativo()" name="pais" class=""  id="pais" > <option value="0">Selecciona el Pais</option>';
+                  var select='<div class="input-field  input"  style="display:block;"><select style="display:block;font-size:19px" onchange="FiltrarIndicativo()" name="pais" class=""  id="pais" > <option value="0">Selecciona el Pais</option>';
                    for (var i = 0; i < print.length;i=i+2){
                       if(i != sum){
                         option=option+'<option value="'+print[i]+'">'+print[i+1]+'</option>';
@@ -670,15 +690,14 @@ function FiltrarPrecioLlamar(){
   esta = pais;
   if(pais == 0){
       $('#number').html('');
-      $('#connect').html('');
-      $('#botton').html('<a class="btn-floating blue"> <i class="material-icons">&#xE8B4;</i></a>');
+      $('#connect').html('<a class="btn-floating blue"> <i class="material-icons">&#xE8B4;</i></a>');
   }else{
       console.log(pais);
     $.post('https://app.emsivoz.co/funciones/prod/programadas/indicativos.php',{'pais':pais},function(data){
-      $('#botton').html('<a class="btn-floating blue modal-trigger " href="#modal8"> <i class="material-icons">&#xE8B4;</i></a>');
+     //$('#connect').html('<a class="btn-floating blue modal-trigger " href="#modal8"> <i class="material-icons">&#xE8B4;</i></a>');
       console.log(data);
        var print=JSON.parse(data);
-       $('#botton').html('<img src="https://www.emsivoz.co/img/banderas-tarifas/'+print[0]['bandera']+'" style="width: 35px;height: 35px;" alt="" class="circle">');
+       var imgBTn = '<img src="https://www.emsivoz.co/img/banderas-tarifas/'+print[0]['bandera']+'" style="width: 35px;height: 35px;" alt="" class="circle">';
        var imprim='';
        for (var i = 0; i < print.length;i++){
            imprim=imprim + print[i]['fijo'];
@@ -686,8 +705,20 @@ function FiltrarPrecioLlamar(){
         console.log(esta);
          if (esta != 1) {
             $('#numero-llam').val(imprim);
-            $('#number').html(imprim);
+            var h = "";
+             for ( i = 0; i < imprim.length; i++) {
+                h = h+ imprim[i];
+                  if(i == 2){
+                    h= h + " ";
+                  }
+                  
+                  if (i == (parseInt(imprim.length)- 1 )) {
+                    h = h + " ";
+                  }
+             } 
+            $('#number').html(h);
          }else{
+
              $('#number').html('');
              $('#numero-llam').val('');
          }
@@ -704,8 +735,8 @@ function FiltrarPrecioLlamar(){
                        precio=print[1]['precio'];
                     }
                   console.log(nombre+' valor min. $'+precio);
-                  $('#btn-borr').html('<h5 class="material-icons right" style="color:#4470B4;margin-top:12px;font-size:32px;" onclick="BorrarNumero();" >&#xE14A;</h5>');
-                   $('#connect').html('<span style="font-style:bold;font-size:20px;font-weight: 900;">'+nombre+'</span> valor min. <span style="font-style:bold;font-size:20px;font-weight: 900;"> $'+precio +'</span>');
+                  $('#btn-borr').html('<h5 class="material-icons right" style="color:#ADACB2;margin-top:12px;font-size:32px;" onclick="BorrarNumero();" >&#xE14A;</h5>');
+                   $('#connect').html(imgBTn + '<span class="conPais">'+nombre+'</span><span style="color:#ADACB2"> $'+precio +' Min </span>');
                 }
               });
     });
@@ -718,7 +749,7 @@ function Colombia(){
     $.post('https://app.emsivoz.co/funciones/prod/programadas/indicativos.php',{'pais':pais},function(data){
       console.log(data);
        var print=JSON.parse(data);
-       $('#botton').html('<img src="https://www.emsivoz.co/img/banderas-tarifas/'+print[0]['bandera']+'" style="width: 35px;height: 35px;" alt="" class="circle">');
+       var imgBTn = '<img src="https://www.emsivoz.co/img/banderas-tarifas/'+print[0]['bandera']+'" style="width: 35px;height: 35px;" alt="" class="circle">';
        var imprim='';
        for (var i = 0; i < print.length;i++){
            imprim=imprim + print[i]['fijo'];
@@ -741,7 +772,7 @@ function Colombia(){
                        precio=print[1]['precio'];
                     }
                   console.log(nombre+' valor min. $'+precio);
-                   $('#connect').html('<span style="font-style:bold;font-size:20px;font-weight: 900;">'+nombre+'</span> valor min. <span style="font-style:bold;font-size:20px;font-weight: 900;"> $'+precio +'</span>');
+                   $('#connect').html(imgBTn+'<span class="conPais">'+nombre+'</span><span style="color:#ADACB2"> $'+precio +' Min </span>');
                 }
               });
     });
@@ -750,24 +781,6 @@ function OpenMod(){
    $('#modal8').openModal();
 }
 function loadPreciosRecarga(){
-  $('#selecff').html('<hr><input name="pru" id="pru"  type="hidden" value=""/>'+
-                        '<label style="color:#4470B4;font-size:15px;"> Selecciona el valor de tu recarga</label>'+
-                       ' <div class="input-field col s12 input"> '+
-                        '<i class="material-icons iconIn prefix ciudad validate " >&#xE227;</i>'+
-                          '<select class="validate  option" onchange="ValorSignature()"  id="amount"  name="amount" >'+
-                              '<option value="10000"> 10.000</option>'+
-                              '<option value="15000"> 15.000</option>'+
-                              '<option value="20000"> 20.000</option>'+
-                              '<option value="25000"> 25.000</option>'+
-                              '<option value="30000"> 30.000</option>'+
-                              '<option value="35000"> 35.000</option>'+
-                              '<option value="40000"> 40.000</option>'+
-                              '<option value="45000"> 45.000</option>'+
-                              '<option value="50000"> 50.000</option>'+
-                         '</select>'+
-                        '</div>'+
-                        '<span id="valorIn"></span>'+
-                        '<br>');
 }
 function loadTarif(){
   $.post('https://app.emsivoz.co/funciones/prod/programadas/paises.php',function(data){
@@ -775,7 +788,7 @@ function loadTarif(){
             var print=data.split("+");
                   var option = "";
                   var sum=print.length - 1;
-                  var select='<div class="input-field  input" style="display:block;"><select  onchange="FiltrarTarifa()" name="pais"  id="pais" style="display:block;" > <option value="0">Selecciona el pais</option>';
+                  var select='<div class="input-field input " style="display:block;"><select  onchange="FiltrarTarifa()" name="pais"  id="pais" style="display:block;font-size:19px" > <option value="0">Selecciona el pais</option>';
                    for (var i = 0; i < print.length;i=i+2){
                     if(i != sum){
                       option=option+'<option value="'+print[i]+'">'+print[i+1]+'</option>';
@@ -828,32 +841,121 @@ function ClicSearch(){
   var h= $('#contbus').val();
   $('#seca').val(h);
 }
-/*
-  function SING(){
-    $('#logoB').css('margin-top','0px');
-    $('#logoB').removeClass('bounceInDown');
-    $('#logoB').addClass('bounceInUp');
-    $('#pkjn').removeClass('bounceInUp');
-    $('#pkjn').addClass('bounceOutUp');
-     $('#pkjn').css('display','none');
-    $('#fade').css('display','block');
-    $('#nav').css('display','block');
-  }
-   var intentos=$('#intentos').val();
-            if(intentos != 0){
-                if(response.mensaje == 'ok'){
-
-                      $("#carga").css('display','none');  
-                      $("#fadeDos").css('display','none');  
-                      $("#fadeTres").css('display','block');
-                }else{
-                   document.getElementById('error_code').innerHTML="<font color='red'>Codigo invalido</font>";
-                     $("#carga").css('display','none');  
-                     $("#principalDos").css('display','block');
-                     $('#error_intentos').html(intentos+" intentos restantes");
-                     $('#intentos').val(parseInt(intentos) - 1);
-               }
-            }else{
-              $(location).attr('href','registrar.html');
+function ValorLlamada(numero){
+  var num  = "";
+  var imd  = false;
+  var bandera,precio,nombre;
+  for (var i = 0; i < numero.length; i++) {
+    num = num + numero[i];
+    if (num.length >= 4){
+        $.post('https://app.emsivoz.co/funciones/prod/programadas/indicativos_pais.php',{'pais':num},function(data){
+          console.log(data);
+            if(data != 0){   
+                imd = true;
+                console.log("se cambio");         
+                var print=JSON.parse(data);
+                nombre=print[0]['nombre'];
+                  if(print[0]['indi'] == 1){
+                      precio=print[0]['precio'];
+                  }else{
+                      precio=print[1]['precio'];
+                  }
+                 bandera = print[0]['bandera'];
             }
-  */
+        });
+    }
+  }
+  setTimeout(function(){
+      console.log(imd);         
+
+      if(imd == true){
+          var text ='<img src="https://www.emsivoz.co/img/banderas-tarifas/'+bandera+'" style="width: 35px;height: 35px;display:inline-block" alt="" class="circle">';
+          text = text + '<span class="conPais">'+nombre+'</span><span style="color:#ADACB2"> $'+precio +' Min </span>';
+      }else{
+        Colombia();
+          text = $('#connect').html();
+      }        
+      $('#p_valor').html(text);  
+    },900);      
+}
+
+function ShowRegalo(){
+    var paramId = {'id':localStorage.getItem('session')};
+                 $.ajax({
+                     data:paramId,
+                      type:'POST',
+                      url:"https://app.emsivoz.co/funciones/prod/usuario-app/regalos.php",
+                      success:function(rta){
+                        var regalo=JSON.parse(rta);
+                        console.log(rta)
+                          if(regalo.estado == 1){
+                            $('#regalo').css('display','block');
+                            $('#regalo').html('<a class="modal-trigger" href="#modal1"><img src="img/Regalo4.gif" class="animated" style="width:80px;" onclick="TomarRegalo('+regalo.monto+','+regalo.id+')"  id="rg_img" >');
+                            $('#html-modal').html('<center><img src="https://app.emsivoz.co/fidelizar_cliente.jpg" ></center>');
+                             $('.modal-trigger').leanModal({
+                                dismissible: true, // Modal can be dismissed by clicking outside of the modal
+                                opacity: .5, // Opacity of modal background
+                                in_duration: 0, // Transition in duration
+                                out_duration: 0, // Transition out duration
+                                ready: function() { }, // Callback for Modal open
+                                complete: function(){ } // Callback for Modal close
+                              }
+                            );
+
+                          }
+                      }
+                  }); 
+}
+function ShowSaldo(){
+  //obtenemos el credito o saldo del usuario
+                        input=localStorage.getItem('credit');
+                        var num = input.replace(/\./g,'');
+                          if(!isNaN(num)){
+                          num = num.toString().split('').reverse().join('').replace(/(?=\d*\.?)(\d{3})/g,'$1.');
+                          num = num.split('').reverse().join('').replace(/^[\.]/,'');
+                          
+                        }
+                     document.getElementById('goodD').innerHTML= "Bienvenido "+localStorage.getItem('name')+"! - Saldo: $<span id='saldo_good'>"+num+"</span>";
+                    var miId=localStorage.getItem('session');
+                    var micred=localStorage.getItem('credit');
+                    var param={'credit':miId};
+                    console.log(localStorage.getItem('name')+"! - Saldo: $"+localStorage.getItem('credit'));
+                      $.ajax({
+                         data:param,
+                          type:'POST',
+                          url:"https://app.emsivoz.co/funciones/prod/usuario-app/getCredit.php",
+                           
+                          success:function(data){
+
+                            if(data == "En estos momentos estamos realizando cambios "){
+                                document.getElementById('goodD').innerHTML= "En estos momentos estamos realizando cambios";
+                                 $('#palabraD').css('background','#F2A914');
+                            }else{
+                              console.log(data);
+                              if(data != micred){
+                                 localStorage.setItem('credit',data);
+                                  input=localStorage.getItem('credit');
+                              var num = input.replace(/\./g,'');
+                                if(!isNaN(num)){
+                                num = num.toString().split('').reverse().join('').replace(/(?=\d*\.?)(\d{3})/g,'$1.');
+                                num = num.split('').reverse().join('').replace(/^[\.]/,'');
+                                
+                              }
+                              if(input <= 500 ){
+                                $('#palabraD').css('background','#ED565A');
+                                $('#goodD').css('color','#fff');
+                             }else{
+                                $('#palabraD').css('background','#89B137');
+                                $('#goodD').css('color','#fff');
+                             }
+                                 document.getElementById('goodD').innerHTML= "Bienvenido "+localStorage.getItem('name')+"! - Saldo: $<span id='saldo_good'>"+num+"</span>" ;
+                              }
+                          }
+                      }
+                    });
+                      
+                  /*   if(localStorage.getItem('credit') <= 500){
+                        $('#palabraD').css('background','#ED565A');
+                        $('#goodD').css('color','#fff');
+                     }*/
+}

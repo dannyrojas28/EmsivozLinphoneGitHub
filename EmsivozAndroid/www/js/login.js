@@ -33,6 +33,7 @@ function Login(user,pass){
                                 localStorage.setItem('cel',data.cel);
                                 localStorage.setItem('uipass',data.uipass);
                                 localStorage.setItem('llamar','1');
+                                localStorage.setItem('htmlHistori', "");
                                      /*  document.getElementById('tx').innerHTML='<h3 style="color:#4470B4;">Bienvenido a </h3> <img src="img/logo.png" class="img-rounded img-responsive" style="height:50px;width:150px;" alt="Responsive image">';
                                       document.getElementById('bd').innerHTML="";
                                       $("#modalls").click();*/
@@ -55,7 +56,7 @@ function Login(user,pass){
                               }
                           }
                    });
-             } ,1000);
+             } ,10);
         }else{
             
             Supass[0].style.borderBottom = "thin dotted red";

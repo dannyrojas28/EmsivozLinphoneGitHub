@@ -2191,7 +2191,7 @@
  *    user zoom.
  */
 html {
-  font-family: sans-serif;
+ font-family:"Helvetica";
   /* 1 */
   -ms-text-size-adjust: 100%;
   /* 2 */
@@ -2937,7 +2937,7 @@ table {
 
 table.bordered > thead > tr,
 table.bordered > tbody > tr {
-  border-bottom: 1px solid #d0d0d0;
+  border-bottom: 2px solid #000;
 }
 
 table.striped > tbody > tr:nth-child(odd) {
@@ -2965,7 +2965,7 @@ thead {
 }
 
 td, th {
-  padding: 15px 5px;
+  padding: 5px 5px;
   display: table-cell;
   text-align: left;
   vertical-align: middle;
@@ -7520,7 +7520,7 @@ a {
 
 html {
   line-height: 1.5;
-  font-family: "Roboto", sans-serif;
+  font-family:"Helvetica";
   font-weight: normal;
   color: rgba(0, 0, 0, 0.87);
 }
@@ -7860,11 +7860,11 @@ small {
 .card .card-reveal {
   padding: 20px;
   position: absolute;
-  background-color: #fff;
+  background-color: #ecedef;
   width: 100%;
   overflow-y: auto;
-  top: 100%;
-  height: 100%;
+  top: 70%;
+  height: 50%;
   z-index: 1;
   display: none;
 }
@@ -8062,7 +8062,7 @@ small {
   line-height: 36px;
   outline: 0;
   padding: 0 2rem;
-  text-transform: uppercase;
+  text-transform: none;
   vertical-align: middle;
   -webkit-tap-highlight-color: transparent;
 }
@@ -8263,7 +8263,7 @@ button.btn-floating {
 
 .dropdown-content li > a, .dropdown-content li > span {
   font-size: 16px;
-  color: #26a69a;
+  color: #516AA3;
   display: block;
   line-height: 22px;
   padding: 14px 16px;
@@ -9444,7 +9444,7 @@ input[type=checkbox]:not(:disabled) ~ .lever:active:after {
   height: 3rem;
   line-height: 3rem;
   width: 100%;
-  font-size: 1rem;
+  font-size: 1.5rem;
   margin: 0 0 15px 0;
   padding: 0;
   display: block;

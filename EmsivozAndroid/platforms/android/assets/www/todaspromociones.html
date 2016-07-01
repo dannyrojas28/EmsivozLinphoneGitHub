@@ -1,7 +1,8 @@
 <script type="text/javascript">
        $(document).ready(function(){
-       document.getElementById('refresh').innerHTML='<i><span style="top:30px;font-size:35px;" class="material-icons"  onclick="ContenidoPrincipal(\'promocioneshoy\')">&#xE317;</span></i>';
-       document.getElementById('barraD').innerHTML='<button type="button"  style="background:#fff;color:#757575;" class="btn barra" onclick="ContenidoPrincipal(\'promocioneshoy\')"><span class="material-icons d" >&#xE8DF;</span> Hoy</button><button type="button"  style="background:#4470B4;color:#fff;" class="btn barra" onclick="ContenidoPrincipal(\'todaspromociones\')"><span class="material-icons d" style="color:#fff">&#xE80B;</span> Semanal  </button>';
+
+        document.getElementById('barraGD').innerHTML='<img src="img/tab-promoB.png" style="width:100%">';
+           document.getElementById('barraD').innerHTML='<a class="btn-large"  style="background:#ecedef;color:#99989d;font-size:15px;letter-spacing:0;width:49.9%;height: 40px;line-height: 42px;padding: 0 1rem;text-align:center" onclick="ContenidoPrincipal(\'promocioneshoy\')"> <i class="material-icons left" style="color:#99989d;font-size:29px;margin-right:0px">&#xE614;</i> Hoy </a><a class="btn-large"  style="background:#89B137;color:#fff;font-size:15px;letter-spacing:0;width:49.9%;height: 40px;line-height: 42px;padding: 0 1rem;text-align:center" onclick="ContenidoPrincipal(\'todaspromociones\')"> <i class="material-icons left" style="color:#fff;font-size:29px;margin-right:0px;">&#xE24F;</i> Semanal </a>';
 
                 var dia = 'x';
                 var param = {'dia':dia};
@@ -15,7 +16,7 @@
                           var res = "";
                          for (var i = 0; i < print.length;i++){
                             var diaLetra=print[i]['day_week'].toUpperCase();
-                             res+= "<div class='card '><div  style='background:#fff;height:45px;color:#757575'><br><span id='h' style='color:#757575;font-size:16px;' class='card-title activator'><span style='color:#757575;margin-left:5px;font-style:italic;'><i class='material-icons right'>&#xE5D4;</i> "+diaLetra+":"+print[i]['titulo']+"</span></span></div><div class='card-image waves-effect waves-block waves-light activator'><center><img class='materialboxed activator' src='https://app.emsivoz.co/funciones/prod/programadas/"+print[i]['imagen']+"' style='width:100% !important;' alt=''></center></div><div class='card-reveal '><span class='card-title grey-text text-darken-4'><h5 style='color:#4470B4;'>"+print[i]['titulo']+"<i class='material-icons right'>close</i></h5></span><p style='color:#757575;text-align:justify'>"+print[i]['descripcion']+"  </p></div></div>"; 
+                             res+= "<div class='card '><div class='card-image waves-effect waves-block waves-light activator'><center><img class='materialboxed activator' src='https://app.emsivoz.co/funciones/prod/programadas/"+print[i]['imagen']+"' style='width:100% !important;' alt=''></center></div><div class='card-reveal '><span class='card-title grey-text text-darken-4'><h5 style='color:#89B137;'>"+print[i]['titulo']+"<i class='material-icons right' style='color:#ADACB2'>close</i></h5></span><p style='color:#ADACB2;text-align:justify'>"+print[i]['descripcion']+"  </p></div></div>"; 
                         }
                         $("#promociones").html(res);
 
@@ -23,9 +24,9 @@
             });
       });
 </script> 
- <div id="" class=" animated bounceInLeft">
-<br>  <br>
-    <center><h5  style="color:#4470B4;">  <span class="glyphicon glyphicon-bullhorn"> </span> PROMOCIONES DE LA SEMANA</h5></center>  
+ <div id="cT" class=" animated bounceInLeft">
+<br><br><br><br><br>
+
     <div id="promociones">
         <div id="cargax" style="text-align:center;margin-top:200px;">
         <div class="preloader-wrapper small active">
@@ -45,18 +46,23 @@
   </div>
 
 </div>
-
-<!--
-<div class="fixed-action-btn vertical left click-to-toggle" style="bottom: 45px; left: 24px;position:fixed;z-index:1002;">
-    <a class="btn-floating btn-large btn-iosD" style="background:#4470B4;" onclick="Desvanceido()">
-      <i class="large material-icons" >&#xE896;</i>
-    </a>
-    <ul  > 
-      <li ><a class="btn-floating btn-ios" style="background:#4470B4;" onclick="Desvanceido();ContenidoPrincipal('puntos')"><i class="material-icons">&#xE56A;</i></a></li>
-      <li ><a class="btn-floating btn-ios" style="background:#4470B4;" onclick="Desvanceido();ContenidoPrincipal('recarga')"><i class="material-icons">&#xE870;</i></a></li>
-      <li ><a class="btn-floating btn-ios" style="background:#4470B4;" onclick="Desvanceido();ContenidoPrincipal('indicativos')"><i class="material-icons">&#xE80B;</i></a></li>
-      <li ><a class="btn-floating btn-ios" style="background:#4470B4;" href="llamar.html"><i class="material-icons">&#xE0BB;</i></a></li>
-      <li ><a class="btn-floating btn-ios" style="background:#4470B4;" href="balance.html" ><i class="material-icons">&#xE873;</i></a></li>
-      <li ><a class="btn-floating btn-ios" style="background:#D0E86F" onclick="Desvanceido();ContenidoPrincipal('promocioneshoy')"><i class="material-icons" style="color:#4470B4">&#xE8B1;</i></a></li>
-    </ul>
-  </div>-->
+ <div id='lio'>
+                   <input   type="hidden" id="minutos" value="00">
+                   <input   type="hidden" id="segundos" value="00">
+                   <input   type="hidden" id="horas" value="00">
+                   <input   type="hidden" id="esta" value="telefono-llamar">
+                   <input   type="hidden" id="colgado" value="false">
+                   <input   type="hidden" id="contas_load" value="1">
+                   <input   type="hidden" id="numero-llam" value="">
+                   <input   type="hidden" name="dtmf_key" id="dtmf_key" value="0">
+                   <input type="hidden" id="salir" value="1">  
+                   <input type="hidden" id="llamar-contact" value="0">  
+                   <input type="hidden" id="call_esta" value="0">  
+                   <input type="hidden" id="page" value="todaspromociones">  
+                  <input type="hidden" id="registrado" value="0">
+                  
+         </div>
+          <div id="telefono-llamar">
+              <span id="number" style="color:#424242 ;margin-left:5px;display:none;margin-top: 10px;font-size: 34px"></span> 
+              <center><p style="font-size:18px;color:#4470B4;display:none" id="connect"></p></center>
+          </div>

@@ -1,19 +1,19 @@
 .bn{
-	font-size: 48px;
-	font-weight: normal;
-	color: #424242;
-	text-align: center;
+    font-size: 48px;
+    font-weight: normal;
+    color: #424242;
+    text-align: center;
 }
 
 .let{
-	font-size: 13px;
-	text-align: center;
-	color: #616161 ;
-	font-weight: normal;
+    font-size: 13px;
+    text-align: center;
+    color: #616161 ;
+    font-weight: normal;
 }
 
 .bot{
-	margin-bottom:5px;
+    margin-bottom:5px;
 }
 
 .ar{
@@ -96,6 +96,28 @@
     .img-cir{
         width: 70%;
     }
+    .img-cirD{
+        width: 70%;
+    }
+  #btnllam{
+        width: 65.5px;
+        height: 65px;
+    }
+    #btnllam i{
+        line-height: 65.5px;
+        font-size: 30px ;
+    }
+    #palabraD{
+        height: 25px;
+        font-size: 16px;
+    }
+    #goodD{
+        font-size: 16px;
+    }
+    .conPais{
+        font-size:15px;
+        margin-left:7px;
+    }
 @media screen and (min-height: 560px) {
     .span4
     {
@@ -138,6 +160,9 @@
     .img-cir{
         width: 80%;
     }
+    .img-cirD{
+        width: 80%;
+    }
     #img-llam{
         width:164px;
         height:70px;
@@ -152,7 +177,18 @@
         font-size:15px;
     }
    
-   
+     #btnllam{
+        width: 72.5px;
+        height: 72px;
+    }
+    #btnllam i{
+        line-height: 72.5px;
+        font-size: 35px;
+    }
+     .conPais{
+        font-size:20px;
+        margin-left:7px;
+    }
 
 }
 .a{margin-top: 10px;}
@@ -171,7 +207,7 @@
         
     }
     .bg i{
-        line-height: 55.5px;
+        line-height: 65.5px;
     }
     .ilet{
         font-size: 19px;
@@ -179,16 +215,47 @@
     .img-cir{
         width: 80%;
     }
+    .img-cirD{
+        width: 80%;
+    }
+     #btnllam{
+        width: 70.5px;
+        height: 70px;
+    }
+    #btnllam i{
+        line-height: 70.5px;
+        font-size: 34px;
+    }
+     .conPais{
+        font-size:16px;
+        margin-left:7px;
+    }
 }
 @media screen and (min-height: 630px) {
     .img-cir{
         width: 90%;
     }
+    .img-cirD{
+        width: 90%;
+    }
     #btnllam{
-        width: 65.5px;
-        height: 65px;
+        width: 75.5px;
+        height: 75px;
     }
     #btnllam i{
-        line-height: 65.5px;
+        line-height: 75.5px;
+         font-size: 40px;
     }
+    #palabraD{
+        height: 30px;
+        font-size: 20px;
     }
+    #goodD{
+        font-size: 20px;
+    }
+     .conPais{
+        font-size:22px;
+        margin-left:7px;
+    }
+}
+
